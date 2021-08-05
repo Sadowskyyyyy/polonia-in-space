@@ -1,4 +1,16 @@
 {
+    "landingi/php-coding-standards": {
+        "version": "v1.0.4"
+    },
+    "phpstan/phpstan": {
+        "version": "0.12.91"
+    },
+    "phpstan/phpstan-phpunit": {
+        "version": "0.12.20"
+    },
+    "phpstan/phpstan-symfony": {
+        "version": "0.12.38"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -145,5 +157,8 @@
     },
     "symfony/yaml": {
         "version": "v4.4.29"
+    },
+    "symplify/easy-coding-standard": {
+        "version": "9.4.22"
     }
 }

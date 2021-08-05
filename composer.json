@@ -12,6 +12,7 @@
         "symfony/yaml": "4.4.*"
     },
     "require-dev": {
+        "landingi/php-coding-standards": "^1.0"
     },
     "config": {
         "preferred-install": {
