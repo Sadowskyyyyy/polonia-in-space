@@ -10,18 +10,15 @@ doctrine:
         password: '%database_password%'
         charset: UTF8
       mysql:
-        driver: pdo_mysql
-#          ??
-          host:
-          port: 4306
+          driver: pdo_mysql
+          da
+          port: 3306
           dbname: space_db
           user: symfony
           password: symfony
           charset: UTF8
       postgres:
           driver: pdo_pgsql
-#          ??
-          host:
           port: 5400
           dbname: space_db
           user: symfony
