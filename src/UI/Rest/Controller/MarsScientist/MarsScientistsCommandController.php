@@ -39,7 +39,7 @@ class MarsScientistsCommandController extends CommandController
     /**
      * @Route(methods={"PATCH"})
      */
-    public function markScientistAsMissing(Request $request)
+    public function markScientistAsMissingOrDead(Request $request)
     {
         $data = json_decode($request->getContent(), true);
 
