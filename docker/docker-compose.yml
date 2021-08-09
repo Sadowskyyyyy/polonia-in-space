@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
   posgres_db:
@@ -14,23 +14,6 @@ services:
       - ./postgres.conf:/etc/postgresql/postgresql.conf
     restart: always
 
-  mysql_db:
-      container_name: mysql
-      image: mysql:8.0
-      command: --default-authentication-plugin=mysql_native_password
-      environment:
-        MYSQL_ROOT_PASSWORD: secret
-        MYSQL_DATABASE: space_db
-        MYSQL_USER: symfony
-        MYSQL_PASSWORD: symfony
-        ports: -'4306:3306'
-        volumes:
-          './mysql:/var/lib/mysql'
-
-#        container_name: postgres
-#        image: postgres
-#        enviroment:
-
   php:
     container_name: php
     build:
@@ -41,7 +24,7 @@ services:
       - ./app:/var/www/symfony_docker
     depends_on:
       - posgres_db
-      - mysql_db
+
   nginx:
     build: nginx
     ports:
@@ -53,4 +36,3 @@ services:
     depends_on:
       - php
       - posgres_db
-      - mysql_db

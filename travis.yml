@@ -7,8 +7,10 @@ env:
   -DB=postgres
   - TEST_SUITE=units
   - TEST_SUITE=integration
-
-script: ""
+script:
+  - make ci
+install:
+  - composer install
 
 os: osx
 
