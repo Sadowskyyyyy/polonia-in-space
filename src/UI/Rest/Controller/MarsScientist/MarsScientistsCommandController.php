@@ -12,7 +12,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/marsscientists", methods={"GET"})
+ * @Route("/marsscientists")
  */
 class MarsScientistsCommandController extends CommandController
 {

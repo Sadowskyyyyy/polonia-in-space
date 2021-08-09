@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Scientist\Domain;
+namespace App\Application\Scientist\Domain\MarsScientist;
 
 use App\Application\Expedition\Domain\Expedition;
+use App\Application\Scientist\Domain\AbstractScientist;
+use App\Application\Scientist\Domain\Exception\ScientistIsAliveException;
 
 class MarsScientist extends AbstractScientist
 {
@@ -34,7 +36,7 @@ class MarsScientist extends AbstractScientist
     {
         return new MarsScientist((int)null,
             $name, $surname,
-            null, null, null, null);
+            (string)null, null, null, null);
     }
 
     public function addRegisteredUser(MarsScientist $scientist): void
@@ -65,8 +67,10 @@ class MarsScientist extends AbstractScientist
 
     public function setReasonOfDeath(string $reason)
     {
-        if ($this->isDead === true) {
-            $this->reason = $reason;
+        if ($this->isDead === false) {
+            throw new ScientistIsAliveException();
         }
+
+        $this->reason = $reason;
     }
 }

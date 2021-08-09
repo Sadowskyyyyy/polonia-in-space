@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Application\Scientist\Application\Command;
+declare(strict_types=1);
 
+namespace App\Application\Scientist\Application\Command;
 
 use App\Application\Shared\Application\Command\CommandInterface;
 use RuntimeException;

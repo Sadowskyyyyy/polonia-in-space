@@ -6,12 +6,22 @@ namespace App\Application\Expedition\Application\Handler;
 
 use App\Application\Expedition\Application\Command\PlanNewExpeditionCommand;
 use App\Application\Expedition\Domain\Expedition;
+use App\Application\Expedition\Domain\Repository\ExpeditionRepositoryInterface;
 
 class PlanNewExpeditionCommandHandler implements MessageSubscriberInterface
 {
+    private ExpeditionRepositoryInterface $repository;
+
+    public function __construct(ExpeditionRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function __invoke(PlanNewExpeditionCommand $command)
     {
+        //TODO make security users :p
         $expedition = Expedition::planNewExpedition(null, $command->plannedStartDate);
-        //TODO save to the database and event save to db
+
+        $this->repository->save($expedition);
     }
 }

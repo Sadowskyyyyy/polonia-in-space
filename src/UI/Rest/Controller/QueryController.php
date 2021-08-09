@@ -15,6 +15,11 @@ abstract class QueryController extends AbstractController
 {
     private MessageBusInterface $bus;
 
+    public function __construct(MessageBusInterface $bus)
+    {
+        $this->bus = $bus;
+    }
+
     protected function ask(QueryInterface $query): Envelope
     {
         $envelope = $this->bus->dispatch($query);
