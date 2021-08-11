@@ -1,14 +1,6 @@
 doctrine:
   dbal:
     connections:
-      default:
-        driver: pdo_mysql
-        host: '%database_host%'
-        port: '%database_port%'
-        dbname: '%database_name%'
-        user: '%database_user%'
-        password: '%database_password%'
-        charset: UTF8
       postgres:
           driver: pdo_pgsql
           port: 5400
@@ -28,7 +20,6 @@ doctrine:
       App:
         is_bundle: false
         type: annotation
-#        TODO change directory
-        dir: '%kernel.project_dir%/src/Entity'
-        prefix: 'App\Entity'
+        dir: '%kernel.project_dir%/src/Application/Shared/Infrastructure/Entity'
+        prefix: 'App\Application\Shared\Infrastructure\Entity'
         alias: App
