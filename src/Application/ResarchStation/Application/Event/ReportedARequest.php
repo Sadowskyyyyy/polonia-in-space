@@ -2,14 +2,14 @@
 
 namespace App\Application\ResarchStation\Application\Event;
 
-use App\Application\Shared\Domain\Event\EventInterface;
+use App\Application\Shared\Domain\Event\Event;
 
-class ReportedARequest implements EventInterface
+class ReportedARequest extends Event
 {
     public string $destination;
 
     public function __construct(string $destination)
     {
-        $this->destination = $destination;
+        parent::__construct($destination);
     }
 }
