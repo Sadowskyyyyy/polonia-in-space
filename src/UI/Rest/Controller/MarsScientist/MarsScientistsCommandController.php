@@ -2,14 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\UI\rest\Controller\MarsScientist;
+namespace App\UI\Rest\Controller\MarsScientist;
 
 use App\Application\Scientist\Application\Command\MarkMarsScientistAsMissingOrDeadCommand;
 use App\Application\Scientist\Application\Command\RegisterScientistCommand;
 use App\UI\rest\Controller\CommandController;
+use App\UI\rest\Response\JsonApiResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use function sprintf;
 
 /**
  * @Route("/marsscientists")
@@ -24,7 +27,7 @@ class MarsScientistsCommandController extends CommandController
     /**
      * @Route(methods={"POST"})
      */
-    public function registerScientist(Request $request)
+    public function registerScientist(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
 
@@ -34,12 +37,14 @@ class MarsScientistsCommandController extends CommandController
         );
 
         $this->handle($command);
+
+
     }
 
     /**
      * @Route(methods={"PATCH"})
      */
-    public function markScientistAsMissingOrDead(Request $request)
+    public function markScientistAsMissingOrDead(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
 
@@ -51,5 +56,7 @@ class MarsScientistsCommandController extends CommandController
         );
 
         $this->handle($command);
+
+        return JsonApiResponse::empty(202);
     }
 }

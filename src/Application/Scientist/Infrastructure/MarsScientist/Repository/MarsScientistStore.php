@@ -17,4 +17,9 @@ final class MarsScientistStore implements MarsScientistRepositoryInterface
     {
 
     }
+
+    public function getAll(): array
+    {
+        // TODO: Implement getAll() method.
+    }
 }

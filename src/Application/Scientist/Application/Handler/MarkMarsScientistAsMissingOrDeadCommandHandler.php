@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace App\Application\Scientist\Application\Handler;
 
 use App\Application\Scientist\Application\Command\MarkMarsScientistAsMissingOrDeadCommand;
+use App\Application\Scientist\Application\Event\MarsScientistHasBeenMarkedAsDeadOrMissing;
 use App\Application\Scientist\Domain\MarsScientist\Repository\MarsScientistRepositoryInterface;
-
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 //TODO tests
-class MarkMarsScientistAsMissingOrDeadCommandHandler implements MessageSubscriberInterface
+class MarkMarsScientistAsMissingOrDeadCommandHandler implements MessageHandlerInterface
 {
     private MarsScientistRepositoryInterface $repository;
+
+    private EventRepositoryInterface $eventRepository;
 
     public function __construct(MarsScientistRepositoryInterface $repository)
     {
@@ -31,5 +34,6 @@ class MarkMarsScientistAsMissingOrDeadCommandHandler implements MessageSubscribe
         }
 
         $this->repository->save($scientist);
+        $this->eventRepository->save(new MarsScientistHasBeenMarkedAsDeadOrMissing());
     }
 }

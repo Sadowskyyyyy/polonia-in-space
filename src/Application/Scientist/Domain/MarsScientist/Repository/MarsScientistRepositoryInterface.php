@@ -12,4 +12,6 @@ interface MarsScientistRepositoryInterface
     public function getById(int $id): MarsScientist;
 
     public function save(MarsScientist $marsScientist): void;
+
+    public function getAll(): array;
 }
