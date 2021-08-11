@@ -2,12 +2,15 @@
 
 namespace App\Application\Scientist\Domain;
 
+use App\Application\Delivery\Domain\Delivery;
+
 abstract class AbstractScientist
 {
     private int $id;
     private string $name;
     private string $surname;
     private string $password;
+    private array $sentDeliveries = [];
 
     public function __construct(int $id, string $name, string $surname, string $password)
     {
@@ -57,4 +60,12 @@ abstract class AbstractScientist
         $this->password = $password;
     }
 
+    public function addDelivery(Delivery $delivery): void
+    {
+        if ($delivery->getSender()->surname === $this->surname && $delivery->getSender()->name === $this->name) {
+            $this->sentDeliveries[] = $delivery;
+        }
+
+        throw new DiffrentSenderException();
+    }
 }

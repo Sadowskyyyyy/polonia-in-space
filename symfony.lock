@@ -303,5 +303,8 @@
     },
     "symplify/easy-coding-standard": {
         "version": "9.4.22"
+    },
+    "tobscure/json-api": {
+        "version": "v0.3.0"
     }
 }

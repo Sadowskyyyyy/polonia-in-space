@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Application\Scientist\Domain\MarsScientist;
 
+use App\Application\Expedition\Domain\Exception\CannotAddStartedOrFinishedExpeditionException;
+use App\Application\Expedition\Domain\Exception\ExpeditionIsNotAlreadyFinishedException;
 use App\Application\Expedition\Domain\Expedition;
 use App\Application\Scientist\Domain\AbstractScientist;
 use App\Application\Scientist\Domain\Exception\ScientistIsAliveException;
@@ -34,9 +36,7 @@ class MarsScientist extends AbstractScientist
 
     public static function createNewScientist(string $name, string $surname): MarsScientist
     {
-        return new MarsScientist((int)null,
-            $name, $surname,
-            (string)null, null, null, null);
+        return new MarsScientist((int)null, $name, $surname, '', [], [], []);
     }
 
     public function addRegisteredUser(MarsScientist $scientist): void
@@ -46,11 +46,19 @@ class MarsScientist extends AbstractScientist
 
     public function addPlanedExpedition(Expedition $expedition): void
     {
+        if ($expedition->isStarted() === true || $expedition->isFinished() === true) {
+            throw new CannotAddStartedOrFinishedExpeditionException();
+        }
+
         $this->plannedExpeditions[] = $expedition;
     }
 
     public function addFinishedExpedition(Expedition $expedition): void
     {
+        if ($expedition->isFinished() === false) {
+            throw new ExpeditionIsNotAlreadyFinishedException();
+        }
+
         $this->finishedExpeditions[] = $expedition;
     }
 
@@ -65,6 +73,12 @@ class MarsScientist extends AbstractScientist
         $this->isMissing = false;
     }
 
+    public function markAsAlive(): void
+    {
+        $this->isDead = false;
+        $this->isMissing = true;
+    }
+
     public function setReasonOfDeath(string $reason)
     {
         if ($this->isDead === false) {
@@ -72,5 +86,35 @@ class MarsScientist extends AbstractScientist
         }
 
         $this->reason = $reason;
+    }
+
+    public function isMissing(): bool
+    {
+        return $this->isMissing;
+    }
+
+    public function isDead(): bool
+    {
+        return $this->isDead;
+    }
+
+    public function getReason(): string
+    {
+        return $this->reason;
+    }
+
+    public function getRegisteredUsers(): array
+    {
+        return $this->registeredUsers;
+    }
+
+    public function getPlannedExpeditions(): array
+    {
+        return $this->plannedExpeditions;
+    }
+
+    public function getFinishedExpeditions(): array
+    {
+        return $this->finishedExpeditions;
     }
 }
