@@ -6,8 +6,9 @@ namespace App\Application\Expedition\Application\Handler;
 
 use App\Application\Expedition\Application\Command\FinishExpeditionCommand;
 use App\Application\Expedition\Domain\Repository\ExpeditionRepositoryInterface;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class FinishExpeditionCommandHandler implements MessageSubscriberInterface
+class FinishExpeditionCommandHandler implements MessageHandlerInterface
 {
     private ExpeditionRepositoryInterface $repository;
 

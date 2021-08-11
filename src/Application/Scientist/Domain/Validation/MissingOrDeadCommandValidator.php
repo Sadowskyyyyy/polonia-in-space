@@ -8,9 +8,12 @@ use App\Application\Scientist\Application\Command\MarkMarsScientistAsMissingOrDe
 use App\Application\Scientist\Domain\Exception\InvalidReasonException;
 use App\Application\Shared\Domain\Exception\InvalidArgumentException;
 
-//TODO make tests
 class MissingOrDeadCommandValidator
 {
+    public function __construct()
+    {
+    }
+
     public function isValid(MarkMarsScientistAsMissingOrDeadCommand $command): void
     {
         if ($command->isDead === true && $command->isMissing === true ||

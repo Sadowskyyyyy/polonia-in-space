@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\rest\Controller;
+namespace App\UI\Rest\Controller;
 
 use App\Application\Shared\Application\Query\QueryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,16 +13,16 @@ use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 abstract class QueryController extends AbstractController
 {
-    private MessageBusInterface $bus;
+    private MessageBusInterface $queryBus;
 
-    public function __construct(MessageBusInterface $bus)
+    public function __construct(MessageBusInterface $queryBus)
     {
-        $this->bus = $bus;
+        $this->queryBus = $queryBus;
     }
 
     protected function ask(QueryInterface $query): Envelope
     {
-        $envelope = $this->bus->dispatch($query);
+        $envelope = $this->queryBus->dispatch($query);
         /** @var HandledStamp $handled*/
         $handled = $envelope->last(HandledStamp::class);
 
@@ -31,7 +31,7 @@ abstract class QueryController extends AbstractController
 
     protected function askWithDelay(QueryInterface $query): Envelope
     {
-       $envelope = $this->bus->dispatch(new Envelope($command), [
+       $envelope = $this->queryBus->dispatch(new Envelope($command), [
             new DelayStamp(840000)
         ]);
         /** @var HandledStamp $handled*/
