@@ -20,6 +20,10 @@ class MarsScientistsQueryController extends QueryController
         parent::__construct($queryBus);
     }
 
+    /**
+     * @Route("/marsscientists")
+     * @IsGranted("ROLE_MARS_SCIENTIST")
+     */
     public function getScientists(Request $request): Response
     {
         $response = $this->ask(new GetAllScientistsFromMarsResearchStation());

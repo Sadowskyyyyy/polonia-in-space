@@ -7,7 +7,6 @@ namespace App\UI\Rest\Controller\MarsScientist;
 use App\Application\Scientist\Application\Command\MarkMarsScientistAsMissingOrDeadCommand;
 use App\Application\Scientist\Application\Command\RegisterScientistCommand;
 use App\UI\rest\Controller\CommandController;
-use App\UI\rest\Response\JsonApiResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -25,6 +24,7 @@ class MarsScientistsCommandController extends CommandController
     }
 
     /**
+     * @IsGranted("ROLE_MARS_SCIENTIST")
      * @Route(methods={"POST"})
      */
     public function registerScientist(Request $request): Response
@@ -42,6 +42,7 @@ class MarsScientistsCommandController extends CommandController
     }
 
     /**
+     * @IsGranted("ROLE_MARS_SCIENTIST")
      * @Route(methods={"PATCH"})
      */
     public function markScientistAsMissingOrDead(Request $request): Response
@@ -57,6 +58,5 @@ class MarsScientistsCommandController extends CommandController
 
         $this->handle($command);
 
-        return JsonApiResponse::empty(202);
     }
 }
