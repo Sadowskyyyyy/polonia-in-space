@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\rest\Controller;
+namespace App\UI\Rest\Controller;
 
 use App\Application\Shared\Application\Command\CommandInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
