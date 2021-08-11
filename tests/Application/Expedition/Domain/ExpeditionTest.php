@@ -58,13 +58,11 @@ class ExpeditionTest extends TestCase
 
     public function testTryToGenerateExpeditionConclusionAndRunSucessful()
     {
-        $dateTime = new \DateTime();
         $marsScientist = new MarsScientist(
             1, 'Adam', 'Jensen', '', array(), array(), array()
         );
         $expedition = new Expedition(1, $marsScientist, true, false);
         $expedition->setStartDate((string)null);
-        $conclusion = $expedition->generateExpeditionConclusion();
-
+        $expedition->generateExpeditionConclusion();
     }
 }

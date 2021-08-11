@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace App\Application\Scientist\Application\Event;
 
-use App\Application\Shared\Domain\Event\EventInterface;
+use App\Application\Shared\Domain\Event\Event;
 
-class MarsScientistCreated implements EventInterface
+class MarsScientistCreated extends Event
 {
-    public string $destination;
     public string $creationDate;
 
     public function __construct()
     {
-        $this->destination = 'marsstation';
+        parent::__construct('marsstation');
         $this->creationDate = date("Y-m-d H:i:s");
     }
 }
