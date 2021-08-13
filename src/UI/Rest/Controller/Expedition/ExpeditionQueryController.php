@@ -2,12 +2,10 @@
 
 namespace App\UI\Rest\Controller\Expedition;
 
-use App\Application\Expedition\Application\Query\GenerateExpeditionConclusionQuery;
+use App\Query\GenerateExpeditionConclusionQuery;
 use App\UI\rest\Controller\QueryController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Tobscure\JsonApi\Resource;
 
 /**
  * @Route("/expeditions")
@@ -22,8 +20,10 @@ class ExpeditionQueryController extends QueryController
     /**
      * @Route("/conclusion/{id}", methods={"GET"})
      */
-    public function generateExpeditionConclusion(int $id): Response
+    public function generateExpeditionConclusion(int $id): Resource
     {
         $query = $this->ask(new GenerateExpeditionConclusionQuery($id));
+
+
     }
 }

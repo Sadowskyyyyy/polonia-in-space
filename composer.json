@@ -16,7 +16,8 @@
         "symfony/framework-bundle": "4.4.*",
         "symfony/messenger": "4.4.*",
         "symfony/proxy-manager-bridge": "4.4.*",
-        "symfony/yaml": "4.4.*"
+        "symfony/yaml": "4.4.*",
+        "tobscure/json-api": "^0.3.0"
     },
     "require-dev": {
         "landingi/php-coding-standards": "^1.0",

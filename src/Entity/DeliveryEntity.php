@@ -2,9 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\DeliveryEntityRepository;
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Entity(repositoryClass=DeliveryEntityRepository::class)
  */

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\ResarchStation;
 
-use App\Application\ResarchStation\Application\Command\ChangeAngleCommand;
-use App\Application\ResarchStation\Application\Command\ReportARequestCommand;
+use App\Command\ChangeAngleCommand;
+use App\Command\ReportARequestCommand;
 use App\UI\rest\Controller\CommandController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

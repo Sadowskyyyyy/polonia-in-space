@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\Expedition;
 
-use App\Application\Expedition\Application\Command\FinishExpeditionCommand;
-use App\Application\Expedition\Application\Command\PlanNewExpeditionCommand;
-use App\Application\Expedition\Application\Command\StartExpeditionCommand;
+
+use App\Command\FinishExpeditionCommand;
+use App\Command\PlanNewExpeditionCommand;
+use App\Command\StartExpeditionCommand;
 use App\UI\rest\Controller\CommandController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/expeditions")

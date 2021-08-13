@@ -3,10 +3,8 @@
 namespace App\Entity;
 
 use App\Application\Scientist\Domain\MarsScientist\MarsScientist;
-use App\Repository\MarsScientistEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=MarsScientistEntityRepository::class)
@@ -71,10 +69,10 @@ class MarsScientistEntity
      */
     private $expeditionEntities;
 
-    public function __construct(int $id, string $name, string $surname,
-                                string $password, bool $isMissing, bool $isDead,
+    public function __construct(int     $id, string $name, string $surname,
+                                string  $password, bool $isMissing, bool $isDead,
                                 ?string $reason
-        , ?MarsScientistEntity $author, array $registredUsers, $station)
+        , ?MarsScientistEntity          $author, array $registredUsers, $station)
     {
         $this->id = $id;
         $this->name = $name;
@@ -144,6 +142,14 @@ class MarsScientistEntity
         return $this;
     }
 
+    /**
+     * @return Collection|self[]
+     */
+    public function getRegistredUsers(): Collection
+    {
+        return $this->registredUsers;
+    }
+
     public function getIsMissing(): ?bool
     {
         return $this->isMissing;
@@ -180,26 +186,6 @@ class MarsScientistEntity
         return $this;
     }
 
-    public function getAuthor(): ?self
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?self $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|self[]
-     */
-    public function getRegistredUsers(): Collection
-    {
-        return $this->registredUsers;
-    }
-
     public function addRegistredUser(self $registredUser): self
     {
         if (!$this->registredUsers->contains($registredUser)) {
@@ -218,6 +204,18 @@ class MarsScientistEntity
                 $registredUser->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?self
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?self $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

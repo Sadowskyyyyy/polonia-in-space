@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Service;
+
+
+use App\DomainModel\AbstractResearchStation;
+use App\DomainModel\AbstractScientist;
+use App\DomainModel\MarsScientist;
+use App\Exception\WrongScientistTypeException;
+
+class MarsResearchStation extends AbstractResearchStation
+{
+    function addScientist(AbstractScientist $scientist): void
+    {
+        if (!$scientist instanceof MarsScientist) {
+            throw new WrongScientistTypeException();
+        }
+
+        $this->getScientists()[$scientist->getId()] = $scientist;
+    }
+}

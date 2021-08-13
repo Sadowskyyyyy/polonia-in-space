@@ -2,8 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\ExpeditionEntityRepository;
-use Doctrine\ORM\Mapping as ORM;
+use DateTimeInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ExpeditionEntityRepository::class)
@@ -60,24 +59,24 @@ class ExpeditionEntity
         return $this;
     }
 
-    public function getCreationDate(): ?\DateTimeInterface
+    public function getCreationDate(): ?DateTimeInterface
     {
         return $this->creationDate;
     }
 
-    public function setCreationDate(\DateTimeInterface $creationDate): self
+    public function setCreationDate(DateTimeInterface $creationDate): self
     {
         $this->creationDate = $creationDate;
 
         return $this;
     }
 
-    public function getPlannedStartDate(): ?\DateTimeInterface
+    public function getPlannedStartDate(): ?DateTimeInterface
     {
         return $this->plannedStartDate;
     }
 
-    public function setPlannedStartDate(\DateTimeInterface $plannedStartDate): self
+    public function setPlannedStartDate(DateTimeInterface $plannedStartDate): self
     {
         $this->plannedStartDate = $plannedStartDate;
 

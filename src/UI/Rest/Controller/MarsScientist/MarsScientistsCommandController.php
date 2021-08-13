@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\MarsScientist;
 
-use App\Application\Scientist\Application\Command\MarkMarsScientistAsMissingOrDeadCommand;
-use App\Application\Scientist\Application\Command\RegisterScientistCommand;
-use App\UI\rest\Controller\CommandController;
+use App\Command\MarkMarsScientistAsMissingOrDeadCommand;
+use App\Command\RegisterScientistCommand;
+use App\UI\Rest\Controller\CommandController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
-use function sprintf;
 
 /**
  * @Route("/marsscientists")

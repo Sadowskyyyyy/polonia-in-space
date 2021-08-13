@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\MarsScientist;
 
-use App\Application\Scientist\Application\Query\GetAllScientistsFromMarsResearchStation;
+use App\Query\GetAllScientistsFromMarsResearchStationQuery;
 use App\UI\rest\Controller\QueryController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,9 +26,8 @@ class MarsScientistsQueryController extends QueryController
      */
     public function getScientists(Request $request): Response
     {
-        $response = $this->ask(new GetAllScientistsFromMarsResearchStation());
+        $response = $this->ask(new GetAllScientistsFromMarsResearchStationQuery());
 
 
     }
-
 }

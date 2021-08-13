@@ -2,9 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\EarthScientistEntityRepository;
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Entity(repositoryClass=EarthScientistEntityRepository::class)
  */
