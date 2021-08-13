@@ -6,5 +6,4 @@ namespace App\DomainModel;
 
 class SpaceScientist extends AbstractScientist
 {
-
 }

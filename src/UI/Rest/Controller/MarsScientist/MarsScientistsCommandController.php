@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\MarsScientist;
@@ -35,8 +34,6 @@ class MarsScientistsCommandController extends CommandController
         );
 
         $this->handle($command);
-
-
     }
 
     /**
@@ -48,13 +45,12 @@ class MarsScientistsCommandController extends CommandController
         $data = json_decode($request->getContent(), true);
 
         $command = new MarkMarsScientistAsMissingOrDeadCommand(
-            (int)$data['id'],
+            (int) $data['id'],
             $data['reason'],
-            (bool)$data['isMissing'],
-            (bool)$data['isDead']
+            (bool) $data['isMissing'],
+            (bool) $data['isDead']
         );
 
         $this->handle($command);
-
     }
 }

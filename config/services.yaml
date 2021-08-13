@@ -19,6 +19,9 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/DomainModel/'
+            - '../src/Command/'
+            - '../src/Query/'
+            - '../src/Event/'
             - '../src/Kernel.php'
             - '../src/Tests/'
 

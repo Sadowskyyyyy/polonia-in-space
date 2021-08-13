@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Repository;
 
-
-use App\Shared\Domain\Event\Event;
 use App\Entity\MarsResearchStationEntity;
 use App\Entity\SpaceResearchStationEntity;
+use App\Shared\Domain\Event\Event;
 use App\Shared\Domain\Event\EventRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -26,15 +25,16 @@ class EventStore implements EventRepositoryInterface
 
         switch ($destination) {
             case 'marsstation':
-                /**@var MarsResearchStationEntity $station */
+                /** @var MarsResearchStationEntity $station */
                 $station = $this->entityManager->getRepository(MarsResearchStationEntity::class)->findOneBy(['id' => 1]);
                 $events = $station->getEvents();
-            case 'earthstation':
-                /**@var EarthResearchStationEntity $station */
-                $station = $this->entityManager->getRepository(::class)->findOneBy(['id' => 1]);
-                $events = $station->getEvents();
+//            case 'earthstation':
+//                /**@var EarthResearchStationEntity $station */
+//                $station = $this->entityManager->getRepository(EarthResearchStationEntity::class)->findOneBy(['id' => 1]);
+//                $events = $station->getEvents();
+// no break
             case 'spacestation':
-                /**@var SpaceResearchStationEntity $station */
+                /** @var SpaceResearchStationEntity $station */
                 $station = $this->entityManager->getRepository(SpaceResearchStationEntity::class)->findOneBy(['id' => 1]);
                 $events = $station->getEvents();
         }
@@ -44,6 +44,7 @@ class EventStore implements EventRepositoryInterface
 
     public function save(Event $event): void
     {
-
+        $this->entityManager->persist($event);
+        $this->entityManager->flush();
     }
 }

@@ -1,15 +1,18 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Handler;
 
+//TODO Tests
+use App\Command\StartExpeditionCommand;
+use App\Event\StartedExpedition;
+use App\Service\ExpeditionRepositoryInterface;
+use App\Shared\Domain\Event\EventRepositoryInterface;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-//Tests
 class StartExpeditionCommandHandler implements MessageHandlerInterface
 {
     private ExpeditionRepositoryInterface $repository;
-
     private EventRepositoryInterface $eventRepository;
 
     public function __construct(ExpeditionRepositoryInterface $repository, EventRepositoryInterface $eventRepository)
@@ -21,7 +24,7 @@ class StartExpeditionCommandHandler implements MessageHandlerInterface
     public function __invoke(StartExpeditionCommand $command)
     {
         $expedition = $this->repository->getById($command->id);
-        $expedition->startExpedition();
+        $expedition->start();
 
         $this->repository->save($expedition);
         $this->eventRepository->save(new StartedExpedition());

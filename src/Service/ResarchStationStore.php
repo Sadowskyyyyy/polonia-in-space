@@ -10,5 +10,4 @@ class ResarchStationStore implements ResarchStationRepositoryInterface
     {
         // TODO: Implement getResarchStationByName() method.
     }
-
 }

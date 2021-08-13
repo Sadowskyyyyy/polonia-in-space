@@ -1,6 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
+
+use App\DomainModel\EarthScientist;
 
 /**
  * @ORM\Entity(repositoryClass=EarthScientistEntityRepository::class)
@@ -17,23 +20,43 @@ class EarthScientistEntity
     /**
      * @ORM\Column(type="string", length=32)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private $surname;
+    private ?string $surname;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $password;
+    private ?string $password;
 
     /**
      * @ORM\ManyToOne(targetEntity=EarthResarchStation::class, inversedBy="scientists")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $station;
+    private ?EarthResarchStation $station;
+
+
+    public function __construct($id, ?string $name, ?string $surname, ?string $password, ?EarthResarchStation $station)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->password = $password;
+        $this->station = $station;
+    }
+
+    public static function toDomain(EarthScientistEntity $entity): EarthScientist
+    {
+        return new EarthScientist(
+            $entity->getId(),
+            $entity->getName(),
+            $entity->getSurname(),
+            $entity->getPassword()
+        );
+    }
 
     public function getId(): ?int
     {
@@ -86,5 +109,10 @@ class EarthScientistEntity
         $this->station = $station;
 
         return $this;
+    }
+
+    public function addScientist(EarthScientistEntity $earthScientist)
+    {
+        $this->s
     }
 }

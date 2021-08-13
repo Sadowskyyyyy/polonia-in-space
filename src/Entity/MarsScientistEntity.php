@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Application\Scientist\Domain\MarsScientist\MarsScientist;
+use App\DomainModel\MarsScientist;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -62,17 +63,14 @@ class MarsScientistEntity
      * @ORM\ManyToOne(targetEntity=MarsResearchStationEntity::class, inversedBy="scientists")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $station;
+    private ?MarsResearchStationEntity $station;
 
     /**
      * @ORM\OneToMany(targetEntity=ExpeditionEntity::class, mappedBy="creator")
      */
     private $expeditionEntities;
 
-    public function __construct(int     $id, string $name, string $surname,
-                                string  $password, bool $isMissing, bool $isDead,
-                                ?string $reason
-        , ?MarsScientistEntity          $author, array $registredUsers, $station)
+    public function __construct(int $id, string $name, string $surname, string $password, bool $isMissing, bool $isDead, ?string $reason, ?MarsScientistEntity $author, ArrayCollection $registredUsers, ?MarsResearchStationEntity $station, $expeditionEntities)
     {
         $this->id = $id;
         $this->name = $name;
@@ -84,11 +82,10 @@ class MarsScientistEntity
         $this->author = $author;
         $this->registredUsers = $registredUsers;
         $this->station = $station;
-        $this->expeditionEntities = new ArrayCollection();
+        $this->expeditionEntities = $expeditionEntities;
     }
 
-
-    public static function toDomain(MarsScientistEntity $entity): MarsScientist
+    public static function toDomain(self $entity): MarsScientist
     {
         return new MarsScientist(
             $entity->getId(),

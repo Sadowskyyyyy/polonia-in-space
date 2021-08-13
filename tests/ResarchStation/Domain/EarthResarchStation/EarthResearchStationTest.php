@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\ResarchStation\Domain\EarthResarchStation;
 
-
 use App\DomainModel\EarthResearchStation;
 use App\DomainModel\EarthScientist;
 use App\DomainModel\SpaceScientist;
@@ -14,7 +13,6 @@ use PHPUnit\Framework\TestCase;
 class EarthResearchStationTest extends TestCase
 {
     private EarthResearchStation $researchStation;
-
 
     public function testTryToAddOtherInstanceOfScientistThenThrowError()
     {

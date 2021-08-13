@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-
 use App\Shared\Application\Command\CommandInterface;
 
 class ChangeAngleCommand implements CommandInterface
 {
-    private float $degrees;
+    public float $degrees;
 
     public function __construct(float $degrees)
     {

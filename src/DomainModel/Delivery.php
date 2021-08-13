@@ -1,7 +1,7 @@
 <?php
+declare(strict_types=1);
 
 namespace App\DomainModel;
-
 
 use App\Exception\CannotChangeStatusOfDeliveredDeliveryException;
 
@@ -25,8 +25,11 @@ class Delivery
 
     private function setPickUpAddress(): string
     {
-        return date('Y-m-d H:i:s', strtotime(
-                date('Y-m-d H:i:s', $this->postDate) . strtotime('now'))
+        return date(
+            'Y-m-d H:i:s',
+            strtotime(
+                date('Y-m-d H:i:s', $this->postDate) . strtotime('now')
+            )
         );
     }
 
@@ -37,7 +40,7 @@ class Delivery
 
     public function changeStatusToSent(): void
     {
-        if ($this->status === 'delivered') {
+        if ('delivered' === $this->status) {
             throw new CannotChangeStatusOfDeliveredDeliveryException();
         }
 
@@ -48,5 +51,4 @@ class Delivery
     {
         return $this->sender;
     }
-
 }

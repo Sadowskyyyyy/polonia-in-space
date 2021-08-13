@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\DomainModel\AbstractResearchStation;
+
 interface ResarchStationRepositoryInterface
 {
-    public function getResarchStationByName(string $name);
+    public function getResarchStationByName(string $name): AbstractResearchStation;
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\ResarchStation\Domain\SpaceResearchStation;
 
-
 use App\DomainModel\EarthScientist;
 use App\DomainModel\SpaceResearchStation;
 use App\DomainModel\SpaceScientist;
@@ -31,5 +30,4 @@ class SpaceResearchStationTest extends TestCase
         $this->researchStation
             ->addScientist(new SpaceScientist(1, 'Adam', 'Jensen', ''));
     }
-
 }

@@ -2,7 +2,6 @@
 
 namespace App\Tests\ResarchStation\Domain\MarsResearchStation;
 
-
 use App\DomainModel\EarthScientist;
 use App\DomainModel\MarsScientist;
 use App\Exception\WrongScientistTypeException;

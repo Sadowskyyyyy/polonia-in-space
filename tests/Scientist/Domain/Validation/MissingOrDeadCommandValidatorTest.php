@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Scientist\Domain\Validation;
 
-use App\Exception\InvalidReasonException;
-use App\Shared\Domain\Exception\InvalidArgumentException;
 use App\Command\MarkMarsScientistAsMissingOrDeadCommand;
+use App\Exception\InvalidReasonException;
 use App\Service\MissingOrDeadCommandValidator;
+use App\Shared\Domain\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class MissingOrDeadCommandValidatorTest extends TestCase
@@ -20,8 +20,10 @@ class MissingOrDeadCommandValidatorTest extends TestCase
         parent::setUp();
         $this->validator = new MissingOrDeadCommandValidator();
         $this->command = new MarkMarsScientistAsMissingOrDeadCommand(
-            1, 'In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Duis sapien nunc, commodo et,'
-            , false, true
+            1,
+            'In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Duis sapien nunc, commodo et,',
+            false,
+            true
         );
     }
 

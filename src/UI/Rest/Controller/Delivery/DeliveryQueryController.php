@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\Delivery;
 
+use App\Query\CheckDeliveryStatusQuery;
 use App\UI\Rest\Controller\QueryController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,8 +25,7 @@ class DeliveryQueryController extends QueryController
      */
     public function checkStatus(Request $request, int $id): Response
     {
-        $destination = $request->query->get('destination')
-        $response = $this->ask(new CheckStatusQuery($id, $destination));
+        $destination = $request->query->get('destination');
+        $response = $this->ask(new CheckDeliveryStatusQuery($id, $destination));
     }
-
 }

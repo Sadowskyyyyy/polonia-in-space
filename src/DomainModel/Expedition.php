@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\DomainModel;
 
 use App\Exception\CannotFinishExpeditionWhichHasNotStartedYetException;
+use App\Exception\CannotGenerateConclusionForNotFinishedExpeditionException;
 use App\Exception\CannotStartFinishedExpeditionException;
 use App\Exception\CannotStartStartedExpeditionException;
 use DateTime;
 
 class Expedition
 {
-    const DATE_TIME_FORMAT = 'Y-m-d H:i:s';
+    public const DATE_TIME_FORMAT = 'Y-m-d H:i:s';
 
     private int $id;
     private MarsScientist $creator;
@@ -21,11 +22,11 @@ class Expedition
     private bool $isStarted = false;
 
     public function __construct(
-        int           $id,
+        int $id,
         MarsScientist $creator,
-        bool          $isFinished,
-        bool          $isStarted)
-    {
+        bool $isFinished,
+        bool $isStarted
+    ) {
         $creationDate = new DateTime();
         $this->id = $id;
         $this->creator = $creator;
@@ -34,28 +35,29 @@ class Expedition
         $this->isStarted = $isStarted;
     }
 
-    public static function planNewExpedition(MarsScientist $marsScientist, string $plannedStartDate): Expedition
+    public static function planNewExpedition(MarsScientist $marsScientist, string $plannedStartDate): self
     {
-        $expedition = new Expedition((int)null, $marsScientist, false, false);
+        $expedition = new self((int) null, $marsScientist, false, false);
         $expedition->plannedStartDate = $plannedStartDate;
+
         return $expedition;
     }
 
-    public function finishExpedition(): void
+    public function finish(): void
     {
-        if ($this->isStarted === false) {
+        if (false === $this->isStarted) {
             throw new CannotFinishExpeditionWhichHasNotStartedYetException();
         }
 
         $this->isFinished = true;
     }
 
-    public function startExpedition(): void
+    public function start(): void
     {
-        if ($this->isFinished === true) {
+        if (true === $this->isFinished) {
             throw new CannotStartFinishedExpeditionException();
         }
-        if ($this->isStarted === true) {
+        if (true === $this->isStarted) {
             throw new CannotStartStartedExpeditionException();
         }
 
@@ -64,10 +66,10 @@ class Expedition
 
     public function generateExpeditionConclusion(): string
     {
-        //TODO make test
-        if ($this->isFinished === false || $this->isStarted === true) {
+        if (false === $this->isFinished) {
             throw new CannotGenerateConclusionForNotFinishedExpeditionException();
         }
+
         return sprintf('creationDate: %1$s, plannedStartDate: %2$s', $this->creationDate, $this->plannedStartDate);
     }
 

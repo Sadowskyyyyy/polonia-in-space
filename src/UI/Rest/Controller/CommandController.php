@@ -1,10 +1,9 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\UI\Rest\Controller;
 
-use App\Application\Shared\Application\Command\CommandInterface;
+use App\Shared\Application\Command\CommandInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -27,7 +26,7 @@ abstract class CommandController extends AbstractController
     protected function handleWithDelay(CommandInterface $command): void
     {
         $this->bus->dispatch(new Envelope($command), [
-            new DelayStamp(840000)
+            new DelayStamp(840000),
         ]);
     }
 }

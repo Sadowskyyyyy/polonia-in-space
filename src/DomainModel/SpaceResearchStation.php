@@ -1,9 +1,7 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\DomainModel;
-
 
 use App\Exception\WrongScientistTypeException;
 
@@ -13,10 +11,11 @@ class SpaceResearchStation extends AbstractResearchStation
     private int $daysAtOrbit;
     private float $mass;
     private float $energyWaste;
+    private float $waterWaste;
     private float $accumulatorsPercentage;
     private float $position;
 
-    function addScientist(AbstractScientist $scientist): void
+    public function addScientist(AbstractScientist $scientist): void
     {
         if (!$scientist instanceof SpaceScientist) {
             throw new WrongScientistTypeException();
@@ -85,8 +84,18 @@ class SpaceResearchStation extends AbstractResearchStation
         return $this->position;
     }
 
-    public function setPosition(float $position): void
+    public function changePosition(float $position): void
     {
-        $this->position = $position;
+        $this->position += $position;
+    }
+
+    public function getWaterWaste(): float
+    {
+        return $this->waterWaste;
+    }
+
+    public function setWaterWaste(float $waterWaste): void
+    {
+        $this->waterWaste = $waterWaste;
     }
 }

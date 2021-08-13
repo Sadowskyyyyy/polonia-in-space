@@ -1,10 +1,9 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Event;
 
-use App\Application\Shared\Domain\Event\Event;
+use App\Shared\Domain\Event\Event;
 
 class MarsScientistCreated extends Event
 {

@@ -1,35 +1,36 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Handler;
 
-use App\Application\Scientist\Application\Command\MarkMarsScientistAsMissingOrDeadCommand;
-use App\Application\Scientist\Application\Event\MarsScientistHasBeenMarkedAsDeadOrMissing;
-use App\Application\Scientist\Domain\MarsScientist\Repository\MarsScientistRepositoryInterface;
+//TODO tests
+use App\Command\MarkMarsScientistAsMissingOrDeadCommand;
+use App\Event\MarsScientistHasBeenMarkedAsDeadOrMissing;
+use App\Service\MarsScientistRepositoryInterface;
+use App\Shared\Domain\Event\EventRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-//TODO tests
 class MarkMarsScientistAsMissingOrDeadCommandHandler implements MessageHandlerInterface
 {
     private MarsScientistRepositoryInterface $repository;
 
     private EventRepositoryInterface $eventRepository;
 
-    public function __construct(MarsScientistRepositoryInterface $repository)
+    public function __construct(MarsScientistRepositoryInterface $repository, EventRepositoryInterface $eventRepository)
     {
         $this->repository = $repository;
+        $this->eventRepository = $eventRepository;
     }
 
     public function __invoke(MarkMarsScientistAsMissingOrDeadCommand $command)
     {
         $scientist = $this->repository->getById($command->id);
 
-        if ($command->isMissing === true) {
+        if (true === $command->isMissing) {
             $scientist->markAsMissing();
             $scientist->setReasonOfDeath($command->reason);
         }
-        if ($command->isDead === true) {
+        if (true === $command->isDead) {
             $scientist->markAsDead();
             $scientist->setReasonOfDeath($command->reason);
         }

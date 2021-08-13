@@ -1,9 +1,7 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\DomainModel;
-
 
 use App\Exception\CannotAddStartedOrFinishedExpeditionException;
 use App\Exception\ExpeditionIsNotAlreadyFinishedException;
@@ -20,26 +18,26 @@ class MarsScientist extends AbstractScientist
     private array $finishedExpeditions = [];
 
     public function __construct(
-        int    $id,
+        int $id,
         string $name,
         string $surname,
         string $password,
-        array  $registeredUsers,
-        array  $plannedExpeditions,
-        array  $finishedExpeditions)
-    {
+        array $registeredUsers,
+        array $plannedExpeditions,
+        array $finishedExpeditions
+    ) {
         parent::__construct($id, $name, $surname, $password);
         $this->registeredUsers = $registeredUsers;
         $this->plannedExpeditions = $plannedExpeditions;
         $this->finishedExpeditions = $finishedExpeditions;
     }
 
-    public static function createNewScientist(string $name, string $surname): MarsScientist
+    public static function createNewScientist(string $name, string $surname): self
     {
-        return new MarsScientist((int)null, $name, $surname, '', [], [], []);
+        return new self((int) null, $name, $surname, '', [], [], []);
     }
 
-    public static function toEntity(MarsScientist $marsScientist)
+    public static function toEntity(self $marsScientist)
     {
         return new MarsScientistEntity(
             $marsScientist->getId(),
@@ -49,7 +47,7 @@ class MarsScientist extends AbstractScientist
             $marsScientist->isMissing(),
             $marsScientist->isDead(),
             $marsScientist->getReason(),
-            MarsScientist::toEntity($marsScientist->getAuthor()),
+            self::toEntity($marsScientist->getAuthor()),
             $marsScientist->getRegisteredUsers(),
             'marsstation'
         );
@@ -70,7 +68,7 @@ class MarsScientist extends AbstractScientist
         return $this->reason;
     }
 
-    public function getAuthor(): MarsScientist
+    public function getAuthor(): self
     {
         return $this->author;
     }
@@ -80,14 +78,14 @@ class MarsScientist extends AbstractScientist
         return $this->registeredUsers;
     }
 
-    public function addRegisteredUser(MarsScientist $scientist): void
+    public function addRegisteredUser(self $scientist): void
     {
         $this->registeredUsers[] = $scientist;
     }
 
     public function addPlanedExpedition(Expedition $expedition): void
     {
-        if ($expedition->isStarted() === true || $expedition->isFinished() === true) {
+        if (true === $expedition->isStarted() || true === $expedition->isFinished()) {
             throw new CannotAddStartedOrFinishedExpeditionException();
         }
 
@@ -96,7 +94,7 @@ class MarsScientist extends AbstractScientist
 
     public function addFinishedExpedition(Expedition $expedition): void
     {
-        if ($expedition->isFinished() === false) {
+        if (false === $expedition->isFinished()) {
             throw new ExpeditionIsNotAlreadyFinishedException();
         }
 
@@ -122,7 +120,7 @@ class MarsScientist extends AbstractScientist
 
     public function setReasonOfDeath(string $reason)
     {
-        if ($this->isDead === false) {
+        if (false === $this->isDead) {
             throw new ScientistIsAliveException();
         }
 

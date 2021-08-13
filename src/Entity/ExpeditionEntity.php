@@ -1,7 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\DomainModel\Expedition;
+use App\DomainModel\MarsScientist;
 use DateTimeInterface;
 
 /**
@@ -14,33 +17,53 @@ class ExpeditionEntity
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=MarsScientistEntity::class, inversedBy="expeditionEntities")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $creator;
+    private ?MarsScientistEntity $creator;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $creationDate;
+    private ?DateTimeInterface $creationDate;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $plannedStartDate;
+    private ?DateTimeInterface $plannedStartDate;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isFinished;
+    private ?bool $isFinished;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isStarted;
+    private ?bool $isStarted;
+
+    public function __construct(?int $id, ?MarsScientistEntity $creator, ?DateTimeInterface $creationDate, ?DateTimeInterface $plannedStartDate, ?bool $isFinished, ?bool $isStarted)
+    {
+        $this->id = $id;
+        $this->creator = $creator;
+        $this->creationDate = $creationDate;
+        $this->plannedStartDate = $plannedStartDate;
+        $this->isFinished = $isFinished;
+        $this->isStarted = $isStarted;
+    }
+
+    public static function toDomain(ExpeditionEntity $entity): Expedition
+    {
+        return new Expedition(
+            $entity->getId(),
+            MarsScientistEntity::toDomain($entity->getCreator()),
+            $entity->isFinished,
+            $entity->isStarted
+        );
+    }
 
     public function getId(): ?int
     {

@@ -1,14 +1,13 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Handler;
 
-use App\Application\Expedition\Application\Command\PlanNewExpeditionCommand;
-use App\Application\Expedition\Application\Event\PlannedNewExpedition;
-use App\Application\Expedition\Domain\Expedition;
-use App\Application\Expedition\Domain\Repository\ExpeditionRepositoryInterface;
-use App\Application\Shared\Domain\Event\EventRepositoryInterface;
+use App\Command\PlanNewExpeditionCommand;
+use App\DomainModel\Expedition;
+use App\Event\PlannedNewExpedition;
+use App\Service\ExpeditionRepositoryInterface;
+use App\Shared\Domain\Event\EventRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class PlanNewExpeditionCommandHandler implements MessageHandlerInterface

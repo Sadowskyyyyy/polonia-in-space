@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\Expedition;
 
-
 use App\Command\FinishExpeditionCommand;
 use App\Command\PlanNewExpeditionCommand;
 use App\Command\StartExpeditionCommand;
@@ -33,7 +32,6 @@ class ExpeditionCommandController extends CommandController
 
         $command = new StartExpeditionCommand($id);
         $this->handle($command);
-
     }
 
     /**
@@ -49,7 +47,6 @@ class ExpeditionCommandController extends CommandController
         );
 
         $this->handle($command);
-
     }
 
     /**
@@ -65,6 +62,5 @@ class ExpeditionCommandController extends CommandController
         );
 
         $this->handle($command);
-
     }
 }

@@ -1,10 +1,9 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\UI\Rest\Controller;
 
-use App\Application\Shared\Application\Query\QueryInterface;
+use App\Shared\Application\Query\QueryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -32,7 +31,7 @@ abstract class QueryController extends AbstractController
     protected function askWithDelay(QueryInterface $query): Envelope
     {
         $envelope = $this->queryBus->dispatch(new Envelope($command), [
-            new DelayStamp(840000)
+            new DelayStamp(840000),
         ]);
         /** @var HandledStamp $handled */
         $handled = $envelope->last(HandledStamp::class);

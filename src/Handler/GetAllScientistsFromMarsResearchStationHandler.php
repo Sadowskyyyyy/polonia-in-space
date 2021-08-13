@@ -1,21 +1,19 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Handler;
 
-use App\Application\Scientist\Application\Query\GetAllScientistsFromMarsResearchStation;
-use App\Application\Scientist\Domain\MarsScientist\Repository\MarsScientistRepositoryInterface;
+//TODO make tests
+use App\Query\GetAllScientistsFromMarsResearchStationQuery;
+use App\Service\MarsScientistRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-//TODO make tests
 class GetAllScientistsFromMarsResearchStationHandler implements MessageHandlerInterface
 {
     private MarsScientistRepositoryInterface $marsScientistRepository;
 
-    public function __invoke(GetAllScientistsFromMarsResearchStation $query): array
+    public function __invoke(GetAllScientistsFromMarsResearchStationQuery $query): array
     {
         return $this->marsScientistRepository->getAll();
     }
-
 }

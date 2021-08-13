@@ -6,6 +6,10 @@ namespace App\UI\Rest\Controller\MarsScientist;
 
 use App\Query\GetAllScientistsFromMarsResearchStationQuery;
 use App\UI\rest\Controller\QueryController;
+use JsonApiPhp\JsonApi\CompoundDocument;
+use JsonApiPhp\JsonApi\ResourceIdentifierCollection;
+use JsonApiPhp\JsonApi\ResourceObject;
+use JsonApiPhp\JsonApi\ToMany;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;

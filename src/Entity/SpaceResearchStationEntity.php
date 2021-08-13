@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -20,46 +21,54 @@ class SpaceResearchStationEntity
     /**
      * @ORM\OneToMany(targetEntity=SpaceScientistEntity::class, mappedBy="station")
      */
-    private $scientists;
+    private ArrayCollection $scientists;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $needHelp;
+    private ?bool $needHelp;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $oxygenPercentage;
+    private ?float $oxygenPercentage;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $daysAtOrbit;
+    private ?int $daysAtOrbit;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $mass;
+    private ?float $mass;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $energyWaste;
+    private ?float $energyWaste;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $accumulatorPercentage;
+    private ?float $accumulatorPercentage;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $position;
+    private ?float $position;
 
-    public function __construct()
+    public function __construct($id, ArrayCollection $scientists, ?bool $needHelp, ?float $oxygenPercentage, ?int $daysAtOrbit, ?float $mass, ?float $energyWaste, ?float $accumulatorPercentage, ?float $position)
     {
-        $this->scientists = new ArrayCollection();
+        $this->id = $id;
+        $this->scientists = $scientists;
+        $this->needHelp = $needHelp;
+        $this->oxygenPercentage = $oxygenPercentage;
+        $this->daysAtOrbit = $daysAtOrbit;
+        $this->mass = $mass;
+        $this->energyWaste = $energyWaste;
+        $this->accumulatorPercentage = $accumulatorPercentage;
+        $this->position = $position;
     }
 
     public function getId(): ?int

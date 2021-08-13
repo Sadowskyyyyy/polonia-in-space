@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\Expedition;
 
@@ -22,8 +23,6 @@ class ExpeditionQueryController extends QueryController
      */
     public function generateExpeditionConclusion(int $id): Resource
     {
-        $query = $this->ask(new GenerateExpeditionConclusionQuery($id));
-
-
+        $response = $this->ask(new GenerateExpeditionConclusionQuery($id));
     }
 }

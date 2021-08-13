@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -20,16 +21,18 @@ class EarthResarchStation
     /**
      * @ORM\OneToMany(targetEntity=EarthScientistEntity::class, mappedBy="station")
      */
-    private $scientists;
+    private ArrayCollection $scientists;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $needHelp;
+    private ?bool $needHelp;
 
-    public function __construct()
+    public function __construct($id, ArrayCollection $scientists, ?bool $needHelp)
     {
-        $this->scientists = new ArrayCollection();
+        $this->id = $id;
+        $this->scientists = $scientists;
+        $this->needHelp = $needHelp;
     }
 
     public function getId(): ?int

@@ -1,14 +1,12 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Application\Scientist\Application\Command\RegisterScientistCommand;
-use App\Application\Shared\Domain\Exception\InvalidArgumentException;
-use function strlen;
-
 //TODO tests
+use App\Command\RegisterScientistCommand;
+use App\Shared\Domain\Exception\InvalidArgumentException;
+
 class RegisterScientistCommandValidator
 {
     public function __construct()

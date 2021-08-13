@@ -4,7 +4,13 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\ResarchStation;
 
+use App\Query\CheckAccumulatorsQuery;
+use App\Query\CheckDaysAtOrbitQuery;
 use App\Query\CheckDemandQuery;
+use App\Query\CheckEnergyWasteQuery;
+use App\Query\CheckMassQuery;
+use App\Query\CheckOxygenQuery;
+use App\Query\CheckWaterWasteAndWaterSuppliesQuery;
 use App\UI\Rest\Controller\QueryController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,6 +34,7 @@ class ResearchStationQueryController extends QueryController
         $direction = $request->query->get('destination');
         $response = $this->askWithDelay(new CheckDemandQuery($direction));
 
+
     }
 
     /**
@@ -37,6 +44,8 @@ class ResearchStationQueryController extends QueryController
     public function checkOxygen(Request $request): Response
     {
         $response = $this->askWithDelay(new CheckOxygenQuery());
+
+
     }
 
     /**
@@ -46,6 +55,8 @@ class ResearchStationQueryController extends QueryController
     public function checkMass(Request $request): Response
     {
         $response = $this->askWithDelay(new CheckMassQuery());
+
+
     }
 
     /**
@@ -55,33 +66,38 @@ class ResearchStationQueryController extends QueryController
     public function checkDaysAtOrbit(Request $request): Response
     {
         $response = $this->askWithDelay(new CheckDaysAtOrbitQuery());
+
+
     }
 
     /**
      * @IsGranted("ROLE_EARTH_SCIENTIST")
      * @Route("/spacestation/energy")
      */
-    public function checkDaysAtOrbit(Request $request): Response
+    public function checkEnergyWaste(Request $request): Response
     {
         $response = $this->askWithDelay(new CheckEnergyWasteQuery());
+
     }
 
     /**
      * @IsGranted("ROLE_EARTH_SCIENTIST")
      * @Route("/spacestation/accumulators")
      */
-    public function checkDaysAtOrbit(Request $request): Response
+    public function checkAccumulators(Request $request): Response
     {
         $response = $this->askWithDelay(new CheckAccumulatorsQuery());
+
+
     }
+
     /**
      * @IsGranted("ROLE_EARTH_SCIENTIST")
      * @Route("/spacestation/water")
      */
-    public function checkDaysAtOrbit(Request $request): Response
+    public function checkWaterAndSupplies(Request $request): Response
     {
         $response = $this->askWithDelay(new CheckWaterWasteAndWaterSuppliesQuery());
+
     }
-
-
 }

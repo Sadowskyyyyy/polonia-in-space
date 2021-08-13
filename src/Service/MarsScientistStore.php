@@ -1,15 +1,13 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Application\Scientist\Domain\MarsScientist\MarsScientist;
-use App\Application\Scientist\Domain\MarsScientist\Repository\MarsScientistRepositoryInterface;
+//TODO tests and implementation
+use App\DomainModel\MarsScientist;
 use App\Entity\MarsScientistEntity;
 use Doctrine\ORM\EntityManagerInterface;
 
-//TODO tests and implementation
 final class MarsScientistStore implements MarsScientistRepositoryInterface
 {
     private EntityManagerInterface $entityManager;
