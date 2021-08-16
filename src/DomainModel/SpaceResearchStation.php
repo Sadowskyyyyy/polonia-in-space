@@ -15,6 +15,26 @@ class SpaceResearchStation extends AbstractResearchStation
     private float $accumulatorsPercentage;
     private float $position;
 
+    public function __construct(int   $id,
+                                float $oxygenPercentage,
+                                int   $daysAtOrbit,
+                                float $mass,
+                                float $energyWaste,
+                                float $waterWaste,
+                                float $accumulatorsPercentage,
+                                float $position)
+    {
+        parent::__construct($id);
+        $this->oxygenPercentage = $oxygenPercentage;
+        $this->daysAtOrbit = $daysAtOrbit;
+        $this->mass = $mass;
+        $this->energyWaste = $energyWaste;
+        $this->waterWaste = $waterWaste;
+        $this->accumulatorsPercentage = $accumulatorsPercentage;
+        $this->position = $position;
+    }
+
+
     public function addScientist(AbstractScientist $scientist): void
     {
         if (!$scientist instanceof SpaceScientist) {
@@ -82,11 +102,6 @@ class SpaceResearchStation extends AbstractResearchStation
     public function getPosition(): float
     {
         return $this->position;
-    }
-
-    public function changePosition(float $position): void
-    {
-        $this->position += $position;
     }
 
     public function getWaterWaste(): float

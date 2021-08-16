@@ -12,6 +12,12 @@ class GetAllScientistsFromMarsResearchStationHandler implements MessageHandlerIn
 {
     private MarsScientistRepositoryInterface $marsScientistRepository;
 
+
+    public function __construct(MarsScientistRepositoryInterface $marsScientistRepository)
+    {
+        $this->marsScientistRepository = $marsScientistRepository;
+    }
+
     public function __invoke(GetAllScientistsFromMarsResearchStationQuery $query): array
     {
         return $this->marsScientistRepository->getAll();

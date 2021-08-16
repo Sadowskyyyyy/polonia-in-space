@@ -5,9 +5,11 @@ namespace App\Handler;
 
 use App\DomainModel\SpaceResearchStation;
 use App\Query\CheckDaysAtOrbitQuery;
+use App\Query\CheckWaterWasteAndWaterSuppliesQuery;
 use App\Service\ResarchStationRepositoryInterface;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class CheckWaterWasteAndWaterSuppliesQueryHandler
+class CheckWaterWasteAndWaterSuppliesQueryHandler implements MessageHandlerInterface
 {
     private ResarchStationRepositoryInterface $stationRepository;
 
@@ -16,12 +18,11 @@ class CheckWaterWasteAndWaterSuppliesQueryHandler
         $this->stationRepository = $stationRepository;
     }
 
-    public function __invoke(CheckDaysAtOrbitQuery $query)
+    public function __invoke(CheckWaterWasteAndWaterSuppliesQuery $query): float
     {
         /**@var SpaceResearchStation $researchStation */
         $researchStation = $this->stationRepository->getResarchStationByName('spacestation');
 
         return $researchStation->getWaterWaste();
     }
-
 }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use App\DomainModel\Delivery;
 use App\Query\CheckDeliveryStatusQuery;
 use App\Service\DeliveryRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -16,7 +17,7 @@ class CheckDeliveryStatusQueryHandler implements MessageHandlerInterface
         $this->deliveryRepository = $deliveryRepository;
     }
 
-    public function __invoke(CheckDeliveryStatusQuery $query)
+    public function __invoke(CheckDeliveryStatusQuery $query): ?Delivery
     {
         return $this->deliveryRepository->getById($query->id);
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\DomainModel\EarthScientist;
+use App\Entity\EarthResarchStation;
 use App\Entity\EarthScientistEntity;
 use App\Shared\Domain\Exception\NotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,7 +31,10 @@ class EarthScientistStore implements EarthScientistRepositoryInterface
 
     public function save(EarthScientist $earthScientist): void
     {
-        $this->entityManager->persist(EarthScientist::toEntity($earthScientist));
+        $entity = EarthScientist::toEntity($earthScientist);
+        $entity->setStation($this->entityManager->getRepository(EarthResarchStation::class)->find(1));
+
+        $this->entityManager->persist($entity);
         $this->entityManager->flush();
     }
 }

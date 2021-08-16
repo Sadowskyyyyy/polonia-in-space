@@ -9,4 +9,6 @@ use App\DomainModel\AbstractResearchStation;
 interface ResarchStationRepositoryInterface
 {
     public function getResarchStationByName(string $name): AbstractResearchStation;
+
+    public function save(AbstractResearchStation $researchStation);
 }

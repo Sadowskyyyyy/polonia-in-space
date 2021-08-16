@@ -13,7 +13,6 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 class ChangeAngleCommandHandler implements MessageHandlerInterface
 {
     private ResarchStationRepositoryInterface $stationRepository;
-
     private EventRepositoryInterface $eventRepository;
 
     public function __construct(ResarchStationRepositoryInterface $stationRepository, EventRepositoryInterface $eventRepository)

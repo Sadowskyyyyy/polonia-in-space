@@ -13,7 +13,6 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 class MarkMarsScientistAsMissingOrDeadCommandHandler implements MessageHandlerInterface
 {
     private MarsScientistRepositoryInterface $repository;
-
     private EventRepositoryInterface $eventRepository;
 
     public function __construct(MarsScientistRepositoryInterface $repository, EventRepositoryInterface $eventRepository)
@@ -28,8 +27,8 @@ class MarkMarsScientistAsMissingOrDeadCommandHandler implements MessageHandlerIn
 
         if (true === $command->isMissing) {
             $scientist->markAsMissing();
-            $scientist->setReasonOfDeath($command->reason);
         }
+
         if (true === $command->isDead) {
             $scientist->markAsDead();
             $scientist->setReasonOfDeath($command->reason);

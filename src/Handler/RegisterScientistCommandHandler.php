@@ -15,9 +15,7 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 class RegisterScientistCommandHandler implements MessageHandlerInterface
 {
     private MarsScientistRepositoryInterface $repository;
-
     private EventRepositoryInterface $eventRepository;
-
     private RegisterScientistCommandValidator $validator;
 
     public function __construct(MarsScientistRepositoryInterface $repository, EventRepositoryInterface $eventRepository, RegisterScientistCommandValidator $validator)

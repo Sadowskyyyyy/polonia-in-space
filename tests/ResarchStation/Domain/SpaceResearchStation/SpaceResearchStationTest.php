@@ -14,20 +14,24 @@ class SpaceResearchStationTest extends TestCase
 {
     private SpaceResearchStation $researchStation;
 
-    public function testTryToAddOtherInstanceOfScientistThenThrowError()
+    public function try_to_add_wrong_scientist_type_should_throw_error()
     {
         $this->expectException(WrongScientistTypeException::class);
 
-        $this->researchStation = new SpaceResearchStation(1);
+        $this->researchStation = new SpaceResearchStation(1, 70, 100,
+            10000.05, 12, 12.5, 89, 12);
+
         $this->researchStation->addScientist(new EarthScientist(1, 'Adam', 'Jensen', ''));
     }
 
-    public function testTryToAddScientistThenRunSuccessful()
+    public function try_to_add_scientist_should_run_successful()
     {
-        $this->doesNotPerformAssertions();
+        $newScientist = new SpaceScientist(1, 'Adam', 'Jensen', '');
 
-        $this->researchStation = new SpaceResearchStation(1);
-        $this->researchStation
-            ->addScientist(new SpaceScientist(1, 'Adam', 'Jensen', ''));
+        $this->researchStation = new SpaceResearchStation(1, 70, 100,
+            10000.05, 12, 12.5, 89, 12);
+        $this->researchStation->addScientist($newScientist);
+
+        $this->assertEquals($newScientist, $this->researchStation->getScientists()[0]);
     }
 }

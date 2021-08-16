@@ -17,7 +17,7 @@ class CheckAccumulatorsQueryHandler implements MessageHandlerInterface
         $this->stationRepository = $stationRepository;
     }
 
-    public function __invoke(CheckDaysAtOrbitQuery $query)
+    public function __invoke(CheckDaysAtOrbitQuery $query): float
     {
         /**@var SpaceResearchStation $researchStation */
         $researchStation = $this->stationRepository->getResarchStationByName('spacestation');
