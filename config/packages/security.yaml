@@ -1,0 +1,25 @@
+security:
+    providers:
+        in_memory:
+            memory:
+                users:
+                    space_user:
+                        password: 'space_user'
+                        roles: 'ROLE_SPACE_SCIENTIST'
+                    mars_user:
+                        password: 'mars_user'
+                        roles: 'ROLE_MARS_SCIENTIST'
+                    earth_user:
+                        password: 'earth_user'
+                        roles: 'ROLE_EARTH_SCIENTIST'
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: ~
+            http_basic: ~
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
