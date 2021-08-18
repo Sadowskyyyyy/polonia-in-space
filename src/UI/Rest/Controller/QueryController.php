@@ -30,7 +30,7 @@ abstract class QueryController extends AbstractController
 
     protected function askWithDelay(QueryInterface $query): Envelope
     {
-        $envelope = $this->queryBus->dispatch(new Envelope($command), [
+        $envelope = $this->queryBus->dispatch(new Envelope($query), [
             new DelayStamp(840000),
         ]);
         /** @var HandledStamp $handled */

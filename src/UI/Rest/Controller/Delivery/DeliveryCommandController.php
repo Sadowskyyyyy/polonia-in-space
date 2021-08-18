@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\Delivery;
 
+use Symfony\Component\Routing\Annotation\Route;
 use App\Command\SendDeliveryCommand;
 use App\UI\Rest\Controller\CommandController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,6 +29,7 @@ class DeliveryCommandController extends CommandController
     {
         $data = json_decode($request->getContent(), true);
         $destination = $request->query->get('destination');
+
         $command = new SendDeliveryCommand($data['category'], $destination);
     }
 }

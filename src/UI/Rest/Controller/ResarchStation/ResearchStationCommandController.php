@@ -10,11 +10,13 @@ use App\UI\rest\Controller\CommandController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/researchstations")
  */
-class ResearchStationController extends CommandController
+class ResearchStationCommandController extends CommandController
 {
     public function __construct(MessageBusInterface $bus)
     {

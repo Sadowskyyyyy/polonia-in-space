@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\Expedition;
@@ -11,6 +10,8 @@ use App\UI\rest\Controller\CommandController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/expeditions")
@@ -24,12 +25,10 @@ class ExpeditionCommandController extends CommandController
 
     /**
      * @IsGranted("ROLE_MARS_SCIENTIST")
-     * @Route("/{id}", methods={"PATCH"})
+     * @Route("/{id}/start", methods={"PATCH"})
      */
     public function startExpedition(Request $request, int $id): Response
     {
-        $data = json_decode($request->getContent(), true);
-
         $command = new StartExpeditionCommand($id);
         $this->handle($command);
     }
@@ -51,12 +50,10 @@ class ExpeditionCommandController extends CommandController
 
     /**
      * @IsGranted("ROLE_MARS_SCIENTIST")
-     * @Route("/{id}", methods={"PATCH"})
+     * @Route("/{id}/finish", methods={"PATCH"})
      */
     public function finishExpedition(Request $request, int $id): Response
     {
-        $data = json_decode($request->getContent(), true);
-
         $command = new FinishExpeditionCommand(
             $id
         );

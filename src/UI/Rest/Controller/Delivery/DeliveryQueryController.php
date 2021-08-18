@@ -6,6 +6,10 @@ namespace App\UI\Rest\Controller\Delivery;
 
 use App\Query\CheckDeliveryStatusQuery;
 use App\UI\Rest\Controller\QueryController;
+use JsonApiPhp\JsonApi\Attribute;
+use JsonApiPhp\JsonApi\DataDocument;
+use JsonApiPhp\JsonApi\Link\SelfLink;
+use JsonApiPhp\JsonApi\ResourceObject;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -23,9 +27,19 @@ class DeliveryQueryController extends QueryController
     /**
      * @Route("/{id}}")
      */
-    public function checkStatus(Request $request, int $id): Response
+    public function checkStatus(Request $request, int $id): string
     {
         $destination = $request->query->get('destination');
         $response = $this->ask(new CheckDeliveryStatusQuery($id, $destination));
+
+        return json_encode(new DataDocument(
+            new ResourceObject(
+                'deliveries',
+                (string)$id,
+                new Attribute('delivery', $response),
+                new SelfLink(sprintf('/deliveries/%d', $id))
+            )),
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+        );
     }
 }
