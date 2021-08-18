@@ -8,7 +8,7 @@ use App\Entity\ExpeditionEntity;
 use App\Shared\Domain\Exception\NotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 
-class ExpeditionStore implements ExpeditionRepositoryInterface
+final class ExpeditionStore implements ExpeditionRepositoryInterface
 {
     private EntityManagerInterface $entityManager;
 

@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace App\DomainModel;
 
+use App\Entity\MarsScientistEntity;
 use App\Exception\CannotAddStartedOrFinishedExpeditionException;
 use App\Exception\ExpeditionIsNotAlreadyFinishedException;
 use App\Exception\ScientistIsAliveException;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class MarsScientist extends AbstractScientist
 {
@@ -48,8 +50,10 @@ class MarsScientist extends AbstractScientist
             $marsScientist->isDead(),
             $marsScientist->getReason(),
             self::toEntity($marsScientist->getAuthor()),
-            $marsScientist->getRegisteredUsers(),
-            'marsstation'
+            new ArrayCollection(),
+            null,
+            new ArrayCollection(),
+            new ArrayCollection()
         );
     }
 

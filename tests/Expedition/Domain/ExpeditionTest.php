@@ -14,7 +14,8 @@ class ExpeditionTest extends TestCase
 {
     private Expedition $expedition;
 
-    public function testTryToFinishExpeditionAndRunSuccessful()
+    /** @test */
+    public function test_try_to_finish_expedition_and_run_successful()
     {
         $marsScientist = new MarsScientist(
             1,
@@ -31,7 +32,8 @@ class ExpeditionTest extends TestCase
         $this->assertTrue($expedition->isFinished());
     }
 
-    public function testTryToFinishFinishedExpeditionAndThrowError()
+    /** @test */
+    public function test_try_to_finish_finished_expedition_and_throw_error()
     {
         $this->expectException(CannotFinishExpeditionWhichHasNotStartedYetException::class);
         $marsScientist = new MarsScientist(
@@ -47,7 +49,8 @@ class ExpeditionTest extends TestCase
         $expedition->finish();
     }
 
-    public function testTryToStartFinishedExpeditionAndThrowError()
+    /** @test */
+    public function test_try_to_start_finished_expedition_and_throw_error()
     {
         $this->expectException(CannotStartFinishedExpeditionException::class);
         $marsScientist = new MarsScientist(
@@ -63,7 +66,8 @@ class ExpeditionTest extends TestCase
         $expedition->start();
     }
 
-    public function testTryToStartStartedExpeditionAndThrowError()
+    /** @test */
+    public function test_try_to_start_started_expedition_and_throw_error()
     {
         $this->expectException(CannotStartStartedExpeditionException::class);
         $marsScientist = new MarsScientist(
@@ -79,7 +83,8 @@ class ExpeditionTest extends TestCase
         $expedition->start();
     }
 
-    public function testTryToGenerateExpeditionConclusionAndRunSucessful()
+    /** @test */
+    public function test_try_to_generate_expedition_conclusion_and_run_sucessful()
     {
         $marsScientist = new MarsScientist(
             1,

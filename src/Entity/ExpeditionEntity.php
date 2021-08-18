@@ -6,6 +6,7 @@ namespace App\Entity;
 use App\DomainModel\Expedition;
 use App\DomainModel\MarsScientist;
 use DateTimeInterface;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ExpeditionEntityRepository::class)
@@ -44,6 +45,11 @@ class ExpeditionEntity
      * @ORM\Column(type="boolean")
      */
     private ?bool $isStarted;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=MarsScientistEntity::class, inversedBy="finishedExpeditions")
+     */
+    private $finishedBy;
 
     public function __construct(?int $id, ?MarsScientistEntity $creator, ?DateTimeInterface $creationDate, ?DateTimeInterface $plannedStartDate, ?bool $isFinished, ?bool $isStarted)
     {
@@ -126,6 +132,18 @@ class ExpeditionEntity
     public function setIsStarted(bool $isStarted): self
     {
         $this->isStarted = $isStarted;
+
+        return $this;
+    }
+
+    public function getFinishedBy(): ?MarsScientistEntity
+    {
+        return $this->finishedBy;
+    }
+
+    public function setFinishedBy(?MarsScientistEntity $finishedBy): self
+    {
+        $this->finishedBy = $finishedBy;
 
         return $this;
     }

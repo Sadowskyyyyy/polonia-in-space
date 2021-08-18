@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\DomainModel\SpaceScientist;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=SpaceScientistEntityRepository::class)
@@ -39,9 +41,30 @@ class SpaceScientistEntity
      */
     private $station;
 
-    public function __construct()
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
+    public function __construct($id, $name, $surname, $sentDeliveries, $station, $password)
     {
-        $this->sentDeliveries = new ArrayCollection();
+        $this->id = $id;
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->sentDeliveries = $sentDeliveries;
+        $this->station = $station;
+        $this->password = $password;
+    }
+
+    public static function toDomain(SpaceScientistEntity $entity): SpaceScientist
+    {
+        return new SpaceScientist(
+            $entity->getId(),
+            $entity->getName(),
+            $entity->getSurname(),
+            $entity->getPassword(),
+            $entity->getSentDeliveriesDomainModel()
+        );
     }
 
     public function getId(): ?int
@@ -113,5 +136,29 @@ class SpaceScientistEntity
         $this->station = $station;
 
         return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getSentDeliveriesDomainModel(): array
+    {
+        $deliveries = [];
+
+        foreach ($this->sentDeliveries as $delivery) {
+            /**@var DeliveryEntity $delivery */
+            $deliveries[] = DeliveryEntity::toDomain($delivery);
+        }
+
+        return $deliveries;
     }
 }

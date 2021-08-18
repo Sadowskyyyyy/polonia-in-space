@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\DomainModel\Delivery;
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * @ORM\Entity(repositoryClass=DeliveryEntityRepository::class)
  */
@@ -19,6 +22,20 @@ class DeliveryEntity
      * @ORM\JoinColumn(nullable=false)
      */
     private $sender;
+
+
+    public static function toDomain(DeliveryEntity $entity): Delivery
+    {
+        //TODO end
+        return new Delivery(
+            $entity->getSender(),
+            ProductEntity::toDomain($entity->getProduct()),
+            $entity->getStatus(),
+            $entity->getStatus(),
+            $entity->getPostDate(),
+            $entity->getPickUpAddress()
+        );
+    }
 
     public function getId(): ?int
     {

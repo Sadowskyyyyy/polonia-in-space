@@ -11,26 +11,35 @@ class Delivery
     private Product $product;
     private string $destination;
     private string $status;
-    private string $postDate;
-    private string $pickUpAddress;
+    private float $postDate;
+    private float $pickUpDate;
 
-    public function __construct(AbstractScientist $sender, Product $product, string $status)
+    public function __construct(AbstractScientist $sender,
+                                Product           $product,
+                                string            $destination,
+                                string            $status,
+                                float             $postDate,
+                                float             $pickUpAddress)
     {
         $this->sender = $sender;
         $this->product = $product;
+        $this->destination = $destination;
         $this->status = $status;
-        $this->postDate = date('Y-m-d H:i:s');
-        $this->pickUpAddress = $this->setPickUpAddress();
+        $this->postDate = $postDate;
+        $this->pickUpDate = $pickUpAddress;
     }
 
-    private function setPickUpAddress(): string
+    public static function createNewDelivery(
+        AbstractScientist $sender,
+        Product           $product,
+        string            $destination,
+        string            $status): Delivery
     {
-        return date(
-            'Y-m-d H:i:s',
-            strtotime(
-                date('Y-m-d H:i:s', $this->postDate) . strtotime('now')
-            )
-        );
+        $now = new \DateTime();
+        $now = $now->getTimestamp();
+        $pickupDate = $now + (14 * 60 * 1000);
+
+        return new Delivery($sender, $product, $destination, $status, $now, $pickupDate);
     }
 
     public function changeStatusToDelivered(): void
@@ -50,5 +59,30 @@ class Delivery
     public function getSender(): AbstractScientist
     {
         return $this->sender;
+    }
+
+    public function getProduct(): Product
+    {
+        return $this->product;
+    }
+
+    public function getDestination(): string
+    {
+        return $this->destination;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function getPostDate(): \DateTime
+    {
+        return $this->postDate;
+    }
+
+    public function getPickUpDate(): \DateTime
+    {
+        return $this->pickUpDate;
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Tests\Scientist\Domain\MarsScientist;
@@ -15,6 +14,7 @@ class MarsScientistTest extends TestCase
 {
     private MarsScientist $scientist;
 
+    /** @test */
     public function testCreatingNewScientist()
     {
         $newScientist = MarsScientist::createNewScientist('Adam', 'Jensen');
@@ -27,10 +27,10 @@ class MarsScientistTest extends TestCase
             ['test'],
             ['test']
         );
-        //TODO make assertSame(object, object)
         $this->assertSame($scientist->getPassword(), $newScientist->getPassword());
     }
 
+    /** @test */
     public function testMarkingAsMissing()
     {
         $scientist = new MarsScientist(
@@ -47,6 +47,7 @@ class MarsScientistTest extends TestCase
         $this->assertTrue($scientist->isMissing());
     }
 
+    /** @test */
     public function testMarkingAsDead()
     {
         $scientist = new MarsScientist(
@@ -63,6 +64,7 @@ class MarsScientistTest extends TestCase
         $this->assertTrue($scientist->isDead());
     }
 
+    /** @test */
     public function testTryToGiveReasonOfDeathToLivingScientist()
     {
         $this->expectException(ScientistIsAliveException::class);
@@ -80,6 +82,7 @@ class MarsScientistTest extends TestCase
         $scientist->setReasonOfDeath('Heart attack');
     }
 
+    /** @test */
     public function testTryToGiveReasonOfDeathToDeadScientist()
     {
         $scientist = new MarsScientist(
@@ -96,6 +99,7 @@ class MarsScientistTest extends TestCase
         $scientist->setReasonOfDeath('Heart attack');
     }
 
+    /** @test */
     public function testTryToAddFinishedExpeditionSuccessful()
     {
         $this->doesNotPerformAssertions();
@@ -119,6 +123,7 @@ class MarsScientistTest extends TestCase
         $scientist->addFinishedExpedition($expedition);
     }
 
+    /** @test */
     public function testTryToAddFinishedExpeditionAndThrowError()
     {
         $this->expectException(ExpeditionIsNotAlreadyFinishedException::class);
@@ -142,6 +147,7 @@ class MarsScientistTest extends TestCase
         $scientist->addFinishedExpedition($expedition);
     }
 
+    /** @test */
     public function testTryToAddPlannedExpeditionSuccessful()
     {
         $this->doesNotPerformAssertions();
@@ -165,6 +171,7 @@ class MarsScientistTest extends TestCase
         $scientist->addPlanedExpedition($expedition);
     }
 
+    /** @test */
     public function testTryToAddRunningExpeditionToPlannedExpeditionAndThrowError()
     {
         $this->expectException(CannotAddStartedOrFinishedExpeditionException::class);
@@ -188,6 +195,7 @@ class MarsScientistTest extends TestCase
         $scientist->addPlanedExpedition($expedition);
     }
 
+    /** @test */
     public function testTryToAddFinishedExpeditionToPlannedExpeditionAndThrowError()
     {
         $this->expectException(CannotAddStartedOrFinishedExpeditionException::class);

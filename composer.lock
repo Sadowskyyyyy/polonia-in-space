@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "548e3cb17e7beb34f875b07bbd55c712",
+    "content-hash": "2b1bbc8f73d1be2fd65c61a992c53e5b",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -1517,6 +1517,60 @@
                 }
             ],
             "time": "2021-05-22T16:11:15+00:00"
+        },
+        {
+            "name": "json-api-php/json-api",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/json-api-php/json-api.git",
+                "reference": "fcecfd38ee5ea58885cfb70e6033eb3983c4fc10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/json-api-php/json-api/zipball/fcecfd38ee5ea58885cfb70e6033eb3983c4fc10",
+                "reference": "fcecfd38ee5ea58885cfb70e6033eb3983c4fc10",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.13",
+                "phpunit/phpunit": "^7.0||^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JsonApiPhp\\JsonApi\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Karapetov",
+                    "email": "karapetov@gmail.com"
+                }
+            ],
+            "description": "An attempt to express JSON API specs (jsonapi.org) in object-oriented way as a set of PHP 7 classes",
+            "support": {
+                "issues": "https://github.com/json-api-php/json-api/issues",
+                "source": "https://github.com/json-api-php/json-api/tree/2.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/f3ath",
+                    "type": "custom"
+                }
+            ],
+            "time": "2020-10-13T00:41:38+00:00"
         },
         {
             "name": "laminas/laminas-code",

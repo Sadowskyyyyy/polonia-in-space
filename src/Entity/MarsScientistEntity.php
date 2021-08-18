@@ -6,6 +6,7 @@ namespace App\Entity;
 use App\DomainModel\MarsScientist;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=MarsScientistEntityRepository::class)
@@ -68,9 +69,25 @@ class MarsScientistEntity
     /**
      * @ORM\OneToMany(targetEntity=ExpeditionEntity::class, mappedBy="creator")
      */
-    private $expeditionEntities;
+    private ArrayCollection $plannedExpeditionsEntities;
 
-    public function __construct(int $id, string $name, string $surname, string $password, bool $isMissing, bool $isDead, ?string $reason, ?MarsScientistEntity $author, ArrayCollection $registredUsers, ?MarsResearchStationEntity $station, $expeditionEntities)
+    /**
+     * @ORM\OneToMany(targetEntity=ExpeditionEntity::class, mappedBy="finishedBy")
+     */
+    private ArrayCollection $finishedExpeditions;
+
+    public function __construct(int                        $id,
+                                string                     $name,
+                                string                     $surname,
+                                string                     $password,
+                                bool                       $isMissing,
+                                bool                       $isDead,
+                                ?string                    $reason,
+                                ?MarsScientistEntity       $author,
+                                ArrayCollection            $registredUsers,
+                                ?MarsResearchStationEntity $station,
+                                ArrayCollection            $expeditionEntities,
+                                ArrayCollection            $finishedExpeditions)
     {
         $this->id = $id;
         $this->name = $name;
@@ -82,7 +99,8 @@ class MarsScientistEntity
         $this->author = $author;
         $this->registredUsers = $registredUsers;
         $this->station = $station;
-        $this->expeditionEntities = $expeditionEntities;
+        $this->plannedExpeditionsEntities = $expeditionEntities;
+        $this->finishedExpeditions = $finishedExpeditions;
     }
 
     public static function toDomain(self $entity): MarsScientist
@@ -93,7 +111,7 @@ class MarsScientistEntity
             $entity->getSurname(),
             $entity->getPassword(),
             $entity->getRegistredUsers(),
-            $entity->getPlannedExpedition(),
+            $entity->getPlannedExpeditions(),
             $entity->getFinishedExpeditions()
         );
     }
@@ -139,10 +157,7 @@ class MarsScientistEntity
         return $this;
     }
 
-    /**
-     * @return Collection|self[]
-     */
-    public function getRegistredUsers(): Collection
+    public function getRegistredUsersEntites(): Collection
     {
         return $this->registredUsers;
     }
@@ -229,18 +244,15 @@ class MarsScientistEntity
         return $this;
     }
 
-    /**
-     * @return Collection|ExpeditionEntity[]
-     */
-    public function getExpeditionEntities(): Collection
+    public function getPlannedExpeditionsEntities(): Collection
     {
-        return $this->expeditionEntities;
+        return $this->plannedExpeditionsEntities;
     }
 
     public function addExpeditionEntity(ExpeditionEntity $expeditionEntity): self
     {
-        if (!$this->expeditionEntities->contains($expeditionEntity)) {
-            $this->expeditionEntities[] = $expeditionEntity;
+        if (!$this->plannedExpeditionsEntities->contains($expeditionEntity)) {
+            $this->plannedExpeditionsEntities[] = $expeditionEntity;
             $expeditionEntity->setCreator($this);
         }
 
@@ -249,10 +261,73 @@ class MarsScientistEntity
 
     public function removeExpeditionEntity(ExpeditionEntity $expeditionEntity): self
     {
-        if ($this->expeditionEntities->removeElement($expeditionEntity)) {
+        if ($this->plannedExpeditionsEntities->removeElement($expeditionEntity)) {
             // set the owning side to null (unless already changed)
             if ($expeditionEntity->getCreator() === $this) {
                 $expeditionEntity->setCreator(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPlannedExpeditions(): array
+    {
+        $expeditions = [];
+
+        foreach ($this->plannedExpeditionsEntities as $expeditionEntity) {
+            /**@var ExpeditionEntity $expeditionEntity */
+            $expeditions[] = ExpeditionEntity::toDomain($expeditionEntity);
+        }
+
+        return $expeditions;
+    }
+
+    public function getRegistredUsers(): array
+    {
+        $users = [];
+
+        foreach ($this->registredUsers as $marsScientist) {
+            /**@var MarsScientistEntity $marsScientist */
+            $users[] = MarsScientistEntity::toDomain($marsScientist);
+        }
+
+        return $users;
+    }
+
+    public function getFinishedExpeditions(): array
+    {
+        $expeditions = [];
+
+        foreach ($this->plannedExpeditionsEntities as $expeditionEntity) {
+            /**@var ExpeditionEntity $expeditionEntity */
+            $expeditions[] = ExpeditionEntity::toDomain($expeditionEntity);
+        }
+
+        return $expeditions;
+    }
+
+    public function getFinishedExpeditionsEntities(): Collection
+    {
+        return $this->finishedExpeditions;
+    }
+
+    public function addFinishedExpedition(ExpeditionEntity $finishedExpedition): self
+    {
+        if (!$this->finishedExpeditions->contains($finishedExpedition)) {
+            $this->finishedExpeditions[] = $finishedExpedition;
+            $finishedExpedition->setFinishedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFinishedExpedition(ExpeditionEntity $finishedExpedition): self
+    {
+        if ($this->finishedExpeditions->removeElement($finishedExpedition)) {
+            // set the owning side to null (unless already changed)
+            if ($finishedExpedition->getFinishedBy() === $this) {
+                $finishedExpedition->setFinishedBy(null);
             }
         }
 

@@ -5,9 +5,9 @@ namespace App\DataFixtures;
 
 use App\Entity\EarthResarchStation;
 use App\Entity\EarthScientistEntity;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class EarthStationFixture extends Fixture
 {

@@ -17,6 +17,7 @@ class CheckWaterWasteAndWaterSuppliesQueryHandlerTest extends KernelTestCase
     protected function setUp(): void
     {
         $this->stationRepository = $this->createMock(ResarchStationRepositoryInterface::class);
+        $this->handler = new CheckWaterWasteAndWaterSuppliesQueryHandler($this->stationRepository);
     }
 
     /** @test */

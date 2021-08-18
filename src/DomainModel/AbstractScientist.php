@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\DomainModel;
 
+use App\Exception\DiffrentSenderException;
+
 abstract class AbstractScientist
 {
     private int $id;
@@ -66,5 +68,15 @@ abstract class AbstractScientist
         }
 
         throw new DiffrentSenderException();
+    }
+
+    public function getSentDeliveries(): array
+    {
+        return $this->sentDeliveries;
+    }
+
+    public function setSentDeliveries(array $sentDeliveries): void
+    {
+        $this->sentDeliveries = $sentDeliveries;
     }
 }

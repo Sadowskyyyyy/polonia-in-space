@@ -3,16 +3,17 @@
 namespace App\Tests\ResarchStation\Domain\MarsResearchStation;
 
 use App\DomainModel\EarthScientist;
+use App\DomainModel\MarsResearchStation;
 use App\DomainModel\MarsScientist;
 use App\Exception\WrongScientistTypeException;
-use App\Service\MarsResearchStation;
 use PHPUnit\Framework\TestCase;
 
 class MarsResearchStationTest extends TestCase
 {
     private MarsResearchStation $marsResearchStation;
 
-    public function testTryToAddOtherInstanceOfScientistThenThrowError()
+    /** @test */
+    public function test_try_to_add_other_instance_of_scientist_then_throw_error()
     {
         $this->expectException(WrongScientistTypeException::class);
 
@@ -20,7 +21,8 @@ class MarsResearchStationTest extends TestCase
         $this->marsResearchStation->addScientist(new EarthScientist(1, 'Adam', 'Jensen', ''));
     }
 
-    public function testTryToAddScientistThenRunSuccessful()
+    /** @test */
+    public function test_try_to_add_scientist_then_run_successful()
     {
         $this->doesNotPerformAssertions();
 

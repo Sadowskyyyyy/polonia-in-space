@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-//TODO tests and implementation
 use App\DomainModel\MarsScientist;
 use App\Entity\MarsScientistEntity;
+use App\Shared\Domain\Exception\NotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class MarsScientistStore implements MarsScientistRepositoryInterface
@@ -20,6 +20,10 @@ final class MarsScientistStore implements MarsScientistRepositoryInterface
     public function getById(int $id): MarsScientist
     {
         $entity = $this->entityManager->getRepository(MarsScientistEntity::class)->findOneBy(['id' => $id]);
+
+        if (empty($entity) === true) {
+            throw new NotFoundException();
+        }
 
         return MarsScientistEntity::toDomain($entity);
     }

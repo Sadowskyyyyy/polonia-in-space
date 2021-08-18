@@ -27,6 +27,6 @@ class CheckMassQueryHandlerTest extends KernelTestCase
             ->willReturn(new SpaceResearchStation(1, 70, 100,
                 10000.05, 12, 12.5, 89, 12));
 
-        $this->assertEquals(12, $this->handler->__invoke(new CheckMassQuery()));
+        $this->assertEquals(10000.05, $this->handler->__invoke(new CheckMassQuery()));
     }
 }

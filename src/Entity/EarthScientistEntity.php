@@ -4,11 +4,13 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\DomainModel\EarthScientist;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=EarthScientistEntityRepository::class)
  */
-class EarthScientistEntity
+class EarthScientistEntity implements UserInterface
 {
     /**
      * @ORM\Id
@@ -111,8 +113,25 @@ class EarthScientistEntity
         return $this;
     }
 
-    public function addScientist(EarthScientistEntity $earthScientist)
+    public function getRoles()
     {
-        $this->s
+        $roles[] = 'ROLE_EARTH_SCIENTIST';
+
+        return array_unique($roles);
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function getUsername(): string
+    {
+        return $this->name;
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }

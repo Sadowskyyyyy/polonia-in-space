@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Tests\Scientist\Domain\Validation;
@@ -17,7 +16,6 @@ class MissingOrDeadCommandValidatorTest extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
         $this->validator = new MissingOrDeadCommandValidator();
         $this->command = new MarkMarsScientistAsMissingOrDeadCommand(
             1,
@@ -27,6 +25,7 @@ class MissingOrDeadCommandValidatorTest extends TestCase
         );
     }
 
+    /** @test */
     public function testValidationForCommandWithValidData()
     {
         $this->doesNotPerformAssertions();
@@ -37,6 +36,7 @@ class MissingOrDeadCommandValidatorTest extends TestCase
         $this->validator->isValid($this->command);
     }
 
+    /** @test */
     public function testValidationForCommandWithInvalidArguments()
     {
         $this->expectException(InvalidArgumentException::class);
@@ -47,6 +47,7 @@ class MissingOrDeadCommandValidatorTest extends TestCase
         $this->validator->isValid($this->command);
     }
 
+    /** @test */
     public function testValidationForCommandWithInvalidReason()
     {
         $this->expectException(InvalidReasonException::class);

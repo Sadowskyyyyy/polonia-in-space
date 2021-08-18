@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Tests\Handler;
 
 use App\DomainModel\Delivery;
+use App\DomainModel\EarthScientist;
 use App\DomainModel\Product;
 use App\Handler\CheckDeliveryStatusQueryHandler;
 use App\Query\CheckDeliveryStatusQuery;
@@ -22,12 +23,18 @@ class CheckDeliveryStatusQueryHandlerTest extends KernelTestCase
     }
 
     /** @test */
-    public function should_return_valid_delivery()
+    public function test_should_return_valid_given_delivery()
     {
-        $this->deliveryRepository->method('getById')
-            ->willReturn(new Delivery(null, new Product('food'), 'delivered'));
+        $delivery = Delivery::createNewDelivery(
+            new EarthScientist(1, 'Adam', 'Jensen', 'pass'),
+            new Product('food'),
+            'spacestation',
+            '');
 
-        $this->assertSame(new Delivery(null, new Product('food'), 'delivered'),
+        $this->deliveryRepository->method('getById')
+            ->willReturn($delivery);
+
+        $this->assertSame($delivery,
             $this->handler->__invoke(new CheckDeliveryStatusQuery(1, 'any')));
     }
 

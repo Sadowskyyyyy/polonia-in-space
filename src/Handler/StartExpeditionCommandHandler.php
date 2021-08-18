@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
-//TODO Tests
 use App\Command\StartExpeditionCommand;
 use App\Event\StartedExpedition;
 use App\Service\ExpeditionRepositoryInterface;

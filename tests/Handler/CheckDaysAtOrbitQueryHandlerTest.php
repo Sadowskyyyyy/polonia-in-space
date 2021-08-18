@@ -28,6 +28,6 @@ class CheckDaysAtOrbitQueryHandlerTest extends KernelTestCase
                 1, 70, 100, 10000.05,
                 12, 12.5, 89, 12));
 
-        $this->assertEquals(89, $this->handler->__invoke(new CheckDaysAtOrbitQuery()));
+        $this->assertEquals(100, $this->handler->__invoke(new CheckDaysAtOrbitQuery()));
     }
 }

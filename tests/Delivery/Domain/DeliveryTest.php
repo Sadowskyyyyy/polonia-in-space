@@ -1,38 +1,40 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Tests\Delivery\Domain;
 
 use App\DomainModel\Delivery;
-use App\DomainModel\MarsScientist;
+use App\DomainModel\EarthScientist;
 use App\DomainModel\Product;
+use App\Exception\CannotChangeStatusOfDeliveredDeliveryException;
 use PHPUnit\Framework\TestCase;
 
 class DeliveryTest extends TestCase
 {
     private Delivery $delivery;
 
-    public function change_delivery_status_to_sent_should_run_successful()
+    /** @test */
+    public function test_should_change_delivery_status_to_sent_should_run_successful()
     {
-        $this->doesNotPerformAssertions();
-        $this->delivery = new Delivery(
-            new MarsScientist(1, 'Adam', 'Jensen', '', [], [], []),
+        $this->delivery = Delivery::createNewDelivery(
+            new EarthScientist(1, 'Adam', 'Jensen', 'pass'),
             new Product('food'),
-            ''
-        );
+        'spacestation',
+        '');
 
         $this->delivery->changeStatusToSent();
+        $this->assertEquals('sent', $this->delivery->getStatus());
     }
 
-    public function change_delivery_status_to_sent_should_throw_error()
+    /** @test */
+    public function test_change_delivery_status_to_sent_should_throw_error()
     {
         $this->expectException(CannotChangeStatusOfDeliveredDeliveryException::class);
-        $this->delivery = new Delivery(
-            new MarsScientist(1, 'Adam', 'Jensen', '', [], [], []),
+        $this->delivery = Delivery::createNewDelivery(
+            new EarthScientist(1, 'Adam', 'Jensen', 'pass'),
             new Product('food'),
-            'delivered'
-        );
+            'spacestation',
+            'delivered');
 
         $this->delivery->changeStatusToSent();
     }

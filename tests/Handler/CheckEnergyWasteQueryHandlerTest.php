@@ -28,7 +28,7 @@ class CheckEnergyWasteQueryHandlerTest extends KernelTestCase
             ->willReturn(new SpaceResearchStation(1, 70, 100,
                 10000.05, 12, 12.5, 89, 12));
 
-        $this->assertSame(12,
+        $this->assertSame(12.0,
             $this->handler->__invoke(new CheckEnergyWasteQuery()));
     }
 }

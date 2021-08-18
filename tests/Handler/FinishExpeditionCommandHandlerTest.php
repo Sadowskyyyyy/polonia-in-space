@@ -5,6 +5,7 @@ namespace App\Tests\Handler;
 
 use App\Command\FinishExpeditionCommand;
 use App\DomainModel\Expedition;
+use App\DomainModel\MarsScientist;
 use App\Exception\CannotFinishExpeditionWhichHasNotStartedYetException;
 use App\Handler\FinishExpeditionCommandHandler;
 use App\Service\ExpeditionRepositoryInterface;
@@ -29,7 +30,9 @@ class FinishExpeditionCommandHandlerTest extends KernelTestCase
     {
         $this->doesNotPerformAssertions();
         $this->expeditionRepository->method('getById')
-            ->willReturn(new Expedition(1, null, false, true));
+            ->willReturn(new Expedition(1,
+                new MarsScientist(1, 'Adam', 'Jensen', 'pass', [], [], []),
+                false, true));
 
         $this->handler->__invoke(new FinishExpeditionCommand(1));
     }
@@ -39,7 +42,9 @@ class FinishExpeditionCommandHandlerTest extends KernelTestCase
     {
         $this->expectException(CannotFinishExpeditionWhichHasNotStartedYetException::class);
         $this->expeditionRepository->method('getById')
-            ->willReturn(new Expedition(1, null, false, false));
+            ->willReturn(new Expedition(1,
+                new MarsScientist(1, 'Adam', 'Jensen', 'pass', [], [], []),
+                false, false));
 
         $this->handler->__invoke(new FinishExpeditionCommand(1));
     }

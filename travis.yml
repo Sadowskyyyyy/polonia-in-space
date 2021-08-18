@@ -3,19 +3,12 @@ php:
   - '7.4'
   - '8.0'
 env:
-  -DB=mysql
-  -DB=postgres
+  - DB=mysql
   - TEST_SUITE=units
   - TEST_SUITE=integration
-script:
-  - make ci
-install:
-  - composer install
 
-os: osx
+before_script: composer require --dev phpunit/phpunit
+script: php bin/phpunit tests
 
 before_install:
   - brew install git-lfs
-
-before_script:
-  - git lfs pull
