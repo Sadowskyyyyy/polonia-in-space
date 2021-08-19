@@ -8,5 +8,6 @@ $ symfony serve
 ```
 $ php vendor/bin/phpunit tests
 ```
+![Screenshot](app infrastructure.png)
 ![Screenshot](scientists.png)
 ![Screenshot](researchstations.png)
