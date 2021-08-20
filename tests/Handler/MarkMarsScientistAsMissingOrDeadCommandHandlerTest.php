@@ -37,6 +37,7 @@ class MarkMarsScientistAsMissingOrDeadCommandHandlerTest extends KernelTestCase
 
     /**
      * @doesNotPerformAssertions
+     * @test
      */
     public function should_mark_scientist_as_dead_with_valid_reason()
     {

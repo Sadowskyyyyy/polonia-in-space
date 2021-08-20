@@ -25,6 +25,7 @@ class ChangeAngleCommandHandlerTest extends KernelTestCase
 
     /**
      * @doesNotPerformAssertions
+     * @test
      */
     public function given_valid_data_to_change_position()
     {
