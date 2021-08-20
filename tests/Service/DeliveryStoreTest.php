@@ -23,13 +23,6 @@ class DeliveryStoreTest extends KernelTestCase
     }
 
     /**@test */
-    //TODO end
-    public function test_should_return_valid_delivery()
-    {
-
-    }
-
-    /**@test */
     public function test_should_return_null_from_database()
     {
         $this->expectException(NotFoundException::class);
@@ -38,6 +31,6 @@ class DeliveryStoreTest extends KernelTestCase
         $this->entityManager->method('getRepository')
             ->willReturn($this->deliveryRepository);
 
-        $this->deliveryStore->getById(1);
+        $this->assertEquals(null, $this->deliveryStore->getById(1));
     }
 }

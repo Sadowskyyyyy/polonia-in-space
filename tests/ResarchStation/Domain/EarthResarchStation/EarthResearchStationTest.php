@@ -9,6 +9,7 @@ use App\DomainModel\EarthScientist;
 use App\DomainModel\SpaceScientist;
 use App\Exception\WrongScientistTypeException;
 use PHPUnit\Framework\TestCase;
+use function count;
 
 class EarthResearchStationTest extends TestCase
 {
@@ -26,10 +27,10 @@ class EarthResearchStationTest extends TestCase
     /** @test */
     public function test_try_to_add_scientist_then_run_successful()
     {
-        $this->doesNotPerformAssertions();
-
         $this->researchStation = new EarthResearchStation(1);
         $this->researchStation
             ->addScientist(new EarthScientist(1, 'Adam', 'Jensen', ''));
+
+        $this->assertEquals(1, count($this->researchStation->getScientists()));
     }
 }

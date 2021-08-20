@@ -9,7 +9,7 @@ use App\Exception\CannotAddStartedOrFinishedExpeditionException;
 use App\Exception\ExpeditionIsNotAlreadyFinishedException;
 use App\Exception\ScientistIsAliveException;
 use PHPUnit\Framework\TestCase;
-
+use function count;
 class MarsScientistTest extends TestCase
 {
     private MarsScientist $scientist;
@@ -97,13 +97,13 @@ class MarsScientistTest extends TestCase
 
         $scientist->markAsDead();
         $scientist->setReasonOfDeath('Heart attack');
+
+       $this->assertTrue($scientist->isDead());
     }
 
     /** @test */
     public function testTryToAddFinishedExpeditionSuccessful()
     {
-        $this->doesNotPerformAssertions();
-
         $scientist = new MarsScientist(
             (int) null,
             'Adam',
@@ -121,6 +121,7 @@ class MarsScientistTest extends TestCase
         );
 
         $scientist->addFinishedExpedition($expedition);
+        $this->assertEquals(1, count($scientist->getFinishedExpeditions()));
     }
 
     /** @test */
@@ -150,7 +151,6 @@ class MarsScientistTest extends TestCase
     /** @test */
     public function testTryToAddPlannedExpeditionSuccessful()
     {
-        $this->doesNotPerformAssertions();
 
         $scientist = new MarsScientist(
             (int) null,
@@ -169,6 +169,8 @@ class MarsScientistTest extends TestCase
         );
 
         $scientist->addPlanedExpedition($expedition);
+        $this->assertEquals(1, count($scientist->getPlannedExpeditions()));
+
     }
 
     /** @test */

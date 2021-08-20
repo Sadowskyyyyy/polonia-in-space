@@ -25,10 +25,11 @@ class FinishExpeditionCommandHandlerTest extends KernelTestCase
         $this->handler = new FinishExpeditionCommandHandler($this->expeditionRepository, $this->eventRepository);
     }
 
-    /** @test */
+    /**
+     * @doesNotPerformAssertions
+     */
     public function should_finish_expedition()
     {
-        $this->doesNotPerformAssertions();
         $this->expeditionRepository->method('getById')
             ->willReturn(new Expedition(1,
                 new MarsScientist(1, 'Adam', 'Jensen', 'pass', [], [], []),

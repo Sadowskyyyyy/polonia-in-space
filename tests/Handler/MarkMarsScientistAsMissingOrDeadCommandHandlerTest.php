@@ -23,10 +23,11 @@ class MarkMarsScientistAsMissingOrDeadCommandHandlerTest extends KernelTestCase
         $this->handler = new MarkMarsScientistAsMissingOrDeadCommandHandler($this->repository, $this->eventRepository);
     }
 
-    /** @test */
+    /**
+     * @doesNotPerformAssertions
+     */
     public function should_mark_scientist_as_missing_with_valid_reason()
     {
-        $this->doesNotPerformAssertions();
         $this->repository->method('getById')
             ->willReturn(new MarsScientist(1, 'Adam', 'Jensen', 'pass', [], [], []));
 
@@ -34,7 +35,9 @@ class MarkMarsScientistAsMissingOrDeadCommandHandlerTest extends KernelTestCase
             true, false));
     }
 
-    /** @test */
+    /**
+     * @doesNotPerformAssertions
+     */
     public function should_mark_scientist_as_dead_with_valid_reason()
     {
         $this->doesNotPerformAssertions();

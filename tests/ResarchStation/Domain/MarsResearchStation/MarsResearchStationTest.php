@@ -7,6 +7,7 @@ use App\DomainModel\MarsResearchStation;
 use App\DomainModel\MarsScientist;
 use App\Exception\WrongScientistTypeException;
 use PHPUnit\Framework\TestCase;
+use function count;
 
 class MarsResearchStationTest extends TestCase
 {
@@ -29,5 +30,7 @@ class MarsResearchStationTest extends TestCase
         $this->marsResearchStation = new MarsResearchStation(1);
         $this->marsResearchStation
             ->addScientist(new MarsScientist(1, 'Adam', 'Jensen', '', [], [], []));
+
+        $this->assertEquals(1, count($this->marsResearchStation->getScientists()));
     }
 }

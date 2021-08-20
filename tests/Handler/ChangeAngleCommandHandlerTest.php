@@ -23,10 +23,11 @@ class ChangeAngleCommandHandlerTest extends KernelTestCase
         $this->handler = new ChangeAngleCommandHandler($this->stationRepository, $this->eventRepository);
     }
 
-    /** @test */
+    /**
+     * @doesNotPerformAssertions
+     */
     public function given_valid_data_to_change_position()
     {
-        $this->doesNotPerformAssertions();
         $this->stationRepository->method('getResarchStationByName')
             ->willReturn(
                 new SpaceResearchStation(1, 70, 100,
