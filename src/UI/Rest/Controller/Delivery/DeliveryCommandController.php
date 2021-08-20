@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\Delivery;
 
+use App\UI\Rest\Response\ApiResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Command\SendDeliveryCommand;
 use App\UI\Rest\Controller\CommandController;
@@ -31,5 +32,8 @@ class DeliveryCommandController extends CommandController
         $destination = $request->query->get('destination');
 
         $command = new SendDeliveryCommand($data['category'], $destination);
+
+        $response = new ApiResponse();
+        return $response->setStatusCode(200);
     }
 }

@@ -11,7 +11,6 @@ use JsonApiPhp\JsonApi\DataDocument;
 use JsonApiPhp\JsonApi\Link\SelfLink;
 use JsonApiPhp\JsonApi\ResourceObject;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
@@ -33,13 +32,13 @@ class DeliveryQueryController extends QueryController
         $response = $this->ask(new CheckDeliveryStatusQuery($id, $destination));
 
         return json_encode(new DataDocument(
-            new ResourceObject(
-                'deliveries',
-                (string)$id,
-                new Attribute('delivery', $response),
-                new SelfLink(sprintf('/deliveries/%d', $id))
-            )),
-            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+                new ResourceObject(
+                    'deliverie',
+                    (string)$id,
+                    new Attribute('delivery', $response),
+                    new SelfLink(sprintf('/deliveries/%d', $id))
+                )
+            )
         );
     }
 }

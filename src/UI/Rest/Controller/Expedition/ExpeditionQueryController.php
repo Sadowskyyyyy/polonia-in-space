@@ -10,8 +10,6 @@ use JsonApiPhp\JsonApi\DataDocument;
 use JsonApiPhp\JsonApi\Link\SelfLink;
 use JsonApiPhp\JsonApi\ResourceObject;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Tobscure\JsonApi\Resource;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/expeditions")
@@ -31,13 +29,13 @@ class ExpeditionQueryController extends QueryController
         $response = $this->ask(new GenerateExpeditionConclusionQuery($id));
 
         return json_encode(new DataDocument(
-            new ResourceObject(
-                'expeditions',
-                '1',
-                new Attribute('expedition_conclusion', $response),
-                new SelfLink(sprintf('/conclusion/%s', $id))
-            )),
-            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+                new ResourceObject(
+                    'expedition',
+                    '1',
+                    new Attribute('expedition_conclusion', $response),
+                    new SelfLink(sprintf('/conclusion/%s', $id))
+                )
+            )
         );
     }
 }

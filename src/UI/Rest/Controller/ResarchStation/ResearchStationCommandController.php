@@ -7,11 +7,10 @@ namespace App\UI\Rest\Controller\ResarchStation;
 use App\Command\ChangeAngleCommand;
 use App\Command\ReportARequestCommand;
 use App\UI\rest\Controller\CommandController;
+use App\UI\Rest\Response\ApiResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/researchstations")
@@ -33,6 +32,9 @@ class ResearchStationCommandController extends CommandController
         $command = new ChangeAngleCommand($data['degrees']);
 
         $this->handle($command);
+
+        $response = new ApiResponse();
+        return $response->setStatusCode(200);
     }
 
     /**
@@ -44,5 +46,8 @@ class ResearchStationCommandController extends CommandController
         $command = new ReportARequestCommand($destination);
 
         $this->handleWithDelay($command);
+
+        $response = new ApiResponse();
+        return $response->setStatusCode(200);
     }
 }

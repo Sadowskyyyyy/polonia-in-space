@@ -7,6 +7,7 @@ use App\Command\FinishExpeditionCommand;
 use App\Command\PlanNewExpeditionCommand;
 use App\Command\StartExpeditionCommand;
 use App\UI\rest\Controller\CommandController;
+use App\UI\Rest\Response\ApiResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -31,6 +32,9 @@ class ExpeditionCommandController extends CommandController
     {
         $command = new StartExpeditionCommand($id);
         $this->handle($command);
+
+        $response = new ApiResponse();
+        return $response->setStatusCode(200);
     }
 
     /**
@@ -46,6 +50,9 @@ class ExpeditionCommandController extends CommandController
         );
 
         $this->handle($command);
+
+        $response = new ApiResponse();
+        return $response->setStatusCode(200);
     }
 
     /**
@@ -59,5 +66,8 @@ class ExpeditionCommandController extends CommandController
         );
 
         $this->handle($command);
+
+        $response = new ApiResponse();
+        return $response->setStatusCode(200);
     }
 }

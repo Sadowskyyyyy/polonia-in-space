@@ -6,11 +6,13 @@ namespace App\UI\Rest\Controller\MarsScientist;
 
 use App\Query\GetAllScientistsFromMarsResearchStationQuery;
 use App\UI\rest\Controller\QueryController;
+use JsonApiPhp\JsonApi\Attribute;
+use JsonApiPhp\JsonApi\DataDocument;
+use JsonApiPhp\JsonApi\Link\SelfLink;
+use JsonApiPhp\JsonApi\ResourceObject;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/marsscientists")
@@ -29,14 +31,16 @@ class MarsScientistsQueryController extends QueryController
     {
         $response = $this->ask(new GetAllScientistsFromMarsResearchStationQuery());
 
-        return json_encode(new DataDocument(
-            new ResourceObject(
-                'scientists',
-                '1',
-                new Attribute('oxygen_percentage', $response),
-                new SelfLink('/spacestation/oxygen')
-            )),
-            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+        $response = json_encode(new DataDocument(
+                new ResourceObject(
+                    'scientists',
+                    '1',
+                    new Attribute('scientists', $response),
+                    new SelfLink('/marsscientists')
+                )
+            )
         );
+
+        return $this->json(json_decode($response));
     }
 }
