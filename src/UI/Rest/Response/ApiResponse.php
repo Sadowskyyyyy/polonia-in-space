@@ -5,7 +5,7 @@ namespace App\UI\Rest\Response;
 
 use Symfony\Component\HttpFoundation\Response;
 
-class ApiResponse extends Response
+final class ApiResponse extends Response
 {
     public function isInvalid(): bool
     {

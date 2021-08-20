@@ -10,6 +10,7 @@ use JsonApiPhp\JsonApi\DataDocument;
 use JsonApiPhp\JsonApi\Link\SelfLink;
 use JsonApiPhp\JsonApi\ResourceObject;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/expeditions")
