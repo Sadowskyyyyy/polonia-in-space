@@ -7,11 +7,11 @@ use App\Shared\Domain\Event\Event;
 
 abstract class AbstractResearchStation
 {
-    private int $id;
-    private array $scientists = [];
-    private array $products = [];
-    private array $events = [];
-    private bool $needHelp = false;
+    protected int $id;
+    protected array $scientists = [];
+    protected array $products = [];
+    protected array $events = [];
+    protected bool $needHelp = false;
 
     public function __construct(int $id)
     {

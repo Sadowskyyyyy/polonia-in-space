@@ -7,7 +7,6 @@ use App\Command\ChangeAngleCommand;
 use App\DomainModel\SpaceResearchStation;
 use App\Handler\ChangeAngleCommandHandler;
 use App\Service\ResarchStationRepositoryInterface;
-
 use App\Shared\Domain\Event\EventRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -29,7 +28,11 @@ class ChangeAngleCommandHandlerTest extends KernelTestCase
     {
         $this->doesNotPerformAssertions();
         $this->stationRepository->method('getResarchStationByName')
-            ->willReturn(new SpaceResearchStation(1, 70, 100, 10000.05, 12, 12.5, 89, 12));
+            ->willReturn(
+                new SpaceResearchStation(1, 70, 100,
+                    10000.05, 12, 12.5,
+                    89, 12)
+            );
 
         $this->handler->__invoke(new ChangeAngleCommand(12));
     }

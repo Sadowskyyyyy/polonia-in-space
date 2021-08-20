@@ -33,8 +33,8 @@ class SpaceResearchStationTest extends TestCase
 
         $this->researchStation = new SpaceResearchStation(1, 70, 100,
             10000.05, 12, 12.5, 89, 12);
+
         $this->researchStation->addScientist($newScientist);
-        $ammount = count($this->researchStation->getScientists());
-        $this->assertEquals(1, $ammount);
+        $this->assertEquals(1, count($this->researchStation->getScientists()));
     }
 }

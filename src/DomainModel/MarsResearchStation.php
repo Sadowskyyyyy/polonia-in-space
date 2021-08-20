@@ -7,8 +7,6 @@ use App\Exception\WrongScientistTypeException;
 
 class MarsResearchStation extends AbstractResearchStation
 {
-
-
     public function __construct(int $id)
     {
         parent::__construct($id);
@@ -20,6 +18,6 @@ class MarsResearchStation extends AbstractResearchStation
             throw new WrongScientistTypeException();
         }
 
-        $this->getScientists()[$scientist->getId()] = $scientist;
+        $this->scientists[$scientist->getId()] = $scientist;
     }
 }

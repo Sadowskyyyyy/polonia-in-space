@@ -7,11 +7,11 @@ use App\Exception\DiffrentSenderException;
 
 abstract class AbstractScientist
 {
-    private int $id;
-    private string $name;
-    private string $surname;
-    private string $password;
-    private array $sentDeliveries = [];
+    protected int $id;
+    protected string $name;
+    protected string $surname;
+    protected string $password;
+    protected array $sentDeliveries = [];
 
     public function __construct(int $id, string $name, string $surname, string $password)
     {

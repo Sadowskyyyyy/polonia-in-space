@@ -41,7 +41,7 @@ class SpaceResearchStation extends AbstractResearchStation
             throw new WrongScientistTypeException();
         }
 
-        $this->getScientists()[$scientist->getId()] = $scientist;
+        $this->scientists[$scientist->getId()] = $scientist;
     }
 
     public function changePosition(float $degrees)

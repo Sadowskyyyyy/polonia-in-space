@@ -13,6 +13,6 @@ class EarthResearchStation extends AbstractResearchStation
             throw new WrongScientistTypeException();
         }
 
-        $this->getScientists()[$scientist->getId()] = $scientist;
+        $this->scientists[$scientist->getId()] = $scientist;
     }
 }
