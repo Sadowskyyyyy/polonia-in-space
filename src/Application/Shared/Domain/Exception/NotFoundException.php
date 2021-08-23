@@ -6,5 +6,4 @@ namespace App\Application\Shared\Domain\Exception;
 
 class NotFoundException extends \RuntimeException
 {
-
 }

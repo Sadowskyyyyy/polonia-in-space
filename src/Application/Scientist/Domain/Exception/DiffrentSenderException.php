@@ -6,5 +6,4 @@ namespace App\Application\Scientist\Domain\Exception;
 
 class DiffrentSenderException extends \RuntimeException
 {
-
 }

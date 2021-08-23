@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 /**
  * @Route("/researchstations")
  */
@@ -28,6 +27,5 @@ class ResearchStationQueryController extends QueryController
     {
         $direction = $request->query->get('destination');
         $response = $this->askWithDelay(new CheckDemand($direction));
-
     }
 }

@@ -6,5 +6,4 @@ namespace App\Application\Shared\Application\Command;
 
 interface CommandInterface
 {
-
 }

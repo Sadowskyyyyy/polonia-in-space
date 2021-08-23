@@ -20,8 +20,10 @@ class MissingOrDeadCommandValidatorTest extends TestCase
         parent::setUp();
         $this->validator = new MissingOrDeadCommandValidator();
         $this->command = new MarkMarsScientistAsMissingOrDeadCommand(
-            1, 'In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Duis sapien nunc, commodo et,'
-            , false, true
+            1,
+            'In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Duis sapien nunc, commodo et,',
+            false,
+            true
         );
     }
 

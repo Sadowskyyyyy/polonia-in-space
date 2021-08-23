@@ -8,6 +8,7 @@ use App\Application\Scientist\Application\Command\MarkMarsScientistAsMissingOrDe
 use App\Application\Scientist\Application\Event\MarsScientistHasBeenMarkedAsDeadOrMissing;
 use App\Application\Scientist\Domain\MarsScientist\Repository\MarsScientistRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+
 //TODO tests
 class MarkMarsScientistAsMissingOrDeadCommandHandler implements MessageHandlerInterface
 {
@@ -24,11 +25,11 @@ class MarkMarsScientistAsMissingOrDeadCommandHandler implements MessageHandlerIn
     {
         $scientist = $this->repository->getById($command->id);
 
-        if ($command->isMissing === true) {
+        if (true === $command->isMissing) {
             $scientist->markAsMissing();
             $scientist->setReasonOfDeath($command->reason);
         }
-        if ($command->isDead === true) {
+        if (true === $command->isDead) {
             $scientist->markAsDead();
             $scientist->setReasonOfDeath($command->reason);
         }

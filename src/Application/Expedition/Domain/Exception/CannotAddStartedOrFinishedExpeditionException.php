@@ -6,5 +6,4 @@ namespace App\Application\Expedition\Domain\Exception;
 
 class CannotAddStartedOrFinishedExpeditionException extends \RuntimeException
 {
-
 }

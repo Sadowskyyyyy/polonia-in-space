@@ -11,7 +11,7 @@ use App\Application\Scientist\Domain\EarthScientist\EarthScientist;
 
 class EarthResearchStation extends AbstractResearchStation
 {
-    function addScientist(AbstractScientist $scientist): void
+    public function addScientist(AbstractScientist $scientist): void
     {
         if (!$scientist instanceof EarthScientist) {
             throw new WrongScientistTypeException();

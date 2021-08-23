@@ -27,7 +27,5 @@ class MarsScientistsQueryController extends QueryController
     public function getScientists(Request $request): Response
     {
         $response = $this->ask(new GetAllScientistsFromMarsResearchStation());
-
-
     }
 }

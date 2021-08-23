@@ -23,7 +23,6 @@ class Delivery
         $this->pickUpAddress = $pickUpAddress;
     }
 
-
     public function changeStatusToDelivered(): void
     {
         $this->status = 'delivered';
@@ -31,7 +30,7 @@ class Delivery
 
     public function changeStatusToSent(): void
     {
-        if ($this->status === 'delivered') {
+        if ('delivered' === $this->status) {
             throw new CannotChangeStatusOfDeliveredDeliveryException();
         }
 
@@ -42,5 +41,4 @@ class Delivery
     {
         return $this->sender;
     }
-
 }

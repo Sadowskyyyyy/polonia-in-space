@@ -6,5 +6,4 @@ namespace App\Application\Delivery\Domain\Exception;
 
 class CannotChangeStatusOfDeliveredDeliveryException extends \RuntimeException
 {
-
 }

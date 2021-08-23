@@ -9,7 +9,6 @@ use App\Application\Expedition\Domain\Repository\ExpeditionRepositoryInterface;
 
 class ExpeditionStore implements ExpeditionRepositoryInterface
 {
-
     public function save(Expedition $expedition): void
     {
         // TODO: Implement save() method.

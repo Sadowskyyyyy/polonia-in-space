@@ -13,7 +13,6 @@ use JsonApiPhp\JsonApi\ResourceObject;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/deliveries")
@@ -33,14 +32,15 @@ class DeliveryQueryController extends QueryController
         $destination = $request->query->get('destination');
         $response = $this->ask(new CheckDeliveryStatusQuery($id, $destination));
 
-        return json_encode(new DataDocument(
-                new ResourceObject(
+        return json_encode(
+            new DataDocument(
+            new ResourceObject(
                     'deliverie',
-                    (string)$id,
+                    (string) $id,
                     new Attribute('delivery', $response),
                     new SelfLink(sprintf('/deliveries/%d', $id))
                 )
-            )
+        )
         );
     }
 }

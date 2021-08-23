@@ -19,8 +19,10 @@ class MarkScientistAsMissingOrDeadCommandTest extends TestCase
     {
         $this->doesNotPerformAssertions();
         $this->command = new MarkMarsScientistAsMissingOrDeadCommand(
-            1, 'In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Duis sapien nunc, commodo et,'
-            , false, true
+            1,
+            'In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Duis sapien nunc, commodo et,',
+            false,
+            true
         );
     }
 
@@ -29,8 +31,10 @@ class MarkScientistAsMissingOrDeadCommandTest extends TestCase
         $this->expectException(RuntimeException::class);
 
         $this->command = new MarkMarsScientistAsMissingOrDeadCommand(
-            1, 'In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Duis sapien nunc, commodo et,'
-            , true, true
+            1,
+            'In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Duis sapien nunc, commodo et,',
+            true,
+            true
         );
     }
 }

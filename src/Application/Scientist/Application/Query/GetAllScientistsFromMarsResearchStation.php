@@ -8,5 +8,4 @@ use App\Application\Shared\Application\Query\QueryInterface;
 
 class GetAllScientistsFromMarsResearchStation implements QueryInterface
 {
-
 }
