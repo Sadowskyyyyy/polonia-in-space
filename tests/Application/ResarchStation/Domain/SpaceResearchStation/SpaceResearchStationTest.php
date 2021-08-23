@@ -33,5 +33,4 @@ class SpaceResearchStationTest extends TestCase
         $this->researchStation
             ->addScientist(new SpaceScientist(1, 'Adam', 'Jensen', ''));
     }
-
 }

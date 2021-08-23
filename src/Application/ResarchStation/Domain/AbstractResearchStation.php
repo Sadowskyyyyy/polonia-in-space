@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Application\ResarchStation\Domain;
 
 use App\Application\Scientist\Domain\AbstractScientist;
-use phpDocumentor\Reflection\Types\This;
 
 abstract class AbstractResearchStation
 {
@@ -20,7 +19,7 @@ abstract class AbstractResearchStation
         $this->id = $id;
     }
 
-    abstract function addScientist(AbstractScientist $scientist): void;
+    abstract public function addScientist(AbstractScientist $scientist): void;
 
     public function addProduct(Product $product): void
     {
@@ -33,14 +32,15 @@ abstract class AbstractResearchStation
 
     public function getProducts(): array
     {
-        if (empty($this->products) === true) {
+        if (true === empty($this->products)) {
             $this->askForHelp();
         }
 
         return $this->products;
     }
 
-    public function getEvents(): array {
+    public function getEvents(): array
+    {
         return $this->events;
     }
 

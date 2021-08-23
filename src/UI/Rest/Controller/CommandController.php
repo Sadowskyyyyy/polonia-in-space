@@ -25,7 +25,7 @@ abstract class CommandController extends AbstractController
     protected function handleWithDelay(CommandInterface $command): void
     {
         $this->bus->dispatch(new Envelope($command), [
-            new DelayStamp(840000)
+            new DelayStamp(840000),
         ]);
     }
 }

@@ -18,19 +18,31 @@ class ExpeditionTest extends TestCase
     public function testTryToFinishExpeditionAndRunSuccessful()
     {
         $marsScientist = new MarsScientist(
-            1, 'Adam', 'Jensen', '', array(), array(), array()
+            1,
+            'Adam',
+            'Jensen',
+            '',
+            [],
+            [],
+            []
         );
         $expedition = new Expedition(1, $marsScientist, false, true);
         $expedition->finishExpedition();
 
-        $this->assertSame(true, $expedition->isFinished());
+        $this->assertTrue($expedition->isFinished());
     }
 
     public function testTryToFinishFinishedExpeditionAndThrowError()
     {
         $this->expectException(CannotFinishExpeditionWhichHasNotStartedYetException::class);
         $marsScientist = new MarsScientist(
-            1, 'Adam', 'Jensen', '', array(), array(), array()
+            1,
+            'Adam',
+            'Jensen',
+            '',
+            [],
+            [],
+            []
         );
         $expedition = new Expedition(1, $marsScientist, true, false);
         $expedition->finishExpedition();
@@ -40,7 +52,13 @@ class ExpeditionTest extends TestCase
     {
         $this->expectException(CannotStartFinishedExpeditionException::class);
         $marsScientist = new MarsScientist(
-            1, 'Adam', 'Jensen', '', array(), array(), array()
+            1,
+            'Adam',
+            'Jensen',
+            '',
+            [],
+            [],
+            []
         );
         $expedition = new Expedition(1, $marsScientist, true, false);
         $expedition->startExpedition();
@@ -50,7 +68,13 @@ class ExpeditionTest extends TestCase
     {
         $this->expectException(CannotStartStartedExpeditionException::class);
         $marsScientist = new MarsScientist(
-            1, 'Adam', 'Jensen', '', array(), array(), array()
+            1,
+            'Adam',
+            'Jensen',
+            '',
+            [],
+            [],
+            []
         );
         $expedition = new Expedition(1, $marsScientist, false, true);
         $expedition->startExpedition();
@@ -62,10 +86,16 @@ class ExpeditionTest extends TestCase
     public function testTryToGenerateExpeditionConclusionAndRunSucessful()
     {
         $marsScientist = new MarsScientist(
-            1, 'Adam', 'Jensen', '', array(), array(), array()
+            1,
+            'Adam',
+            'Jensen',
+            '',
+            [],
+            [],
+            []
         );
         $expedition = new Expedition(1, $marsScientist, true, false);
-        $expedition->setStartDate((string)null);
+        $expedition->setStartDate((string) null);
         $expedition->generateExpeditionConclusion();
     }
 }

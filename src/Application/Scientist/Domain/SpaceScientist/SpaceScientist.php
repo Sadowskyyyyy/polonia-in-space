@@ -8,5 +8,4 @@ use App\Application\Scientist\Domain\AbstractScientist;
 
 class SpaceScientist extends AbstractScientist
 {
-
 }

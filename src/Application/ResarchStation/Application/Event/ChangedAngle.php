@@ -14,6 +14,6 @@ class ChangedAngle extends Event
     public function __construct()
     {
         parent::__construct('earthstation');
-        $this->creationDate = date("Y-m-d H:i:s");
+        $this->creationDate = date('Y-m-d H:i:s');
     }
 }

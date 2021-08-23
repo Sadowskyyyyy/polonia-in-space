@@ -16,8 +16,8 @@ class MissingOrDeadCommandValidator
 
     public function isValid(MarkMarsScientistAsMissingOrDeadCommand $command): void
     {
-        if ($command->isDead === true && $command->isMissing === true ||
-            $command->isDead === false && $command->isMissing === false) {
+        if (true === $command->isDead && true === $command->isMissing ||
+            false === $command->isDead && false === $command->isMissing) {
             throw new InvalidArgumentException();
         }
         if (strlen($command->reason) > 255 || strlen($command->reason) < 32) {

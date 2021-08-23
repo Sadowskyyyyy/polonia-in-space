@@ -71,10 +71,18 @@ class MarsScientistEntity
      */
     private $expeditionEntities;
 
-    public function __construct(int $id, string $name, string $surname,
-                                string $password, bool $isMissing, bool $isDead,
-                                ?string $reason
-        , ?MarsScientistEntity $author, array $registredUsers, $station)
+    public function __construct(
+        int $id,
+        string $name,
+        string $surname,
+        string $password,
+        bool $isMissing,
+        bool $isDead,
+        ?string $reason,
+        ?self $author,
+        array $registredUsers,
+        $station
+    )
     {
         $this->id = $id;
         $this->name = $name;
@@ -89,8 +97,7 @@ class MarsScientistEntity
         $this->expeditionEntities = new ArrayCollection();
     }
 
-
-    public static function toDomain(MarsScientistEntity $entity): MarsScientist
+    public static function toDomain(self $entity): MarsScientist
     {
         return new MarsScientist(
             $entity->getId(),

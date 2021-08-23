@@ -14,7 +14,6 @@ class EarthResearchStationTest extends TestCase
 {
     private EarthResearchStation $researchStation;
 
-
     public function testTryToAddOtherInstanceOfScientistThenThrowError()
     {
         $this->expectException(WrongScientistTypeException::class);
