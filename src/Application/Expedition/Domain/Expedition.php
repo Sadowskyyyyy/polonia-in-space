@@ -26,8 +26,7 @@ class Expedition
         MarsScientist $creator,
         bool $isFinished,
         bool $isStarted
-    )
-    {
+    ) {
         $creationDate = new \DateTime();
         $this->id = $id;
         $this->creator = $creator;

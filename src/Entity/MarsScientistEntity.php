@@ -82,8 +82,7 @@ class MarsScientistEntity
         ?self $author,
         array $registredUsers,
         $station
-    )
-    {
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->surname = $surname;

@@ -27,8 +27,7 @@ class MarsScientist extends AbstractScientist
         array $registeredUsers,
         array $plannedExpeditions,
         array $finishedExpeditions
-    )
-    {
+    ) {
         parent::__construct($id, $name, $surname, $password);
         $this->registeredUsers = $registeredUsers;
         $this->plannedExpeditions = $plannedExpeditions;
