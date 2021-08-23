@@ -7,6 +7,7 @@ namespace App\Application\ResarchStation\Application\Handler;
 use App\Application\ResarchStation\Application\Command\ReportARequestCommand;
 use App\Application\ResarchStation\Application\Event\ReportedARequest;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+
 //TODO tests and event repo
 class ReportARequestCommandHandler implements MessageHandlerInterface
 {
@@ -16,5 +17,4 @@ class ReportARequestCommandHandler implements MessageHandlerInterface
     {
         $this->eventRepository->save(new ReportedARequest($command->destination));
     }
-
 }

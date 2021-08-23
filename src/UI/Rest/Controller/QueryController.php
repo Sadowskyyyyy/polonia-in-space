@@ -22,7 +22,7 @@ abstract class QueryController extends AbstractController
     protected function ask(QueryInterface $query): Envelope
     {
         $envelope = $this->queryBus->dispatch($query);
-        /** @var HandledStamp $handled*/
+        /** @var HandledStamp $handled */
         $handled = $envelope->last(HandledStamp::class);
 
         return $handled->getResult();
@@ -30,10 +30,10 @@ abstract class QueryController extends AbstractController
 
     protected function askWithDelay(QueryInterface $query): Envelope
     {
-       $envelope = $this->queryBus->dispatch(new Envelope($command), [
-            new DelayStamp(840000)
+        $envelope = $this->queryBus->dispatch(new Envelope($command), [
+            new DelayStamp(840000),
         ]);
-        /** @var HandledStamp $handled*/
+        /** @var HandledStamp $handled */
         $handled = $envelope->last(HandledStamp::class);
 
         return $handled->getResult();

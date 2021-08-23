@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Application\Scientist\Domain\Validation;
 
-use App\Application\Shared\Domain\Exception\InvalidArgumentException;
 use App\Application\Scientist\Application\Command\RegisterScientistCommand;
+use App\Application\Shared\Domain\Exception\InvalidArgumentException;
 use function strlen;
+
 //TODO tests
 class RegisterScientistCommandValidator
 {

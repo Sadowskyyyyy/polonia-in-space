@@ -6,5 +6,4 @@ namespace App\Application\ResarchStation\Domain\Exception;
 
 class WrongScientistTypeException extends \RuntimeException
 {
-
 }

@@ -20,8 +20,13 @@ class MarsScientistTest extends TestCase
     {
         $newScientist = MarsScientist::createNewScientist('Adam', 'Jensen');
         $scientist = new MarsScientist(
-            (int)null, 'Adam', 'Jensen',
-            (string)null, array('test'), array('test'), array('test')
+            (int) null,
+            'Adam',
+            'Jensen',
+            (string) null,
+            ['test'],
+            ['test'],
+            ['test']
         );
         //TODO make assertSame(object, object)
         $this->assertSame($scientist->getPassword(), $newScientist->getPassword());
@@ -30,8 +35,13 @@ class MarsScientistTest extends TestCase
     public function testMarkingAsMissing()
     {
         $scientist = new MarsScientist(
-            (int)null, 'Adam', 'Jensen',
-            (string)null, array('test'), array('test'), array('test')
+            (int) null,
+            'Adam',
+            'Jensen',
+            (string) null,
+            ['test'],
+            ['test'],
+            ['test']
         );
         $scientist->markAsMissing();
 
@@ -41,8 +51,13 @@ class MarsScientistTest extends TestCase
     public function testMarkingAsDead()
     {
         $scientist = new MarsScientist(
-            (int)null, 'Adam', 'Jensen',
-            (string)null, array('test'), array('test'), array('test')
+            (int) null,
+            'Adam',
+            'Jensen',
+            (string) null,
+            ['test'],
+            ['test'],
+            ['test']
         );
         $scientist->markAsDead();
 
@@ -53,8 +68,13 @@ class MarsScientistTest extends TestCase
     {
         $this->expectException(ScientistIsAliveException::class);
         $scientist = new MarsScientist(
-            (int)null, 'Adam', 'Jensen',
-            (string)null, array('test'), array('test'), array('test')
+            (int) null,
+            'Adam',
+            'Jensen',
+            (string) null,
+            ['test'],
+            ['test'],
+            ['test']
         );
 
         $scientist->markAsAlive();
@@ -67,8 +87,13 @@ class MarsScientistTest extends TestCase
     public function testTryToGiveReasonOfDeathToDeadScientist()
     {
         $scientist = new MarsScientist(
-            (int)null, 'Adam', 'Jensen',
-            (string)null, array('test'), array('test'), array('test')
+            (int) null,
+            'Adam',
+            'Jensen',
+            (string) null,
+            ['test'],
+            ['test'],
+            ['test']
         );
 
         $scientist->markAsDead();
@@ -83,12 +108,20 @@ class MarsScientistTest extends TestCase
         $this->doesNotPerformAssertions();
 
         $scientist = new MarsScientist(
-            (int)null, 'Adam', 'Jensen',
-            (string)null, array(), array(), array()
+            (int) null,
+            'Adam',
+            'Jensen',
+            (string) null,
+            [],
+            [],
+            []
         );
         $dateTime = new DateTime();
         $expedition = new Expedition(
-            1, $scientist, true, true
+            1,
+            $scientist,
+            true,
+            true
         );
 
         $scientist->addFinishedExpedition($expedition);
@@ -99,12 +132,20 @@ class MarsScientistTest extends TestCase
         $this->expectException(ExpeditionIsNotAlreadyFinishedException::class);
 
         $scientist = new MarsScientist(
-            (int)null, 'Adam', 'Jensen',
-            (string)null, array(), array(), array()
+            (int) null,
+            'Adam',
+            'Jensen',
+            (string) null,
+            [],
+            [],
+            []
         );
         $dateTime = new DateTime();
         $expedition = new Expedition(
-            1, $scientist, false, true
+            1,
+            $scientist,
+            false,
+            true
         );
 
         $scientist->addFinishedExpedition($expedition);
@@ -118,12 +159,20 @@ class MarsScientistTest extends TestCase
         $this->doesNotPerformAssertions();
 
         $scientist = new MarsScientist(
-            (int)null, 'Adam', 'Jensen',
-            (string)null, array(), array(), array()
+            (int) null,
+            'Adam',
+            'Jensen',
+            (string) null,
+            [],
+            [],
+            []
         );
         $dateTime = new DateTime();
         $expedition = new Expedition(
-            1, $scientist, false, false
+            1,
+            $scientist,
+            false,
+            false
         );
 
         $scientist->addPlanedExpedition($expedition);
@@ -134,12 +183,20 @@ class MarsScientistTest extends TestCase
         $this->expectException(CannotAddStartedOrFinishedExpeditionException::class);
 
         $scientist = new MarsScientist(
-            (int)null, 'Adam', 'Jensen',
-            (string)null, array(), array(), array()
+            (int) null,
+            'Adam',
+            'Jensen',
+            (string) null,
+            [],
+            [],
+            []
         );
         $dateTime = new DateTime();
         $expedition = new Expedition(
-            1, $scientist, false, true
+            1,
+            $scientist,
+            false,
+            true
         );
 
         $scientist->addPlanedExpedition($expedition);
@@ -150,12 +207,20 @@ class MarsScientistTest extends TestCase
         $this->expectException(CannotAddStartedOrFinishedExpeditionException::class);
 
         $scientist = new MarsScientist(
-            (int)null, 'Adam', 'Jensen',
-            (string)null, array(), array(), array()
+            (int) null,
+            'Adam',
+            'Jensen',
+            (string) null,
+            [],
+            [],
+            []
         );
         $dateTime = new DateTime();
         $expedition = new Expedition(
-            1, $scientist, true, true
+            1,
+            $scientist,
+            true,
+            true
         );
 
         $scientist->addPlanedExpedition($expedition);

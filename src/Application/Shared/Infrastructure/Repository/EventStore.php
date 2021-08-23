@@ -9,7 +9,6 @@ use App\Application\Shared\Domain\Event\EventRepositoryInterface;
 
 class EventStore implements EventRepositoryInterface
 {
-
     public function getAllEventsFrom(string $destination): array
     {
         return [];
@@ -17,6 +16,5 @@ class EventStore implements EventRepositoryInterface
 
     public function save(Event $event): void
     {
-
     }
 }

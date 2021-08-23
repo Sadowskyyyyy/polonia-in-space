@@ -25,8 +25,8 @@ class MarkMarsScientistAsMissingOrDeadCommand implements CommandInterface
 
     private function validate()
     {
-        if (($this->isDead === true && $this->isMissing === true)
-            || ($this->isDead === false && $this->isMissing === false)) {
+        if ((true === $this->isDead && true === $this->isMissing)
+            || (false === $this->isDead && false === $this->isMissing)) {
             throw new RuntimeException('Data is not valid');
         }
     }

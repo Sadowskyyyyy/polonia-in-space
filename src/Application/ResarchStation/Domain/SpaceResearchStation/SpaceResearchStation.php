@@ -18,7 +18,7 @@ class SpaceResearchStation extends AbstractResearchStation
     private float $accumulatorsPercentage;
     private float $position;
 
-    function addScientist(AbstractScientist $scientist): void
+    public function addScientist(AbstractScientist $scientist): void
     {
         if (!$scientist instanceof SpaceScientist) {
             throw new WrongScientistTypeException();

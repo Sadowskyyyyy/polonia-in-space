@@ -32,7 +32,6 @@ class ExpeditionCommandController extends CommandController
 
         $command = new StartExpeditionCommand($id);
         $this->handle($command);
-
     }
 
     /**
@@ -48,7 +47,6 @@ class ExpeditionCommandController extends CommandController
         );
 
         $this->handle($command);
-
     }
 
     /**
@@ -64,6 +62,5 @@ class ExpeditionCommandController extends CommandController
         );
 
         $this->handle($command);
-
     }
 }

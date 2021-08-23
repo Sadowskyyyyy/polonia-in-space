@@ -17,7 +17,6 @@ class GetAllScientistsFromMarsResearchStationHandler implements MessageHandlerIn
 
     public function __invoke(GetAllScientistsFromMarsResearchStation $query)
     {
-       return $this->marsScientistRepository->getAll();
+        return $this->marsScientistRepository->getAll();
     }
-
 }
