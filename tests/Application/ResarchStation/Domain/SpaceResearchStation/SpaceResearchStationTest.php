@@ -22,6 +22,9 @@ class SpaceResearchStationTest extends TestCase
         $this->researchStation->addScientist(new EarthScientist(1, 'Adam', 'Jensen', ''));
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testTryToAddScientistThenRunSuccessful()
     {
         $this->doesNotPerformAssertions();

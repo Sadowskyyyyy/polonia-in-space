@@ -61,6 +61,9 @@ class MarsScientistTest extends TestCase
         $scientist->setReasonOfDeath('Heart attack');
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testTryToGiveReasonOfDeathToDeadScientist()
     {
         $scientist = new MarsScientist(
@@ -72,6 +75,9 @@ class MarsScientistTest extends TestCase
         $scientist->setReasonOfDeath('Heart attack');
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testTryToAddFinishedExpeditionSuccessful()
     {
         $this->doesNotPerformAssertions();
@@ -104,6 +110,9 @@ class MarsScientistTest extends TestCase
         $scientist->addFinishedExpedition($expedition);
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testTryToAddPlannedExpeditionSuccessful()
     {
         $this->doesNotPerformAssertions();

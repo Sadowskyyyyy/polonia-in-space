@@ -12,6 +12,9 @@ class MarkScientistAsMissingOrDeadCommandTest extends TestCase
 {
     private MarkMarsScientistAsMissingOrDeadCommand $command;
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testValidationWithValidData()
     {
         $this->doesNotPerformAssertions();

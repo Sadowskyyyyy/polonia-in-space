@@ -25,6 +25,9 @@ class MissingOrDeadCommandValidatorTest extends TestCase
         );
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testValidationForCommandWithValidData()
     {
         $this->doesNotPerformAssertions();
