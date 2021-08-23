@@ -26,5 +26,5 @@ install:
   - composer require landingi/php-coding-standards
 
 script:
-  - vendor/bin/ecs check --config vendor/landingi/php-coding-standards/ecs.php --fix
+  - vendor/bin/ecs check --config vendor/landingi/php-coding-standards/ecs.php
   - ./vendor/bin/simple-phpunit $PHPUNIT_FLAGS
