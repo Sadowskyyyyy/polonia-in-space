@@ -56,6 +56,9 @@ class ExpeditionTest extends TestCase
         $expedition->startExpedition();
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testTryToGenerateExpeditionConclusionAndRunSucessful()
     {
         $marsScientist = new MarsScientist(
