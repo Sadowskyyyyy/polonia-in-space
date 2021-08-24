@@ -28,13 +28,13 @@ class ExpeditionQueryController extends QueryController
 
         return json_encode(
             new DataDocument(
-            new ResourceObject(
+                new ResourceObject(
                     'expedition',
                     '1',
                     new Attribute('expedition_conclusion', $response),
                     new SelfLink(sprintf('/conclusion/%s', $id))
                 )
-        )
+            )
         );
     }
 }
