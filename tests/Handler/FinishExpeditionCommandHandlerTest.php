@@ -31,9 +31,12 @@ class FinishExpeditionCommandHandlerTest extends KernelTestCase
     public function should_finish_expedition()
     {
         $this->expeditionRepository->method('getById')
-            ->willReturn(new Expedition(1,
+            ->willReturn(new Expedition(
+                1,
                 new MarsScientist(1, 'Adam', 'Jensen', 'pass', [], [], []),
-                false, true));
+                false,
+                true
+            ));
 
         $this->handler->__invoke(new FinishExpeditionCommand(1));
     }
@@ -43,9 +46,12 @@ class FinishExpeditionCommandHandlerTest extends KernelTestCase
     {
         $this->expectException(CannotFinishExpeditionWhichHasNotStartedYetException::class);
         $this->expeditionRepository->method('getById')
-            ->willReturn(new Expedition(1,
+            ->willReturn(new Expedition(
+                1,
                 new MarsScientist(1, 'Adam', 'Jensen', 'pass', [], [], []),
-                false, false));
+                false,
+                false
+            ));
 
         $this->handler->__invoke(new FinishExpeditionCommand(1));
     }

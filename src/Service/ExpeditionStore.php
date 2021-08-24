@@ -27,7 +27,7 @@ final class ExpeditionStore implements ExpeditionRepositoryInterface
     {
         $entity = $this->entityManager->getRepository(ExpeditionEntity::class)->find($id);
 
-        if (empty($entity) === true) {
+        if (true === empty($entity)) {
             throw new NotFoundException();
         }
 

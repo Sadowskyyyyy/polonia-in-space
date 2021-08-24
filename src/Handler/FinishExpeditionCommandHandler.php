@@ -20,7 +20,6 @@ class FinishExpeditionCommandHandler implements MessageHandlerInterface
         $this->eventRepository = $eventRepository;
     }
 
-
     public function __invoke(FinishExpeditionCommand $command)
     {
         $expedition = $this->repository->getById($command->id);
