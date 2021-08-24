@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller;
 
-use App\Application\Shared\Application\Command\CommandInterface;
+use App\Shared\Application\Command\CommandInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
