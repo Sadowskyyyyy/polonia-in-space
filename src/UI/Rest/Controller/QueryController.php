@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller;
 
-use App\Shared\Application\Query\QueryInterface;
+use App\Shared\Application\Query;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -19,7 +19,7 @@ abstract class QueryController extends AbstractController
         $this->queryBus = $queryBus;
     }
 
-    protected function ask(QueryInterface $query): Envelope
+    protected function ask(Query $query): Envelope
     {
         $envelope = $this->queryBus->dispatch($query);
         /** @var HandledStamp $handled */
@@ -28,7 +28,7 @@ abstract class QueryController extends AbstractController
         return $handled->getResult();
     }
 
-    protected function askWithDelay(QueryInterface $query): Envelope
+    protected function askWithDelay(Query $query): Envelope
     {
         $envelope = $this->queryBus->dispatch(new Envelope($query), [
             new DelayStamp(840000),

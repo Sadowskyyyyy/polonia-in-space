@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller;
 
-use App\Shared\Application\Command\CommandInterface;
+use App\Shared\Application\Command;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -18,11 +18,12 @@ abstract class CommandController extends AbstractController
         $this->bus = $bus;
     }
 
-    protected function handle(CommandInterface $command): void
+    protected function handle(Command $command): void
     {
         $this->bus->dispatch($command);
     }
-    protected function handleWithDelay(CommandInterface $command): void
+
+    protected function handleWithDelay(Command $command): void
     {
         $this->bus->dispatch(new Envelope($command), [
             new DelayStamp(840000),
