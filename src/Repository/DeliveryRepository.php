@@ -26,8 +26,7 @@ class DeliveryRepository extends ServiceEntityRepository
             ->andWhere('d.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
     }
 
 }
