@@ -6,15 +6,15 @@ namespace App\UI\Rest\Controller\ResarchStation;
 use App\Application\ResarchStation\Application\Query\CheckDemand;
 use App\Query\CheckOxygenQuery;
 use App\UI\Rest\Controller\QueryController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\MessageBusInterface;
 use JsonApiPhp\JsonApi\Attribute;
 use JsonApiPhp\JsonApi\DataDocument;
 use JsonApiPhp\JsonApi\Link\SelfLink;
 use JsonApiPhp\JsonApi\ResourceObject;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/researchstations")
@@ -43,14 +43,15 @@ class ResearchStationQueryController extends QueryController
     {
         $response = $this->askWithDelay(new CheckOxygenQuery());
 
-        return json_encode(new DataDocument(
-                new ResourceObject(
+        return json_encode(
+            new DataDocument(
+            new ResourceObject(
                     'spacestations',
                     '1',
                     new Attribute('oxygen_percentage', $response),
                     new SelfLink('/spacestation/oxygen')
                 )
-            )
+        )
         );
     }
 }

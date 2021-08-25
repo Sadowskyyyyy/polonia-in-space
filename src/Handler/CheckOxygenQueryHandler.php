@@ -19,7 +19,7 @@ class CheckOxygenQueryHandler implements MessageHandlerInterface
 
     public function __invoke(CheckOxygenQuery $query): float
     {
-        /**@var SpaceResearchStation $researchStation*/
+        /** @var SpaceResearchStation $researchStation */
         $researchStation = $this->stationRepository->getResarchStationByName('spacestation');
 
         return $researchStation->getOxygenPercentage();

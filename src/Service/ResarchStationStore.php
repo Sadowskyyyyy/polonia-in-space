@@ -3,12 +3,8 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-
 use App\DomainModel\AbstractResearchStation;
-use App\Entity\EarthScientistEntity;
-use App\Entity\MarsResearchStationEntity;
 use App\Entity\SpaceResearchStation;
-use App\Entity\SpaceResearchStationEntity;
 use App\Shared\Domain\Exception\NotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -21,7 +17,6 @@ class ResarchStationStore implements ResarchStationRepository
         $this->entityManager = $entityManager;
     }
 
-
     public function getResarchStationByName(string $name): AbstractResearchStation
     {
         $entity = null;
@@ -29,13 +24,13 @@ class ResarchStationStore implements ResarchStationRepository
 
         switch ($name) {
             case 'spacestation':
-                /**@var SpaceResearchStation $entity */
+                /** @var SpaceResearchStation $entity */
                 $entity = $this->entityManager->getRepository(SpaceResearchStation::class)->find(1);
                 $response = SpaceResearchStation::toDomain($entity);
                 break;
         }
 
-        if (empty($entity) === true) {
+        if (true === empty($entity)) {
             throw new NotFoundException();
         }
 

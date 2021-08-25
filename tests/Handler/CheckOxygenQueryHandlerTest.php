@@ -24,8 +24,16 @@ class CheckOxygenQueryHandlerTest extends KernelTestCase
     public function should_return_valid_data()
     {
         $this->stationRepository->method('getResarchStationByName')
-            ->willReturn(new SpaceResearchStation(1, 70, 100,
-                10000.05, 12, 12.5, 89, 12));
+            ->willReturn(new SpaceResearchStation(
+                1,
+                70,
+                100,
+                10000.05,
+                12,
+                12.5,
+                89,
+                12
+            ));
 
         $this->assertEquals(70, $this->handler->__invoke(new CheckOxygenQuery()));
     }

@@ -65,7 +65,7 @@ class SpaceResearchStation
         $this->scientists = new ArrayCollection();
     }
 
-    public static function toDomain(SpaceResearchStation $entity)
+    public static function toDomain(self $entity)
     {
         return new \App\DomainModel\SpaceResearchStation(
             $entity->getId(),
