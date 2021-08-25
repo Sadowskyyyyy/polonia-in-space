@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\EarthScientistEntityRepository;
+use App\Repository\EarthScientistRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EarthScientistEntityRepository::class)
+ * @ORM\Entity(repositoryClass=EarthScientistRepository::class)
  */
-class EarthScientistEntity
+class EarthScientist
 {
     /**
      * @ORM\Id
@@ -79,12 +79,12 @@ class EarthScientistEntity
         return $this;
     }
 
-    public function getStation(): ?EarthResarchStation
+    public function getStation(): ?EarthResearchStation
     {
         return $this->station;
     }
 
-    public function setStation(?EarthResarchStation $station): self
+    public function setStation(?EarthResearchStation $station): self
     {
         $this->station = $station;
 

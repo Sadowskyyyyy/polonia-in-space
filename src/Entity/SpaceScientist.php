@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\SpaceScientistEntityRepository;
+use App\Repository\SpaceScientistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=SpaceScientistEntityRepository::class)
+ * @ORM\Entity(repositoryClass=SpaceScientistRepository::class)
  */
-class SpaceScientistEntity
+class SpaceScientist
 {
     /**
      * @ORM\Id
@@ -30,12 +30,12 @@ class SpaceScientistEntity
     private $surname;
 
     /**
-     * @ORM\OneToMany(targetEntity=DeliveryEntity::class, mappedBy="sender")
+     * @ORM\OneToMany(targetEntity=Delivery::class, mappedBy="sender")
      */
     private $sentDeliveries;
 
     /**
-     * @ORM\ManyToOne(targetEntity=SpaceResearchStationEntity::class, inversedBy="scientists")
+     * @ORM\ManyToOne(targetEntity=SpaceResearchStation::class, inversedBy="scientists")
      * @ORM\JoinColumn(nullable=false)
      */
     private $station;
@@ -75,14 +75,14 @@ class SpaceScientistEntity
     }
 
     /**
-     * @return Collection|DeliveryEntity[]
+     * @return Collection|Delivery[]
      */
     public function getSentDeliveries(): Collection
     {
         return $this->sentDeliveries;
     }
 
-    public function addSentDelivery(DeliveryEntity $sentDelivery): self
+    public function addSentDelivery(Delivery $sentDelivery): self
     {
         if (!$this->sentDeliveries->contains($sentDelivery)) {
             $this->sentDeliveries[] = $sentDelivery;
@@ -92,7 +92,7 @@ class SpaceScientistEntity
         return $this;
     }
 
-    public function removeSentDelivery(DeliveryEntity $sentDelivery): self
+    public function removeSentDelivery(Delivery $sentDelivery): self
     {
         if ($this->sentDeliveries->removeElement($sentDelivery)) {
             // set the owning side to null (unless already changed)
@@ -104,12 +104,12 @@ class SpaceScientistEntity
         return $this;
     }
 
-    public function getStation(): ?SpaceResearchStationEntity
+    public function getStation(): ?SpaceResearchStation
     {
         return $this->station;
     }
 
-    public function setStation(?SpaceResearchStationEntity $station): self
+    public function setStation(?SpaceResearchStation $station): self
     {
         $this->station = $station;
 

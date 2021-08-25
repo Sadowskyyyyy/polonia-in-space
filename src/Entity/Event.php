@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\EventEntityRepository;
+use App\Repository\EventRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EventEntityRepository::class)
+ * @ORM\Entity(repositoryClass=EventRepository::class)
  */
-class EventEntity
+class Event
 {
     /**
      * @ORM\Id
