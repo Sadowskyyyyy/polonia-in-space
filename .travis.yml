@@ -1,7 +1,7 @@
 language: php
 sudo: false
 branches:
-  except:
+  only:
     - master
 cache:
   directories:
