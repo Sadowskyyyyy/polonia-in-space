@@ -45,13 +45,13 @@ class ResearchStationQueryController extends QueryController
 
         return json_encode(
             new DataDocument(
-            new ResourceObject(
-                    'spacestations',
-                    '1',
-                    new Attribute('oxygen_percentage', $response),
-                    new SelfLink('/spacestation/oxygen')
-                )
-        )
+                new ResourceObject(
+                'spacestations',
+                '1',
+                new Attribute('oxygen_percentage', $response),
+                new SelfLink('/spacestation/oxygen')
+            )
+            )
         );
     }
 }

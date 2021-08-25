@@ -24,8 +24,7 @@ class SpaceResearchStation extends AbstractResearchStation
         float $waterWaste,
         float $accumulatorsPercentage,
         float $position
-    )
-    {
+    ) {
         parent::__construct($id);
         $this->oxygenPercentage = $oxygenPercentage;
         $this->daysAtOrbit = $daysAtOrbit;
