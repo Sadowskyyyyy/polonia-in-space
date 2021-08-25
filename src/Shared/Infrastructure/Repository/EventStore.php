@@ -7,10 +7,10 @@ namespace App\Shared\Infrastructure\Repository;
 use App\Entity\MarsResearchStationEntity;
 use App\Entity\SpaceResearchStationEntity;
 use App\Shared\Domain\Event\Event;
-use App\Shared\Domain\Event\EventRepositoryInterface;
+use App\Shared\Domain\Event\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-class EventStore implements EventRepositoryInterface
+class EventStore implements EventRepository
 {
     private EntityManagerInterface $entityManager;
 
