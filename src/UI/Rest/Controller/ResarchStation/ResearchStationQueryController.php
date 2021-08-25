@@ -14,7 +14,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/researchstations")
@@ -46,11 +45,11 @@ class ResearchStationQueryController extends QueryController
         return json_encode(
             new DataDocument(
                 new ResourceObject(
-                'spacestations',
-                '1',
-                new Attribute('oxygen_percentage', $response),
-                new SelfLink('/spacestation/oxygen')
-            )
+                    'spacestations',
+                    '1',
+                    new Attribute('oxygen_percentage', $response),
+                    new SelfLink('/spacestation/oxygen')
+                )
             )
         );
     }
