@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\SpaceResearchStationEntityRepository;
+use App\Repository\SpaceResearchStationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=SpaceResearchStationEntityRepository::class)
+ * @ORM\Entity(repositoryClass=SpaceResearchStationRepository::class)
  */
-class SpaceResearchStationEntity
+class SpaceResearchStation
 {
     /**
      * @ORM\Id
@@ -20,7 +20,7 @@ class SpaceResearchStationEntity
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity=SpaceScientistEntity::class, mappedBy="station")
+     * @ORM\OneToMany(targetEntity=SpaceScientist::class, mappedBy="station")
      */
     private $scientists;
 
@@ -70,14 +70,14 @@ class SpaceResearchStationEntity
     }
 
     /**
-     * @return Collection|SpaceScientistEntity[]
+     * @return Collection|SpaceScientist[]
      */
     public function getScientists(): Collection
     {
         return $this->scientists;
     }
 
-    public function addScientist(SpaceScientistEntity $scientist): self
+    public function addScientist(SpaceScientist $scientist): self
     {
         if (!$this->scientists->contains($scientist)) {
             $this->scientists[] = $scientist;
@@ -87,7 +87,7 @@ class SpaceResearchStationEntity
         return $this;
     }
 
-    public function removeScientist(SpaceScientistEntity $scientist): self
+    public function removeScientist(SpaceScientist $scientist): self
     {
         if ($this->scientists->removeElement($scientist)) {
             // set the owning side to null (unless already changed)

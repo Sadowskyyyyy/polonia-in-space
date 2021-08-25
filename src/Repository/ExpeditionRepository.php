@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\EarthScientistEntity;
+use App\Entity\Expedition;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method EarthScientistEntity|null find($id, $lockMode = null, $lockVersion = null)
- * @method EarthScientistEntity|null findOneBy(array $criteria, array $orderBy = null)
- * @method EarthScientistEntity[]    findAll()
- * @method EarthScientistEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Expedition|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Expedition|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Expedition[]    findAll()
+ * @method Expedition[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EarthScientistEntityRepository extends ServiceEntityRepository
+class ExpeditionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, EarthScientistEntity::class);
+        parent::__construct($registry, Expedition::class);
     }
 
     // /**
-    //  * @return EarthScientistEntity[] Returns an array of EarthScientistEntity objects
+    //  * @return Expedition[] Returns an array of Expedition objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class EarthScientistEntityRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?EarthScientistEntity
+    public function findOneBySomeField($value): ?Expedition
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.exampleField = :val')

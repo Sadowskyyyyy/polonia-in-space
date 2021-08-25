@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\DeliveryEntityRepository;
+use App\Repository\DeliveryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=DeliveryEntityRepository::class)
+ * @ORM\Entity(repositoryClass=DeliveryRepository::class)
  */
-class DeliveryEntity
+class Delivery
 {
     /**
      * @ORM\Id
@@ -18,7 +18,7 @@ class DeliveryEntity
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=SpaceScientistEntity::class, inversedBy="sentDeliveries")
+     * @ORM\ManyToOne(targetEntity=SpaceScientist::class, inversedBy="sentDeliveries")
      * @ORM\JoinColumn(nullable=false)
      */
     private $sender;
@@ -28,12 +28,12 @@ class DeliveryEntity
         return $this->id;
     }
 
-    public function getSender(): ?SpaceScientistEntity
+    public function getSender(): ?SpaceScientist
     {
         return $this->sender;
     }
 
-    public function setSender(?SpaceScientistEntity $sender): self
+    public function setSender(?SpaceScientist $sender): self
     {
         $this->sender = $sender;
 

@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\SpaceResearchStationEntity;
+use App\Entity\SpaceScientist;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method SpaceResearchStationEntity|null find($id, $lockMode = null, $lockVersion = null)
- * @method SpaceResearchStationEntity|null findOneBy(array $criteria, array $orderBy = null)
- * @method SpaceResearchStationEntity[]    findAll()
- * @method SpaceResearchStationEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method SpaceScientist|null find($id, $lockMode = null, $lockVersion = null)
+ * @method SpaceScientist|null findOneBy(array $criteria, array $orderBy = null)
+ * @method SpaceScientist[]    findAll()
+ * @method SpaceScientist[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SpaceResearchStationEntityRepository extends ServiceEntityRepository
+class SpaceScientistRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, SpaceResearchStationEntity::class);
+        parent::__construct($registry, SpaceScientist::class);
     }
 
     // /**
-    //  * @return SpaceResearchStationEntity[] Returns an array of SpaceResearchStationEntity objects
+    //  * @return SpaceScientist[] Returns an array of SpaceScientist objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class SpaceResearchStationEntityRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?SpaceResearchStationEntity
+    public function findOneBySomeField($value): ?SpaceScientist
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')

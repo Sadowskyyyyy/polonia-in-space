@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\MarsResearchStationEntity;
+use App\Entity\MarsScientistEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method MarsResearchStationEntity|null find($id, $lockMode = null, $lockVersion = null)
- * @method MarsResearchStationEntity|null findOneBy(array $criteria, array $orderBy = null)
- * @method MarsResearchStationEntity[]    findAll()
- * @method MarsResearchStationEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method MarsScientistEntity|null find($id, $lockMode = null, $lockVersion = null)
+ * @method MarsScientistEntity|null findOneBy(array $criteria, array $orderBy = null)
+ * @method MarsScientistEntity[]    findAll()
+ * @method MarsScientistEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MarsResearchStationEntityRepository extends ServiceEntityRepository
+class MarsScientistRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, MarsResearchStationEntity::class);
+        parent::__construct($registry, MarsScientistEntity::class);
     }
 
     // /**
-    //  * @return MarsResearchStationEntity[] Returns an array of MarsResearchStationEntity objects
+    //  * @return MarsScientistEntity[] Returns an array of MarsScientistEntity objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class MarsResearchStationEntityRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?MarsResearchStationEntity
+    public function findOneBySomeField($value): ?MarsScientistEntity
     {
         return $this->createQueryBuilder('m')
             ->andWhere('m.exampleField = :val')

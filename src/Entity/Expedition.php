@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ExpeditionEntityRepository;
+use App\Repository\ExpeditionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ExpeditionEntityRepository::class)
+ * @ORM\Entity(repositoryClass=ExpeditionRepository::class)
  */
-class ExpeditionEntity
+class Expedition
 {
     /**
      * @ORM\Id

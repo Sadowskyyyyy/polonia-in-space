@@ -2,32 +2,32 @@
 
 namespace App\Entity;
 
-use App\Repository\EarthResarchStationRepository;
+use App\Repository\MarsResearchStationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EarthResarchStationRepository::class)
+ * @ORM\Entity(repositoryClass=MarsResearchStationRepository::class)
  */
-class EarthResarchStation
+class MarsResearchStation
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
-
-    /**
-     * @ORM\OneToMany(targetEntity=EarthScientistEntity::class, mappedBy="station")
-     */
-    private $scientists;
+    private int $id;
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $needHelp;
+
+    /**
+     * @ORM\OneToMany(targetEntity=MarsScientistEntity::class, mappedBy="station")
+     */
+    private $scientists = [];
 
     public function __construct()
     {
@@ -39,15 +39,27 @@ class EarthResarchStation
         return $this->id;
     }
 
+    public function getNeedHelp(): ?bool
+    {
+        return $this->needHelp;
+    }
+
+    public function setNeedHelp(bool $needHelp): self
+    {
+        $this->needHelp = $needHelp;
+
+        return $this;
+    }
+
     /**
-     * @return Collection|EarthScientistEntity[]
+     * @return Collection|MarsScientistEntity[]
      */
     public function getScientists(): Collection
     {
         return $this->scientists;
     }
 
-    public function addScientist(EarthScientistEntity $scientist): self
+    public function addScientist(MarsScientistEntity $scientist): self
     {
         if (!$this->scientists->contains($scientist)) {
             $this->scientists[] = $scientist;
@@ -57,7 +69,7 @@ class EarthResarchStation
         return $this;
     }
 
-    public function removeScientist(EarthScientistEntity $scientist): self
+    public function removeScientist(MarsScientistEntity $scientist): self
     {
         if ($this->scientists->removeElement($scientist)) {
             // set the owning side to null (unless already changed)
@@ -65,18 +77,6 @@ class EarthResarchStation
                 $scientist->setStation(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getNeedHelp(): ?bool
-    {
-        return $this->needHelp;
-    }
-
-    public function setNeedHelp(bool $needHelp): self
-    {
-        $this->needHelp = $needHelp;
 
         return $this;
     }

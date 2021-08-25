@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\EventEntity;
+use App\Entity\EarthScientist;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method EventEntity|null find($id, $lockMode = null, $lockVersion = null)
- * @method EventEntity|null findOneBy(array $criteria, array $orderBy = null)
- * @method EventEntity[]    findAll()
- * @method EventEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method EarthScientist|null find($id, $lockMode = null, $lockVersion = null)
+ * @method EarthScientist|null findOneBy(array $criteria, array $orderBy = null)
+ * @method EarthScientist[]    findAll()
+ * @method EarthScientist[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EventEntityRepository extends ServiceEntityRepository
+class EarthScientistRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, EventEntity::class);
+        parent::__construct($registry, EarthScientist::class);
     }
 
     // /**
-    //  * @return EventEntity[] Returns an array of EventEntity objects
+    //  * @return EarthScientist[] Returns an array of EarthScientist objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class EventEntityRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?EventEntity
+    public function findOneBySomeField($value): ?EarthScientist
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.exampleField = :val')

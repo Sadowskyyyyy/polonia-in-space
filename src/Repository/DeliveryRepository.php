@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\DeliveryEntity;
+use App\Entity\Delivery;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method DeliveryEntity|null find($id, $lockMode = null, $lockVersion = null)
- * @method DeliveryEntity|null findOneBy(array $criteria, array $orderBy = null)
- * @method DeliveryEntity[]    findAll()
- * @method DeliveryEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Delivery|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Delivery|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Delivery[]    findAll()
+ * @method Delivery[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class DeliveryEntityRepository extends ServiceEntityRepository
+class DeliveryRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, DeliveryEntity::class);
+        parent::__construct($registry, Delivery::class);
     }
 
     // /**
-    //  * @return DeliveryEntity[] Returns an array of DeliveryEntity objects
+    //  * @return Delivery[] Returns an array of Delivery objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class DeliveryEntityRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?DeliveryEntity
+    public function findOneBySomeField($value): ?Delivery
     {
         return $this->createQueryBuilder('d')
             ->andWhere('d.exampleField = :val')

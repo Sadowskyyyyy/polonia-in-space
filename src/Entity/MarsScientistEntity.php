@@ -3,13 +3,13 @@
 namespace App\Entity;
 
 use App\Application\Scientist\Domain\MarsScientist\MarsScientist;
-use App\Repository\MarsScientistEntityRepository;
+use App\Repository\MarsScientistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=MarsScientistEntityRepository::class)
+ * @ORM\Entity(repositoryClass=MarsScientistRepository::class)
  */
 class MarsScientistEntity
 {
@@ -61,13 +61,13 @@ class MarsScientistEntity
     private ArrayCollection $registredUsers;
 
     /**
-     * @ORM\ManyToOne(targetEntity=MarsResearchStationEntity::class, inversedBy="scientists")
+     * @ORM\ManyToOne(targetEntity=MarsResearchStation::class, inversedBy="scientists")
      * @ORM\JoinColumn(nullable=false)
      */
     private $station;
 
     /**
-     * @ORM\OneToMany(targetEntity=ExpeditionEntity::class, mappedBy="creator")
+     * @ORM\OneToMany(targetEntity=Expedition::class, mappedBy="creator")
      */
     private $expeditionEntities;
 
@@ -228,12 +228,12 @@ class MarsScientistEntity
         return $this;
     }
 
-    public function getStation(): ?MarsResearchStationEntity
+    public function getStation(): ?MarsResearchStation
     {
         return $this->station;
     }
 
-    public function setStation(?MarsResearchStationEntity $station): self
+    public function setStation(?MarsResearchStation $station): self
     {
         $this->station = $station;
 
@@ -241,14 +241,14 @@ class MarsScientistEntity
     }
 
     /**
-     * @return Collection|ExpeditionEntity[]
+     * @return Collection|Expedition[]
      */
     public function getExpeditionEntities(): Collection
     {
         return $this->expeditionEntities;
     }
 
-    public function addExpeditionEntity(ExpeditionEntity $expeditionEntity): self
+    public function addExpeditionEntity(Expedition $expeditionEntity): self
     {
         if (!$this->expeditionEntities->contains($expeditionEntity)) {
             $this->expeditionEntities[] = $expeditionEntity;
@@ -258,7 +258,7 @@ class MarsScientistEntity
         return $this;
     }
 
-    public function removeExpeditionEntity(ExpeditionEntity $expeditionEntity): self
+    public function removeExpeditionEntity(Expedition $expeditionEntity): self
     {
         if ($this->expeditionEntities->removeElement($expeditionEntity)) {
             // set the owning side to null (unless already changed)
