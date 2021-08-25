@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -19,24 +20,6 @@ class DeliveryEntityRepository extends ServiceEntityRepository
         parent::__construct($registry, DeliveryEntity::class);
     }
 
-    // /**
-    //  * @return DeliveryEntity[] Returns an array of DeliveryEntity objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
     public function findOneBySomeField($value): ?DeliveryEntity
     {
         return $this->createQueryBuilder('d')
@@ -46,5 +29,4 @@ class DeliveryEntityRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
 }
