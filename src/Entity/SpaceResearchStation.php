@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -62,6 +63,20 @@ class SpaceResearchStation
     public function __construct()
     {
         $this->scientists = new ArrayCollection();
+    }
+
+    public static function toDomain(SpaceResearchStation $entity)
+    {
+        return new \App\DomainModel\SpaceResearchStation(
+            $entity->getId(),
+            $entity->getOxygenPercentage(),
+            $entity->getDaysAtOrbit(),
+            $entity->getMass(),
+            $entity->getEnergyWaste(),
+            $entity->getEnergyWaste(),
+            $entity->getAccumulatorPercentage(),
+            $entity->getPosition()
+        );
     }
 
     public function getId(): ?int
