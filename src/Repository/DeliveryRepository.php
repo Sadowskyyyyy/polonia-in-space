@@ -28,5 +28,4 @@ class DeliveryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-
 }
