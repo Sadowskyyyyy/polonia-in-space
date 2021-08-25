@@ -28,8 +28,9 @@ class EventStore implements EventRepositoryInterface
                 /** @var MarsResearchStationEntity $station */
                 $station = $this->entityManager->getRepository(MarsResearchStationEntity::class)->findOneBy(['id' => 1]);
                 $events = $station->getEvents();
+                break;
             case 'earthstation':
-                /**@var EarthResarchStation $station */
+                /** @var EarthResarchStation $station */
                 $station = $this->entityManager->getRepository(EarthResarchStation::class)->findOneBy(['id' => 1]);
                 $events = $station->getEvents();
                 break;
@@ -37,6 +38,7 @@ class EventStore implements EventRepositoryInterface
                 /** @var SpaceResearchStationEntity $station */
                 $station = $this->entityManager->getRepository(SpaceResearchStationEntity::class)->findOneBy(['id' => 1]);
                 $events = $station->getEvents();
+                break;
         }
 
         return $events;
