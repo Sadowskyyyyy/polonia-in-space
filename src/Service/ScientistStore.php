@@ -18,20 +18,20 @@ class ScientistStore
         $this->entityManager = $entityManager;
     }
 
-    public function getScientistByRoleAndName(array $data)
+    public function getScientistByRoleAndName(string $name, string $password, string $roles)
     {
         $user = null;
 
-        switch ($data['roles']) {
+        switch ($roles) {
             case 'ROLE_MARS_SCIENTIST':
                 $user = $this->entityManager->getRepository(MarsScientistEntity::class)
-                    ->findOneBy(['name' => $data['name']]);
+                    ->findOneBy(['name' => $name]);
             case 'ROLE_EARTH_SCIENTIST':
                 $user = $this->entityManager->getRepository(EarthScientist::class)
-                    ->findOneBy(['name' => $data['name']]);
+                    ->findOneBy(['name' => $name]);
             case 'ROLE_SPACE_SCIENTIST':
                 $user = $this->entityManager->getRepository(SpaceScientist::class)
-                    ->findOneBy(['name' => $data['name']]);
+                    ->findOneBy(['name' => $name]);
         }
 
         if (empty($user) === true) {
