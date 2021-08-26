@@ -8,7 +8,6 @@ use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -27,7 +26,6 @@ class TokenGuard extends AbstractGuardAuthenticator
         $this->scientistStore = $scientistStore;
         $this->passwordEncoder = $passwordEncoder;
     }
-
 
     public function start(Request $request, AuthenticationException $authException = null)
     {
@@ -48,7 +46,7 @@ class TokenGuard extends AbstractGuardAuthenticator
 
         $token = $extractor->extract($request);
 
-        if (empty($token) === true) {
+        if (true === empty($token)) {
             return;
         }
 

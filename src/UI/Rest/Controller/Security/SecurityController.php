@@ -27,6 +27,14 @@ class SecurityController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
-        $token = $this->accountManager->generateToken($data);
+        return json_encode(new DataDocument(
+                new ResourceObject(
+                    'token',
+                    '1',
+                    new Attribute('token', $this->accountManager->generateToken($data)),
+                    new SelfLink(sprintf('/tokens/generate')
+                )
+            )
+        );
     }
 }

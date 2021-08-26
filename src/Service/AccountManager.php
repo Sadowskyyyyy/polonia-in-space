@@ -13,7 +13,7 @@ class AccountManager
 
     public function generateToken(array $data): string
     {
-        if (empty($data) === true) {
+        if (true === empty($data)) {
             throw new InvalidArgumentException();
         }
 
@@ -23,7 +23,7 @@ class AccountManager
         return $this->encoder->encode([
             'name' => $data['name'],
             'password' => $data['password'],
-            'roles' => $data['roles']
+            'roles' => $data['roles'],
         ]);
     }
 }

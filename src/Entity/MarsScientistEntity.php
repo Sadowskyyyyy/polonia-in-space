@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Application\Scientist\Domain\MarsScientist\MarsScientist;
 use App\Repository\MarsScientistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -102,9 +101,9 @@ class MarsScientistEntity implements UserInterface
         $this->expeditionEntities = new ArrayCollection();
     }
 
-    public static function toDomain(self $entity): MarsScientistEntity
+    public static function toDomain(self $entity): self
     {
-        return new MarsScientistEntity(
+        return new self(
             $entity->getId(),
             $entity->getName(),
             $entity->getSurname(),

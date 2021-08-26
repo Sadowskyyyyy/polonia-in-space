@@ -15,14 +15,12 @@ class PasswordValidator
         $this->encoder = $encoder;
     }
 
-
     public function isValidPassword($user, array $data): bool
     {
-        if (!$this->encoder->isPasswordValid($user, $data['password'], null)){
+        if (!$this->encoder->isPasswordValid($user, $data['password'], null)) {
             throw new BadCredentialsException();
         }
 
         return true;
     }
-
 }

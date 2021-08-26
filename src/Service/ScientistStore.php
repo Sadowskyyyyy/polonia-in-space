@@ -26,15 +26,17 @@ class ScientistStore
             case 'ROLE_MARS_SCIENTIST':
                 $user = $this->entityManager->getRepository(MarsScientistEntity::class)
                     ->findOneBy(['name' => $name]);
+                    // no break
             case 'ROLE_EARTH_SCIENTIST':
                 $user = $this->entityManager->getRepository(EarthScientist::class)
                     ->findOneBy(['name' => $name]);
+                    // no break
             case 'ROLE_SPACE_SCIENTIST':
                 $user = $this->entityManager->getRepository(SpaceScientist::class)
                     ->findOneBy(['name' => $name]);
         }
 
-        if (empty($user) === true) {
+        if (true === empty($user)) {
             throw new NotFoundException();
         }
 

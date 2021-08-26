@@ -1,0 +1,4 @@
+test:
+  path:     /tokens/generate
+  controller: App\UI\Rest\Controller\Security::generateToken
+  methods: POST
