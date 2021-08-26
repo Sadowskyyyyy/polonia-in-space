@@ -6,6 +6,11 @@ namespace App\UI\Rest\Controller\Security;
 use App\Service\AccountManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use JsonApiPhp\JsonApi\Attribute;
+use JsonApiPhp\JsonApi\DataDocument;
+use JsonApiPhp\JsonApi\Link\SelfLink;
+use JsonApiPhp\JsonApi\ResourceObject;
+use Symfony\Component\Routing\Annotation\Route;
 use function json_decode;
 
 /**
