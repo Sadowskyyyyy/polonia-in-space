@@ -7,11 +7,12 @@ use App\Repository\MarsScientistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=MarsScientistRepository::class)
  */
-class MarsScientistEntity
+class MarsScientistEntity implements UserInterface
 {
     /**
      * @ORM\Id
@@ -71,6 +72,11 @@ class MarsScientistEntity
      */
     private $expeditionEntities;
 
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles = [];
+
     public function __construct(
         int $id,
         string $name,
@@ -96,9 +102,9 @@ class MarsScientistEntity
         $this->expeditionEntities = new ArrayCollection();
     }
 
-    public static function toDomain(self $entity): MarsScientist
+    public static function toDomain(self $entity): MarsScientistEntity
     {
-        return new MarsScientist(
+        return new MarsScientistEntity(
             $entity->getId(),
             $entity->getName(),
             $entity->getSurname(),
@@ -136,11 +142,6 @@ class MarsScientistEntity
         $this->surname = $surname;
 
         return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -266,6 +267,49 @@ class MarsScientistEntity
                 $expeditionEntity->setCreator(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getApikey(): ?string
+    {
+        return $this->apikey;
+    }
+
+    public function setApikey(string $apikey): self
+    {
+        $this->apikey = $apikey;
+
+        return $this;
+    }
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+
+    public function getPassword()
+    {
+        $this->password;
+    }
+
+    public function getSalt()
+    {
+        return;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->name;
+    }
+
+    public function eraseCredentials()
+    {
+        return;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
