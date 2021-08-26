@@ -36,7 +36,12 @@ class EarthScientist
      * @ORM\ManyToOne(targetEntity=EarthResarchStation::class, inversedBy="scientists")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $station;
+    private ?EarthResearchStation $station;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles = [];
 
     public function getId(): ?int
     {
