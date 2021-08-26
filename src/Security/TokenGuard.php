@@ -9,6 +9,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderToken
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -18,14 +19,15 @@ class TokenGuard extends AbstractGuardAuthenticator
 {
     private JWTEncoderInterface $encoder;
     private ScientistStore $scientistStore;
-    private PasswordEncoderInterface $passwordEncoder;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
-    public function __construct(JWTEncoderInterface $encoder, ScientistStore $scientistStore, PasswordEncoderInterface $passwordEncoder)
+    public function __construct(JWTEncoderInterface $encoder, ScientistStore $scientistStore, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->encoder = $encoder;
         $this->scientistStore = $scientistStore;
         $this->passwordEncoder = $passwordEncoder;
     }
+
 
     public function start(Request $request, AuthenticationException $authException = null)
     {
