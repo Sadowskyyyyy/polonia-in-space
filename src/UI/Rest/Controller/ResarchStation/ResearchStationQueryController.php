@@ -10,9 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/researchstations")
- */
 class ResearchStationQueryController extends QueryController
 {
     public function __construct(MessageBusInterface $queryBus)
@@ -21,11 +18,11 @@ class ResearchStationQueryController extends QueryController
     }
 
     /**
-     * @Route("/demand")
+     * @Route("/researchstations/demand", name="DEMAND")
      */
     public function checkDemand(Request $request): Response
     {
         $direction = $request->query->get('destination');
-        $response = $this->askWithDelay(new CheckDemand($direction));
+        $this->askWithDelay(new CheckDemand($direction));
     }
 }
