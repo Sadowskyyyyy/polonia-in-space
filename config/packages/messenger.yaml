@@ -16,10 +16,3 @@ framework:
                     delay: 1000
              failed: 'doctrine://default?queue_name=failed'
             # sync: 'sync://'
-
-        routing:
-             'App\Application\Expedition\Application\Handler\FinishExpeditionCommandHandler': async
-             'App\Application\Expedition\Application\Handler\PlanNewExpeditionCommandHandler': async
-             'App\Application\Expedition\Application\Handler\StartExpeditionCommandHandler': async
-             'App\Application\Scientist\Application\Handler\MarkMarsScientistAsMissingOrDeadCommandHandler': async
-             'App\Application\Scientist\Application\Handler\RegisterScientistCommandHandler': async

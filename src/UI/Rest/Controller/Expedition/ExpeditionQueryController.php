@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\UI\Rest\Controller\Expedition;
 
 use App\Application\Expedition\Application\Query\GenerateExpeditionConclusionQuery;
-use App\UI\rest\Controller\QueryController;
+use App\UI\Rest\Controller\QueryController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;

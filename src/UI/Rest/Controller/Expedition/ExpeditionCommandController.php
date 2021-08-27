@@ -23,7 +23,6 @@ class ExpeditionCommandController extends CommandController
     }
 
     /**
-     * @IsGranted("ROLE_MARS_SCIENTIST")
      * @Route("/{id}", methods={"PATCH"})
      */
     public function startExpedition(Request $request, int $id): Response
@@ -35,7 +34,6 @@ class ExpeditionCommandController extends CommandController
     }
 
     /**
-     * @IsGranted("ROLE_MARS_SCIENTIST")
      * @Route(methods={"POST"})
      */
     public function planNewExpedition(Request $request): Response
@@ -50,7 +48,6 @@ class ExpeditionCommandController extends CommandController
     }
 
     /**
-     * @IsGranted("ROLE_MARS_SCIENTIST")
      * @Route("/{id}", methods={"PATCH"})
      */
     public function finishExpedition(Request $request, int $id): Response

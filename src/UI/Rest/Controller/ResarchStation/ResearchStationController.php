@@ -22,7 +22,6 @@ class ResearchStationController extends CommandController
     }
 
     /**
-     * @IsGranted("ROLE_SPACE_SCIENTIST")
      * @Route("/angle", methods={"PATCH"})
      */
     public function changeAngle(Request $request): Response

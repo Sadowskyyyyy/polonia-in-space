@@ -22,7 +22,6 @@ class MarsScientistsCommandController extends CommandController
     }
 
     /**
-     * @IsGranted("ROLE_MARS_SCIENTIST")
      * @Route(methods={"POST"})
      */
     public function registerScientist(Request $request): Response
@@ -38,7 +37,6 @@ class MarsScientistsCommandController extends CommandController
     }
 
     /**
-     * @IsGranted("ROLE_MARS_SCIENTIST")
      * @Route(methods={"PATCH"})
      */
     public function markScientistAsMissingOrDead(Request $request): Response
