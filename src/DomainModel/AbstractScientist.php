@@ -51,6 +51,16 @@ abstract class AbstractScientist
         $this->surname = $surname;
     }
 
+    public function getApikey(): string
+    {
+        return $this->apikey;
+    }
+
+    public function setApikey(string $apikey): void
+    {
+        $this->apikey = $apikey;
+    }
+
     public function addDelivery(Delivery $delivery): void
     {
         if ($delivery->getSender()->surname === $this->surname && $delivery->getSender()->name === $this->name) {

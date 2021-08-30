@@ -27,7 +27,7 @@ class MarsScientistTest extends TestCase
             ['test'],
             ['test']
         );
-        $this->assertSame($scientist->getPassword(), $newScientist->getPassword());
+        $this->assertSame($scientist->getApikey(), $newScientist->getApikey());
     }
 
     /** @test */
