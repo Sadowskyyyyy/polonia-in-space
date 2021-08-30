@@ -33,10 +33,16 @@ class EarthScientist
     private $password;
 
     /**
-     * @ORM\ManyToOne(targetEntity=EarthResarchStation::class, inversedBy="scientists")
+     * @ORM\ManyToOne(targetEntity=EarthResearchStation::class, inversedBy="scientists")
      * @ORM\JoinColumn(nullable=false)
      */
     private $station;
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $securityUser;
 
     public function getId(): ?int
     {
@@ -87,6 +93,18 @@ class EarthScientist
     public function setStation(?EarthResearchStation $station): self
     {
         $this->station = $station;
+
+        return $this;
+    }
+
+    public function getSecurityUser(): ?User
+    {
+        return $this->securityUser;
+    }
+
+    public function setSecurityUser(User $securityUser): self
+    {
+        $this->securityUser = $securityUser;
 
         return $this;
     }

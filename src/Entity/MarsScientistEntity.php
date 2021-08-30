@@ -71,6 +71,12 @@ class MarsScientistEntity
      */
     private $expeditionEntities;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $securityUser;
+
     public function __construct(
         int $id,
         string $name,
@@ -266,6 +272,18 @@ class MarsScientistEntity
                 $expeditionEntity->setCreator(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSecurityUser(): ?User
+    {
+        return $this->securityUser;
+    }
+
+    public function setSecurityUser(User $securityUser): self
+    {
+        $this->securityUser = $securityUser;
 
         return $this;
     }

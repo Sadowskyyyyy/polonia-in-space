@@ -20,11 +20,6 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
-    private $name;
-
-    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -39,12 +34,11 @@ class User implements UserInterface
      */
     private $apikey;
 
-    public function __construct($id, $name, array $roles, $uuid, $apikey)
+    public function __construct($name, array $roles, string $apikey)
     {
-        $this->id = $id;
         $this->name = $name;
         $this->roles = $roles;
-        $this->uuid = $uuid;
+        $this->uuid = uniqid();
         $this->apikey = $apikey;
     }
 

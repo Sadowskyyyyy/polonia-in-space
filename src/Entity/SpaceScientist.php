@@ -40,6 +40,12 @@ class SpaceScientist
      */
     private $station;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $securityUser;
+
     public function __construct()
     {
         $this->sentDeliveries = new ArrayCollection();
@@ -112,6 +118,18 @@ class SpaceScientist
     public function setStation(?SpaceResearchStation $station): self
     {
         $this->station = $station;
+
+        return $this;
+    }
+
+    public function getSecurityUser(): ?User
+    {
+        return $this->securityUser;
+    }
+
+    public function setSecurityUser(User $securityUser): self
+    {
+        $this->securityUser = $securityUser;
 
         return $this;
     }
