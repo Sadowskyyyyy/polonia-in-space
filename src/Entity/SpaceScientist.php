@@ -17,39 +17,39 @@ class SpaceScientist
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=32)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private $surname;
+    private string $surname;
 
     /**
      * @ORM\OneToMany(targetEntity=Delivery::class, mappedBy="sender")
      */
-    private $sentDeliveries = [];
+    private array $sentDeliveries = [];
 
     /**
      * @ORM\ManyToOne(targetEntity=SpaceResearchStation::class, inversedBy="scientists")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $station;
+    private SpaceResearchStation $station;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $securityUser;
+    private UserInterface $securityUser;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $apikey;
+    private string $apikey;
 
     public function __construct(
         string $name,

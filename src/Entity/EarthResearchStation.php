@@ -22,7 +22,7 @@ class EarthResearchStation
     /**
      * @ORM\OneToMany(targetEntity=EarthScientist::class, mappedBy="station")
      */
-    private $scientists;
+    private array $scientists;
 
     /**
      * @ORM\Column(type="boolean")
@@ -31,7 +31,7 @@ class EarthResearchStation
 
     public function __construct()
     {
-        $this->scientists = new ArrayCollection();
+        $this->scientists = [];
     }
 
     public function getId(): ?int

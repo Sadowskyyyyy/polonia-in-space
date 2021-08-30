@@ -8,6 +8,13 @@ use function strlen;
 
 class ApiKeyGeneratorTest extends TestCase
 {
+    private ApiKeyGenerator $generator;
+
+    protected function setUp(): void
+    {
+        $generator = new ApiKeyGenerator();
+    }
+
     public function test_should_count_30()
     {
         $generator = new ApiKeyGenerator();

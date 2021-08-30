@@ -16,39 +16,34 @@ class EarthScientist
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=32)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private $surname;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
+    private string $surname;
 
     /**
      * @ORM\ManyToOne(targetEntity=EarthResearchStation::class, inversedBy="scientists")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $station;
+    private ?EarthResearchStation $station;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $securityUser;
+    private UserInterface $securityUser;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $apikey;
+    private string $apikey;
 
     public function __construct(string $name, string $surname, $station, UserInterface $securityUser, string $apikey)
     {

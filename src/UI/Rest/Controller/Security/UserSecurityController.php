@@ -30,18 +30,16 @@ class UserSecurityController extends AbstractController
      */
     public function findCurrentUser(Request $request): JsonResponse
     {
-        $response = json_encode(
+        return $this->json(
             new DataDocument(
                 new ResourceObject(
                     'user',
                     '1',
-                    new Attribute('user', $this->userFactory->createFromUser($this->getUser())),
+                    new Attribute('user', 'test'),
                     new SelfLink('/users')
                 )
             )
         );
-
-        return $this->json(json_decode($response));
     }
 
     /**
@@ -49,7 +47,7 @@ class UserSecurityController extends AbstractController
      */
     public function findCurrentApikey(Request $request): JsonResponse
     {
-        $response = json_encode(
+        return $this->json(
             new DataDocument(
                 new ResourceObject(
                     'apikey',
@@ -59,8 +57,6 @@ class UserSecurityController extends AbstractController
                 )
             )
         );
-
-        return $this->json(json_decode($response));
     }
 
     /**
@@ -68,17 +64,15 @@ class UserSecurityController extends AbstractController
      */
     public function generateApikey(Request $request): JsonResponse
     {
-        $response = json_encode(
+        return $this->json(
             new DataDocument(
                 new ResourceObject(
-                    'apikey',
+                    'user',
                     '1',
                     new Attribute('apikey', $this->generator->generateApiKey()),
                     new SelfLink('/users/generate')
                 )
             )
         );
-
-        return $this->json(json_decode($response));
     }
 }
