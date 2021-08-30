@@ -5,7 +5,6 @@ namespace App\Service;
 use App\Repository\EarthScientistRepository;
 use App\Repository\UserRepository;
 use App\Shared\Domain\Exception\NotFoundException;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class AuthFactory
@@ -15,10 +14,12 @@ class AuthFactory
     private SpaceScientistRepository $spaceScientistRepository;
     private EarthScientistRepository $earthScientistRepository;
 
-    public function __construct(UserRepository $userRepository,
-                                MarsScientistRepository $marsScientistRepository,
-                                SpaceScientistRepository $spaceScientistRepository,
-                                EarthScientistRepository $earthScientistRepository)
+    public function __construct(
+        UserRepository $userRepository,
+        MarsScientistRepository $marsScientistRepository,
+        SpaceScientistRepository $spaceScientistRepository,
+        EarthScientistRepository $earthScientistRepository
+    )
     {
         $this->userRepository = $userRepository;
         $this->marsScientistRepository = $marsScientistRepository;
@@ -26,13 +27,12 @@ class AuthFactory
         $this->earthScientistRepository = $earthScientistRepository;
     }
 
-
     public function createFromUser(UserInterface $user): AbstractScientist
     {
         $scientist = null;
         $user = $this->userRepository->findOneBy(['apikey' => $user->getUsername()]);
 
-        if (empty($user) === true) {
+        if (true === empty($user)) {
             throw new NotFoundException();
         }
 
@@ -48,10 +48,8 @@ class AuthFactory
             $scientist = $this->earthScientistStore->findByApikey($user->getUsername());
         }
 
-
-        if (empty($scientist) === true) {
+        if (true === empty($scientist)) {
             throw new NotFoundException();
         }
-
     }
 }

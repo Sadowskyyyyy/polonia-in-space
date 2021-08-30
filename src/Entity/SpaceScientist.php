@@ -3,9 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\SpaceScientistRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=SpaceScientistRepository::class)
@@ -32,7 +32,7 @@ class SpaceScientist
     /**
      * @ORM\OneToMany(targetEntity=Delivery::class, mappedBy="sender")
      */
-    private $sentDeliveries;
+    private $sentDeliveries = [];
 
     /**
      * @ORM\ManyToOne(targetEntity=SpaceResearchStation::class, inversedBy="scientists")
@@ -46,9 +46,24 @@ class SpaceScientist
      */
     private $securityUser;
 
-    public function __construct()
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $apikey;
+
+    public function __construct(
+        string $name,
+        string $surname,
+        SpaceResearchStation $station,
+        UserInterface $securityUser,
+        string $apikey
+    )
     {
-        $this->sentDeliveries = new ArrayCollection();
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->station = $station;
+        $this->securityUser = $securityUser;
+        $this->apikey = $apikey;
     }
 
     public function getId(): ?int
@@ -130,6 +145,18 @@ class SpaceScientist
     public function setSecurityUser(User $securityUser): self
     {
         $this->securityUser = $securityUser;
+
+        return $this;
+    }
+
+    public function getApikey(): ?string
+    {
+        return $this->apikey;
+    }
+
+    public function setApikey(string $apikey): self
+    {
+        $this->apikey = $apikey;
 
         return $this;
     }

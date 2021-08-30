@@ -59,7 +59,6 @@ class EarthScientist
         $this->apikey = $apikey;
     }
 
-
     public function getId(): ?int
     {
         return $this->id;

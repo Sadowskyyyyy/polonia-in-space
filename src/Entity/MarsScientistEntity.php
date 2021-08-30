@@ -4,9 +4,9 @@ namespace App\Entity;
 
 use App\Application\Scientist\Domain\MarsScientist\MarsScientist;
 use App\Repository\MarsScientistRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=MarsScientistRepository::class)
@@ -31,11 +31,6 @@ class MarsScientistEntity
     private string $surname;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $password;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private bool $isMissing = false;
@@ -58,7 +53,7 @@ class MarsScientistEntity
     /**
      * @ORM\OneToMany(targetEntity=MarsScientistEntity::class, mappedBy="author")
      */
-    private ArrayCollection $registredUsers;
+    private $registredUsers = [];
 
     /**
      * @ORM\ManyToOne(targetEntity=MarsResearchStation::class, inversedBy="scientists")
@@ -69,7 +64,7 @@ class MarsScientistEntity
     /**
      * @ORM\OneToMany(targetEntity=Expedition::class, mappedBy="creator")
      */
-    private $expeditionEntities;
+    private $expeditionEntities = [];
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
@@ -77,29 +72,34 @@ class MarsScientistEntity
      */
     private $securityUser;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $apikey;
+
+    /**
+     * @param string $name
+     * @param string $surname
+     * @param MarsScientistEntity|null $author
+     * @param $station
+     * @param $securityUser
+     * @param $apikey
+     */
     public function __construct(
-        int $id,
         string $name,
         string $surname,
-        string $password,
-        bool $isMissing,
-        bool $isDead,
-        ?string $reason,
         ?self $author,
-        array $registredUsers,
-        $station
-    ) {
-        $this->id = $id;
+        MarsResearchStation $station,
+        UserInterface $securityUser,
+        $apikey
+    )
+    {
         $this->name = $name;
         $this->surname = $surname;
-        $this->password = $password;
-        $this->isMissing = $isMissing;
-        $this->isDead = $isDead;
-        $this->reason = $reason;
         $this->author = $author;
-        $this->registredUsers = $registredUsers;
         $this->station = $station;
-        $this->expeditionEntities = new ArrayCollection();
+        $this->securityUser = $securityUser;
+        $this->apikey = $apikey;
     }
 
     public static function toDomain(self $entity): MarsScientist
@@ -284,6 +284,18 @@ class MarsScientistEntity
     public function setSecurityUser(User $securityUser): self
     {
         $this->securityUser = $securityUser;
+
+        return $this;
+    }
+
+    public function getApikey(): ?string
+    {
+        return $this->apikey;
+    }
+
+    public function setApikey(string $apikey): self
+    {
+        $this->apikey = $apikey;
 
         return $this;
     }
