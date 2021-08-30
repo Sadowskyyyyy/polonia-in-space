@@ -29,13 +29,13 @@ class UserSecurityController extends AbstractController
     {
         $response = json_encode(
             new DataDocument(
-            new ResourceObject(
-                    'user',
-                    '1',
-                    new Attribute('user', $this->getUser()),
-                    new SelfLink('/users')
-                )
-        )
+                new ResourceObject(
+                'user',
+                '1',
+                new Attribute('user', $this->getUser()),
+                new SelfLink('/users')
+            )
+            )
         );
 
         return $this->json(json_decode($response));
@@ -48,13 +48,13 @@ class UserSecurityController extends AbstractController
     {
         $response = json_encode(
             new DataDocument(
-            new ResourceObject(
-                    'apikey',
-                    '1',
-                    new Attribute('apikey', $this->getUser()->getUsername()),
-                    new SelfLink('/users/apikey')
-                )
-        )
+                new ResourceObject(
+                'apikey',
+                '1',
+                new Attribute('apikey', $this->getUser()->getUsername()),
+                new SelfLink('/users/apikey')
+            )
+            )
         );
 
         return $this->json(json_decode($response));
@@ -67,13 +67,13 @@ class UserSecurityController extends AbstractController
     {
         $response = json_encode(
             new DataDocument(
-            new ResourceObject(
-                    'apikey',
-                    '1',
-                    new Attribute('apikey', $this->generator->generateApiKey()),
-                    new SelfLink('/users/generate')
-                )
-        )
+                new ResourceObject(
+                'apikey',
+                '1',
+                new Attribute('apikey', $this->generator->generateApiKey()),
+                new SelfLink('/users/generate')
+            )
+            )
         );
 
         return $this->json(json_decode($response));
