@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\UI\Rest\Controller\Security;
 
 use App\Service\ApiKeyGenerator;
+use App\Service\AuthFactory;
 use JsonApiPhp\JsonApi\Attribute;
 use JsonApiPhp\JsonApi\DataDocument;
 use JsonApiPhp\JsonApi\Link\SelfLink;
@@ -16,10 +17,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserSecurityController extends AbstractController
 {
     private ApiKeyGenerator $generator;
+    private AuthFactory $userFactory;
 
-    public function __construct(ApiKeyGenerator $generator)
+    public function __construct(ApiKeyGenerator $generator, AuthFactory $userFactory)
     {
         $this->generator = $generator;
+        $this->userFactory = $userFactory;
     }
 
     /**
@@ -30,11 +33,11 @@ class UserSecurityController extends AbstractController
         $response = json_encode(
             new DataDocument(
                 new ResourceObject(
-                'user',
-                '1',
-                new Attribute('user', $this->getUser()),
-                new SelfLink('/users')
-            )
+                    'user',
+                    '1',
+                    new Attribute('user', $this->userFactory->createFromUser($this->getUser())),
+                    new SelfLink('/users')
+                )
             )
         );
 
@@ -49,11 +52,11 @@ class UserSecurityController extends AbstractController
         $response = json_encode(
             new DataDocument(
                 new ResourceObject(
-                'apikey',
-                '1',
-                new Attribute('apikey', $this->getUser()->getUsername()),
-                new SelfLink('/users/apikey')
-            )
+                    'apikey',
+                    '1',
+                    new Attribute('apikey', $this->getUser()->getUsername()),
+                    new SelfLink('/users/apikey')
+                )
             )
         );
 
@@ -68,11 +71,11 @@ class UserSecurityController extends AbstractController
         $response = json_encode(
             new DataDocument(
                 new ResourceObject(
-                'apikey',
-                '1',
-                new Attribute('apikey', $this->generator->generateApiKey()),
-                new SelfLink('/users/generate')
-            )
+                    'apikey',
+                    '1',
+                    new Attribute('apikey', $this->generator->generateApiKey()),
+                    new SelfLink('/users/generate')
+                )
             )
         );
 

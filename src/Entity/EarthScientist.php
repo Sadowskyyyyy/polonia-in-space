@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EarthScientistRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=EarthScientistRepository::class)
@@ -43,6 +44,21 @@ class EarthScientist
      * @ORM\JoinColumn(nullable=false)
      */
     private $securityUser;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $apikey;
+
+    public function __construct(string $name, string $surname, $station, UserInterface $securityUser, string $apikey)
+    {
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->station = $station;
+        $this->securityUser = $securityUser;
+        $this->apikey = $apikey;
+    }
+
 
     public function getId(): ?int
     {
@@ -105,6 +121,18 @@ class EarthScientist
     public function setSecurityUser(User $securityUser): self
     {
         $this->securityUser = $securityUser;
+
+        return $this;
+    }
+
+    public function getApikey(): ?string
+    {
+        return $this->apikey;
+    }
+
+    public function setApikey(string $apikey): self
+    {
+        $this->apikey = $apikey;
 
         return $this;
     }
