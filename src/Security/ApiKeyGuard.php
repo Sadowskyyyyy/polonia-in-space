@@ -25,7 +25,7 @@ class ApiKeyGuard extends AbstractGuardAuthenticator
     public function start(Request $request, AuthenticationException $authException = null): JsonResponse
     {
         $data = [
-            'message' => 'Authentication Required'
+            'message' => 'Authentication Required',
         ];
 
         return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
@@ -43,13 +43,13 @@ class ApiKeyGuard extends AbstractGuardAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider): ?UserInterface
     {
-        if (empty($credentials) === true) {
+        if (true === empty($credentials)) {
             return null;
         }
 
         $user = $this->userRepository->findOneBy(['apikey' => $credentials]);
 
-        if (empty($user) === true) {
+        if (true === empty($user)) {
             throw new BadCredentialsException();
         }
 

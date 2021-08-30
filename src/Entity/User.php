@@ -30,12 +30,6 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
-     */
-    private $password;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $uuid;
@@ -44,6 +38,15 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $apikey;
+
+    public function __construct($id, $name, array $roles, $uuid, $apikey)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->roles = $roles;
+        $this->uuid = $uuid;
+        $this->apikey = $apikey;
+    }
 
     public function getId(): ?int
     {
@@ -62,19 +65,11 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
     public function getUsername(): string
     {
-        return (string) $this->name;
+        return (string) $this->apikey;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -91,35 +86,11 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Returning a salt is only needed, if you are not using a modern
-     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
-     *
-     * @see UserInterface
-     */
     public function getSalt(): ?string
     {
         return null;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
@@ -148,5 +119,10 @@ class User implements UserInterface
         $this->apikey = $apikey;
 
         return $this;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->apikey;
     }
 }

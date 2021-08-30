@@ -27,14 +27,15 @@ class UserSecurityController extends AbstractController
      */
     public function findCurrentUser(Request $request): JsonResponse
     {
-        $response = json_encode(new DataDocument(
-                new ResourceObject(
+        $response = json_encode(
+            new DataDocument(
+            new ResourceObject(
                     'user',
                     '1',
                     new Attribute('user', $this->getUser()),
                     new SelfLink('/users')
                 )
-            )
+        )
         );
 
         return $this->json(json_decode($response));
@@ -45,14 +46,15 @@ class UserSecurityController extends AbstractController
      */
     public function findCurrentApikey(Request $request): JsonResponse
     {
-        $response = json_encode(new DataDocument(
-                new ResourceObject(
+        $response = json_encode(
+            new DataDocument(
+            new ResourceObject(
                     'apikey',
                     '1',
                     new Attribute('apikey', $this->getUser()->getUsername()),
                     new SelfLink('/users/apikey')
                 )
-            )
+        )
         );
 
         return $this->json(json_decode($response));
@@ -63,14 +65,15 @@ class UserSecurityController extends AbstractController
      */
     public function generateApikey(Request $request): JsonResponse
     {
-        $response = json_encode(new DataDocument(
-                new ResourceObject(
+        $response = json_encode(
+            new DataDocument(
+            new ResourceObject(
                     'apikey',
                     '1',
                     new Attribute('apikey', $this->generator->generateApiKey()),
                     new SelfLink('/users/generate')
                 )
-            )
+        )
         );
 
         return $this->json(json_decode($response));
