@@ -57,8 +57,7 @@ class SpaceScientist
         SpaceResearchStation $station,
         UserInterface $securityUser,
         string $apikey
-    )
-    {
+    ) {
         $this->name = $name;
         $this->surname = $surname;
         $this->station = $station;

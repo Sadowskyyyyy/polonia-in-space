@@ -64,7 +64,7 @@ class UserSecurityController extends AbstractController
     }
 
     /**
-     * @Route("/users/generate", methods={"GET"})
+     * @Route("/users/generate", methods={"POST"})
      */
     public function generateApikey(Request $request): JsonResponse
     {

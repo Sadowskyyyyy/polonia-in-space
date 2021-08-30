@@ -92,8 +92,7 @@ class MarsScientistEntity
         MarsResearchStation $station,
         UserInterface $securityUser,
         $apikey
-    )
-    {
+    ) {
         $this->name = $name;
         $this->surname = $surname;
         $this->author = $author;

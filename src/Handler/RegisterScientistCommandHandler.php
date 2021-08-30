@@ -9,8 +9,15 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class RegisterScientistCommandHandler implements MessageHandlerInterface
 {
+    private ScientistFactory $factory;
+
+    public function __construct(ScientistFactory $factory)
+    {
+        $this->factory = $factory;
+    }
+
     public function __invoke(RegisterScientistCommand $command)
     {
-        ScientistFactory::createFromCommand($command, $station);
+        $this->factory->createFromCommand($command);
     }
 }
