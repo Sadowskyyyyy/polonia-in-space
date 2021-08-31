@@ -53,7 +53,7 @@ class MarsScientist extends AbstractScientist
             $marsResearchStationEntity
         );
 
-        $entity->setRegistredUsers(array_map('toEntity', $marsScientist->registeredUsers));
+        $entity->setRegistredUsers(array_map(array('MarsScientist', 'toEntity'), $marsScientist->registeredUsers));
 
         return $entity;
     }
