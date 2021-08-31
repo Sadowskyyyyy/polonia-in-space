@@ -24,6 +24,5 @@ install:
   - composer require phpunit/phpunit
   - composer require landingi/php-coding-standards
 script:
-  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis/run_on_non_pull_requests; fi
   - vendor/bin/ecs check --config vendor/landingi/php-coding-standards/ecs.php
   - ./vendor/bin/simple-phpunit $PHPUNIT_FLAGS
