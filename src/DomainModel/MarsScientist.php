@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\DomainModel;
 
+use App\Entity\MarsResearchStation;
 use App\Entity\MarsScientistEntity;
 use App\Exception\CannotAddStartedOrFinishedExpeditionException;
 use App\Exception\ExpeditionIsNotAlreadyFinishedException;
@@ -39,21 +40,19 @@ class MarsScientist extends AbstractScientist
         return new self((int) null, $name, $surname, '', [], [], []);
     }
 
-    public static function toEntity(self $marsScientist)
+    public static function toEntity(self $marsScientist, MarsResearchStation $marsResearchStationEntity): MarsScientistEntity
     {
         return new MarsScientistEntity(
             $marsScientist->getId(),
             $marsScientist->getName(),
             $marsScientist->getSurname(),
-            $marsScientist->getPassword(),
+            $marsScientist->getApikey(),
             $marsScientist->isMissing(),
             $marsScientist->isDead(),
             $marsScientist->getReason(),
             self::toEntity($marsScientist->getAuthor()),
-            new ArrayCollection(),
-            null,
-            new ArrayCollection(),
-            new ArrayCollection()
+            $marsScientist->registeredUsers,
+            $marsResearchStationEntity
         );
     }
 

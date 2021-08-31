@@ -33,7 +33,7 @@ class MarsScientistEntity
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $password;
+    private string $apikey;
 
     /**
      * @ORM\Column(type="boolean")
@@ -58,18 +58,18 @@ class MarsScientistEntity
     /**
      * @ORM\OneToMany(targetEntity=MarsScientistEntity::class, mappedBy="author")
      */
-    private ArrayCollection $registredUsers;
+    private array $registredUsers = [];
 
     /**
      * @ORM\ManyToOne(targetEntity=MarsResearchStation::class, inversedBy="scientists")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $station;
+    private ?MarsResearchStation $station;
 
     /**
      * @ORM\OneToMany(targetEntity=Expedition::class, mappedBy="creator")
      */
-    private $expeditionEntities;
+    private array $expeditionEntities = [];
 
     public function __construct(
         int $id,
