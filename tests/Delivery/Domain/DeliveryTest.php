@@ -13,28 +13,28 @@ class DeliveryTest extends TestCase
 {
     private Delivery $delivery;
 
-    /** @test */
-    public function test_should_change_delivery_status_to_sent_should_run_successful()
+    protected function setUp(): void
     {
         $this->delivery = Delivery::createNewDelivery(
-            new EarthScientistDomain(1, 'Adam', 'Jensen', 'pass'),
+            new EarthScientistDomain(1, 'Adam', 'Jensen', 'pass', []),
             new Product('food'),
-        'spacestation',
-        '');
+            'spacestation',
+            '');
+    }
 
+    /** @test */
+    public function test_should_change_delivery_status_to_sent_should_run_successful(): void
+    {
         $this->delivery->changeStatusToSent();
+
         $this->assertEquals('sent', $this->delivery->getStatus());
     }
 
     /** @test */
-    public function test_change_delivery_status_to_sent_should_throw_error()
+    public function test_change_delivery_status_to_sent_should_throw_error(): void
     {
         $this->expectException(CannotChangeStatusOfDeliveredDeliveryException::class);
-        $this->delivery = Delivery::createNewDelivery(
-            new EarthScientistDomain(1, 'Adam', 'Jensen', 'pass'),
-            new Product('food'),
-            'spacestation',
-            'delivered');
+        $this->delivery->changeStatusToDelivered();
 
         $this->delivery->changeStatusToSent();
     }
