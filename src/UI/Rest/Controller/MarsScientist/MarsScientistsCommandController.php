@@ -5,8 +5,8 @@ namespace App\UI\Rest\Controller\MarsScientist;
 
 use App\Command\MarkMarsScientistAsMissingOrDeadCommand;
 use App\Command\RegisterScientistCommand;
+use App\Service\MarkMarsScientistAsMissingOrDeadCommandValidator;
 use App\UI\Rest\Controller\CommandController;
-use App\UI\Rest\Response\ApiResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -17,8 +17,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class MarsScientistsCommandController extends CommandController
 {
-    public function __construct(MessageBusInterface $bus)
+    private MarkMarsScientistAsMissingOrDeadCommandValidator $validator;
+    public function __construct(MessageBusInterface $bus, MarkMarsScientistAsMissingOrDeadCommandValidator $validator)
     {
+        $this->validator = $validator;
         parent::__construct($bus);
     }
 
@@ -30,9 +32,7 @@ class MarsScientistsCommandController extends CommandController
         $data = json_decode($request->getContent(), true);
         $this->handle(new RegisterScientistCommand($data['name'], $data['surname']));
 
-        $response = new ApiResponse();
-
-        return $response->setStatusCode(200);
+        return new Response([], 200);
     }
 
     /**
@@ -50,8 +50,6 @@ class MarsScientistsCommandController extends CommandController
 
         $this->handle($command);
 
-        $response = new ApiResponse();
-
-        return $response->setStatusCode(200);
+        return new Response([], 200);
     }
 }

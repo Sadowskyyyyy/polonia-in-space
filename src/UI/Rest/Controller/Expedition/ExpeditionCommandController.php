@@ -7,7 +7,6 @@ use App\Command\FinishExpeditionCommand;
 use App\Command\PlanNewExpeditionCommand;
 use App\Command\StartExpeditionCommand;
 use App\UI\Rest\Controller\CommandController;
-use App\UI\Rest\Response\ApiResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -28,12 +27,9 @@ class ExpeditionCommandController extends CommandController
      */
     public function startExpedition(Request $request, int $id): Response
     {
-        $data = json_decode($request->getContent(), true);
         $this->handle(new StartExpeditionCommand($id));
 
-        $response = new ApiResponse();
-
-        return $response->setStatusCode(200);
+        return new Response([], 200);
     }
 
     /**
@@ -44,9 +40,7 @@ class ExpeditionCommandController extends CommandController
         $data = json_decode($request->getContent(), true);
         $this->handle(new PlanNewExpeditionCommand($data['plannedStartDate']));
 
-        $response = new ApiResponse();
-
-        return $response->setStatusCode(200);
+        return new Response([], 200);
     }
 
     /**
@@ -54,11 +48,8 @@ class ExpeditionCommandController extends CommandController
      */
     public function finishExpedition(Request $request, int $id): Response
     {
-        $data = json_decode($request->getContent(), true);
         $this->handle(new FinishExpeditionCommand($id));
 
-        $response = new ApiResponse();
-
-        return $response->setStatusCode(200);
+        return new Response([], 200);
     }
 }

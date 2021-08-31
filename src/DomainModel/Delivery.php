@@ -11,30 +11,34 @@ class Delivery
     private Product $product;
     private string $destination;
     private string $status;
-    private \DateTime $postDate;
-    private \DateTime $pickUpDate;
+    private \DateTimeInterface $postDate;
+    private \DateTimeInterface $pickUpDate;
 
     public function __construct(
         AbstractScientist $sender,
         Product $product,
         string $destination,
-        string $status
+        string $status,
+        \DateTimeInterface $postDate,
+        \DateTimeInterface $pickUpDate
     ) {
         $this->sender = $sender;
         $this->product = $product;
         $this->destination = $destination;
         $this->status = $status;
-        $this->postDate = new \DateTime();
-        $this->pickUpDate = $this->postDate->modify('+14 minutes');
+        $this->postDate = $postDate;
+        $this->pickUpDate = $pickUpDate;
     }
 
     public static function createNewDelivery(
         AbstractScientist $sender,
         Product $product,
         string $destination,
-        string $status
+        string $status,
+        \DateTimeInterface $postDate,
+        \DateTimeInterface $pickUpDate
     ): self {
-        return new self($sender, $product, $destination, $status);
+        return new self($sender, $product, $destination, $status, $postDate, $pickUpDate);
     }
 
     public function changeStatusToDelivered(): void

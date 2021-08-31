@@ -14,10 +14,9 @@ class MarsScientistTest extends TestCase
     protected function setUp(): void
     {
         $this->scientist = new MarsScientist(
-            (int) null,
             'Adam',
             'Jensen',
-            (string) null,
+            'apikey',
             ['test'],
             ['test'],
             ['test']
@@ -27,7 +26,7 @@ class MarsScientistTest extends TestCase
     /** @test */
     public function test_creating_new_scientist(): void
     {
-        $newScientist = MarsScientist::createNewScientist('Adam', 'Jensen');
+        $newScientist = MarsScientist::createNewScientist('Adam', 'Jensen', 'apikey');
 
         $this->assertSame($this->scientist->getApikey(), $newScientist->getApikey());
     }

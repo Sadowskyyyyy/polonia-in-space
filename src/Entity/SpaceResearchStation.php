@@ -63,6 +63,29 @@ class SpaceResearchStation
      */
     private array $events = [];
 
+    public function __construct(
+        array $scientists,
+        bool $needHelp,
+        float $oxygenPercentage,
+        int $daysAtOrbit,
+        float $mass,
+        float $energyWaste,
+        float $accumulatorPercentage,
+        float $position,
+        array $events
+    )
+    {
+        $this->scientists = $scientists;
+        $this->needHelp = $needHelp;
+        $this->oxygenPercentage = $oxygenPercentage;
+        $this->daysAtOrbit = $daysAtOrbit;
+        $this->mass = $mass;
+        $this->energyWaste = $energyWaste;
+        $this->accumulatorPercentage = $accumulatorPercentage;
+        $this->position = $position;
+        $this->events = $events;
+    }
+
     public function getEvents(): array
     {
         return $this->events;

@@ -13,9 +13,8 @@ abstract class AbstractScientist
     protected string $surname;
     protected array $sentDeliveries = [];
 
-    public function __construct(int $id, string $name, string $surname, string $apikey)
+    public function __construct(string $name, string $surname, string $apikey)
     {
-        $this->id = $id;
         $this->name = $name;
         $this->surname = $surname;
         $this->apikey = $apikey;
@@ -63,7 +62,7 @@ abstract class AbstractScientist
 
     public function addDelivery(Delivery $delivery): void
     {
-        if ($delivery->getSender()->surname === $this->surname && $delivery->getSender()->name === $this->name) {
+        if ($delivery->getSender()->id === $this->id) {
             $this->sentDeliveries[] = $delivery;
         }
 

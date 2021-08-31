@@ -6,7 +6,6 @@ namespace App\UI\Rest\Controller\ResarchStation;
 use App\Command\ChangeAngleCommand;
 use App\Command\ReportARequestCommand;
 use App\UI\Rest\Controller\CommandController;
-use App\UI\Rest\Response\ApiResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -30,9 +29,7 @@ class ResearchStationCommandController extends CommandController
         $data = json_decode($request->getContent(), true);
         $this->handle(new ChangeAngleCommand($data['degrees']));
 
-        $response = new ApiResponse();
-
-        return $response->setStatusCode(200);
+        return new Response([], 200);
     }
 
     /**
@@ -43,8 +40,6 @@ class ResearchStationCommandController extends CommandController
         $destination = $request->query->get('destination');
         $this->handleWithDelay(new ReportARequestCommand($destination));
 
-        $response = new ApiResponse();
-
-        return $response->setStatusCode(200);
+        return new Response([], 200);
     }
 }

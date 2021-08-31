@@ -118,177 +118,111 @@ class MarsScientistEntity
         );
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
     public function setId(int $id): void
     {
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
     public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
     public function getSurname(): string
     {
         return $this->surname;
     }
 
-    /**
-     * @param string $surname
-     */
     public function setSurname(string $surname): void
     {
         $this->surname = $surname;
     }
 
-    /**
-     * @return string
-     */
     public function getApikey(): string
     {
         return $this->apikey;
     }
 
-    /**
-     * @param string $apikey
-     */
     public function setApikey(string $apikey): void
     {
         $this->apikey = $apikey;
     }
 
-    /**
-     * @return bool
-     */
     public function isMissing(): bool
     {
         return $this->isMissing;
     }
 
-    /**
-     * @param bool $isMissing
-     */
     public function setIsMissing(bool $isMissing): void
     {
         $this->isMissing = $isMissing;
     }
 
-    /**
-     * @return bool
-     */
     public function isDead(): bool
     {
         return $this->isDead;
     }
 
-    /**
-     * @param bool $isDead
-     */
     public function setIsDead(bool $isDead): void
     {
         $this->isDead = $isDead;
     }
 
-    /**
-     * @return string|null
-     */
     public function getReason(): ?string
     {
         return $this->reason;
     }
 
-    /**
-     * @param string|null $reason
-     */
     public function setReason(?string $reason): void
     {
         $this->reason = $reason;
     }
 
-    /**
-     * @return MarsScientistEntity|null
-     */
     public function getAuthor(): ?self
     {
         return $this->author;
     }
 
-    /**
-     * @param MarsScientistEntity|null $author
-     */
     public function setAuthor(?self $author): void
     {
         $this->author = $author;
     }
 
-    /**
-     * @return array
-     */
     public function getRegistredUsers(): array
     {
         return $this->registredUsers;
     }
 
-    /**
-     * @param array $registredUsers
-     */
     public function setRegistredUsers(array $registredUsers): void
     {
         $this->registredUsers = $registredUsers;
     }
 
-    /**
-     * @return MarsResearchStation|null
-     */
     public function getStation(): ?MarsResearchStation
     {
         return $this->station;
     }
 
-    /**
-     * @param MarsResearchStation|null $station
-     */
     public function setStation(?MarsResearchStation $station): void
     {
         $this->station = $station;
     }
 
-    /**
-     * @return array
-     */
     public function getExpeditionEntities(): array
     {
         return $this->expeditionEntities;
     }
 
-    /**
-     * @param array $expeditionEntities
-     */
     public function setExpeditionEntities(array $expeditionEntities): void
     {
         $this->expeditionEntities = $expeditionEntities;
