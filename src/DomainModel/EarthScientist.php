@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\DomainModel;
 
-use App\Entity\EarthResarchStation;
 use App\Entity\EarthScientistEntity;
 
 class EarthScientist extends AbstractScientist
@@ -14,13 +13,14 @@ class EarthScientist extends AbstractScientist
         $this->setSentDeliveries($deliveries);
     }
 
-    public static function toEntity(EarthScientist $earthScientist)
+    public static function toEntity(self $earthScientist)
     {
-        return new EarthScientistEntity($earthScientist->getName(),
-        $earthScientist->getSurname(),
-        $earthScientist->getPassword(),
-        $earthScientist->getPassword(),
-        null
+        return new EarthScientistEntity(
+            $earthScientist->getName(),
+            $earthScientist->getSurname(),
+            $earthScientist->getPassword(),
+            $earthScientist->getPassword(),
+            null
         );
     }
 }

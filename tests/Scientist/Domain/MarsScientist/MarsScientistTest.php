@@ -3,221 +3,66 @@ declare(strict_types=1);
 
 namespace App\Tests\Scientist\Domain\MarsScientist;
 
-use App\DomainModel\Expedition;
 use App\DomainModel\MarsScientist;
-use App\Exception\CannotAddStartedOrFinishedExpeditionException;
-use App\Exception\ExpeditionIsNotAlreadyFinishedException;
 use App\Exception\ScientistIsAliveException;
 use PHPUnit\Framework\TestCase;
-use function count;
+
 class MarsScientistTest extends TestCase
 {
     private MarsScientist $scientist;
 
+    protected function setUp(): void
+    {
+        $this->scientist = new MarsScientist(
+            (int) null,
+            'Adam',
+            'Jensen',
+            (string) null,
+            ['test'],
+            ['test'],
+            ['test']
+        );
+    }
+
     /** @test */
-    public function testCreatingNewScientist()
+    public function test_creating_new_scientist()
     {
         $newScientist = MarsScientist::createNewScientist('Adam', 'Jensen');
-        $scientist = new MarsScientist(
-            (int) null,
-            'Adam',
-            'Jensen',
-            (string) null,
-            ['test'],
-            ['test'],
-            ['test']
-        );
-        $this->assertSame($scientist->getApikey(), $newScientist->getApikey());
+
+        $this->assertSame($this->scientist->getApikey(), $newScientist->getApikey());
     }
 
     /** @test */
-    public function testMarkingAsMissing()
+    public function test_marking_as_missing()
     {
-        $scientist = new MarsScientist(
-            (int) null,
-            'Adam',
-            'Jensen',
-            (string) null,
-            ['test'],
-            ['test'],
-            ['test']
-        );
-        $scientist->markAsMissing();
+        $this->scientist->markAsMissing();
 
-        $this->assertTrue($scientist->isMissing());
+        $this->assertTrue($this->scientist->isMissing());
     }
 
     /** @test */
-    public function testMarkingAsDead()
+    public function test_marking_as_dead()
     {
-        $scientist = new MarsScientist(
-            (int) null,
-            'Adam',
-            'Jensen',
-            (string) null,
-            ['test'],
-            ['test'],
-            ['test']
-        );
-        $scientist->markAsDead();
+        $this->scientist->markAsDead();
 
-        $this->assertTrue($scientist->isDead());
+        $this->assertTrue($this->scientist->isDead());
     }
 
     /** @test */
-    public function testTryToGiveReasonOfDeathToLivingScientist()
+    public function test_try_to_give_eason_of_death_to_living_scientist()
     {
         $this->expectException(ScientistIsAliveException::class);
-        $scientist = new MarsScientist(
-            (int) null,
-            'Adam',
-            'Jensen',
-            (string) null,
-            ['test'],
-            ['test'],
-            ['test']
-        );
 
-        $scientist->markAsAlive();
-        $scientist->setReasonOfDeath('Heart attack');
+        $this->scientist->markAsAlive();
+        $this->scientist->setReasonOfDeath('Heart attack');
     }
 
     /** @test */
-    public function testTryToGiveReasonOfDeathToDeadScientist()
+    public function test_try_to_give_reason_of_death_to_dead_scientist()
     {
-        $scientist = new MarsScientist(
-            (int) null,
-            'Adam',
-            'Jensen',
-            (string) null,
-            ['test'],
-            ['test'],
-            ['test']
-        );
+        $this->scientist->markAsDead();
+        $this->scientist->setReasonOfDeath('Heart attack');
 
-        $scientist->markAsDead();
-        $scientist->setReasonOfDeath('Heart attack');
-
-       $this->assertTrue($scientist->isDead());
-    }
-
-    /** @test */
-    public function testTryToAddFinishedExpeditionSuccessful()
-    {
-        $scientist = new MarsScientist(
-            (int) null,
-            'Adam',
-            'Jensen',
-            (string) null,
-            [],
-            [],
-            []
-        );
-        $expedition = new Expedition(
-            1,
-            $scientist,
-            true,
-            true
-        );
-
-        $scientist->addFinishedExpedition($expedition);
-        $this->assertEquals(1, count($scientist->getFinishedExpeditions()));
-    }
-
-    /** @test */
-    public function testTryToAddFinishedExpeditionAndThrowError()
-    {
-        $this->expectException(ExpeditionIsNotAlreadyFinishedException::class);
-
-        $scientist = new MarsScientist(
-            (int) null,
-            'Adam',
-            'Jensen',
-            (string) null,
-            [],
-            [],
-            []
-        );
-        $expedition = new Expedition(
-            1,
-            $scientist,
-            false,
-            true
-        );
-
-        $scientist->addFinishedExpedition($expedition);
-    }
-
-    /** @test */
-    public function testTryToAddPlannedExpeditionSuccessful()
-    {
-
-        $scientist = new MarsScientist(
-            (int) null,
-            'Adam',
-            'Jensen',
-            (string) null,
-            [],
-            [],
-            []
-        );
-        $expedition = new Expedition(
-            1,
-            $scientist,
-            false,
-            false
-        );
-
-        $scientist->addPlanedExpedition($expedition);
-        $this->assertEquals(1, count($scientist->getPlannedExpeditions()));
-
-    }
-
-    /** @test */
-    public function testTryToAddRunningExpeditionToPlannedExpeditionAndThrowError()
-    {
-        $this->expectException(CannotAddStartedOrFinishedExpeditionException::class);
-
-        $scientist = new MarsScientist(
-            (int) null,
-            'Adam',
-            'Jensen',
-            (string) null,
-            [],
-            [],
-            []
-        );
-        $expedition = new Expedition(
-            1,
-            $scientist,
-            false,
-            true
-        );
-
-        $scientist->addPlanedExpedition($expedition);
-    }
-
-    /** @test */
-    public function testTryToAddFinishedExpeditionToPlannedExpeditionAndThrowError()
-    {
-        $this->expectException(CannotAddStartedOrFinishedExpeditionException::class);
-
-        $scientist = new MarsScientist(
-            (int) null,
-            'Adam',
-            'Jensen',
-            (string) null,
-            [],
-            [],
-            []
-        );
-        $expedition = new Expedition(
-            1,
-            $scientist,
-            true,
-            true
-        );
-
-        $scientist->addPlanedExpedition($expedition);
+        $this->assertTrue($this->scientist->isDead());
     }
 }
