@@ -39,4 +39,20 @@ class EarthResearchStation
     {
         return $this->events;
     }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getScientists(): array
+    {
+        return $this->scientists;
+    }
+
+    public function isNeedHelp(): bool
+    {
+        return $this->needHelp;
+    }
+
 }

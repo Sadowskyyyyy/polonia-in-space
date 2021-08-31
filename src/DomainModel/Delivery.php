@@ -24,7 +24,6 @@ class Delivery
         $this->destination = $destination;
         $this->status = $status;
         $this->postDate = new \DateTime();
-        $this->postDate->getTimestamp();
         $this->pickUpDate = $this->postDate->modify('+14 minutes');
     }
 
@@ -34,13 +33,7 @@ class Delivery
         string            $destination,
         string            $status): Delivery
     {
-        $now = new \DateTime();
-        $now->getTimestamp();
-
-        $delivery = new Delivery($sender, $product, $destination, $status);
-        $delivery->pickUpDate = $delivery->postDate->modify('+14 minutes');
-
-        return $delivery;
+        return new Delivery($sender, $product, $destination, $status);
     }
 
     public function changeStatusToDelivered(): void
