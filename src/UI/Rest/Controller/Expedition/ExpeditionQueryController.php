@@ -5,6 +5,10 @@ namespace App\UI\Rest\Controller\Expedition;
 
 use App\Application\Expedition\Application\Query\GenerateExpeditionConclusionQuery;
 use App\UI\Rest\Controller\QueryController;
+use JsonApiPhp\JsonApi\Attribute;
+use JsonApiPhp\JsonApi\DataDocument;
+use JsonApiPhp\JsonApi\Link\SelfLink;
+use JsonApiPhp\JsonApi\ResourceObject;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,6 +28,17 @@ class ExpeditionQueryController extends QueryController
      */
     public function generateExpeditionConclusion(int $id): Response
     {
-        $query = $this->ask(new GenerateExpeditionConclusionQuery($id));
+        $response = $this->ask(new GenerateExpeditionConclusionQuery($id));
+
+        return $this->json(
+            new DataDocument(
+                new ResourceObject(
+                    'user',
+                    '1',
+                    new Attribute('apikey', $response),
+                    new SelfLink('/users/generate')
+                )
+            )
+        );
     }
 }

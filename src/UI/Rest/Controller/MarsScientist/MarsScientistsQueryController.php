@@ -5,6 +5,10 @@ namespace App\UI\Rest\Controller\MarsScientist;
 
 use App\Application\Scientist\Application\Query\GetAllScientistsFromMarsResearchStation;
 use App\UI\Rest\Controller\QueryController;
+use JsonApiPhp\JsonApi\Attribute;
+use JsonApiPhp\JsonApi\DataDocument;
+use JsonApiPhp\JsonApi\Link\SelfLink;
+use JsonApiPhp\JsonApi\ResourceObject;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -26,5 +30,16 @@ class MarsScientistsQueryController extends QueryController
     public function getScientists(Request $request): Response
     {
         $response = $this->ask(new GetAllScientistsFromMarsResearchStation());
+
+        return $this->json(
+            new DataDocument(
+                new ResourceObject(
+                    'user',
+                    '1',
+                    new Attribute('apikey', $response),
+                    new SelfLink('/users/generate')
+                )
+            )
+        );
     }
 }
