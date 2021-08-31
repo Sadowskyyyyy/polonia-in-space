@@ -44,6 +44,16 @@ class Expedition
      */
     private ?bool $isStarted;
 
+    public static function toDomain(self $expedition): \App\DomainModel\Expedition
+    {
+        return new \App\DomainModel\Expedition(
+            $expedition->id,
+            MarsScientistEntity::toDomain($expedition->creator),
+            $expedition->isFinished,
+            $expedition->isStarted
+        );
+    }
+
     public function getId(): ?int
     {
         return $this->id;

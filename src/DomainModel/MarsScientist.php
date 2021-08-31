@@ -48,7 +48,7 @@ class MarsScientist extends AbstractScientist
             $registredUsersEntities[] = self::toEntity($registeredUser, $marsResearchStationEntity);
         }
 
-        return new MarsScientistEntity(
+        $entity =  new MarsScientistEntity(
             $marsScientist->getId(),
             $marsScientist->getName(),
             $marsScientist->getSurname(),
@@ -57,9 +57,12 @@ class MarsScientist extends AbstractScientist
             $marsScientist->isDead(),
             $marsScientist->getReason(),
             self::toEntity($marsScientist->getAuthor(), $marsResearchStationEntity),
-            $registredUsersEntities,
             $marsResearchStationEntity
         );
+
+       $entity->setRegistredUsers($registredUsersEntities);
+
+       return $entity;
     }
 
     public function isMissing(): bool
@@ -145,4 +148,10 @@ class MarsScientist extends AbstractScientist
     {
         return $this->finishedExpeditions;
     }
+
+    public function setRegisteredUsers(array $registeredUsers): void
+    {
+        $this->registeredUsers = $registeredUsers;
+    }
+
 }
