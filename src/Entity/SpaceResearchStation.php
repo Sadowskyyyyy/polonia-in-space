@@ -73,8 +73,7 @@ class SpaceResearchStation
         float $accumulatorPercentage,
         float $position,
         array $events
-    )
-    {
+    ) {
         $this->scientists = $scientists;
         $this->needHelp = $needHelp;
         $this->oxygenPercentage = $oxygenPercentage;

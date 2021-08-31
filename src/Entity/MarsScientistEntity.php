@@ -63,7 +63,7 @@ class MarsScientistEntity
      * @ORM\ManyToOne(targetEntity=MarsResearchStation::class, inversedBy="scientists")
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?MarsResearchStation $station;
+    private MarsResearchStation $station;
 
     /**
      * @ORM\OneToMany(targetEntity=Expedition::class, mappedBy="creator")
@@ -108,7 +108,6 @@ class MarsScientistEntity
         }
 
         return new MarsScientist(
-            $entity->getId(),
             $entity->getName(),
             $entity->getSurname(),
             $entity->getApikey(),
