@@ -57,4 +57,14 @@ class SpaceResearchStation
      * @ORM\Column(type="float")
      */
     private ?float $position;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Event::class)
+     */
+    private array $events = [];
+
+    public function getEvents(): array
+    {
+        return $this->events;
+    }
 }

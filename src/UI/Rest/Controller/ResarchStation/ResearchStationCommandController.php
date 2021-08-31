@@ -5,7 +5,7 @@ namespace App\UI\Rest\Controller\ResarchStation;
 
 use App\Command\ChangeAngleCommand;
 use App\Command\ReportARequestCommand;
-use App\UI\rest\Controller\CommandController;
+use App\UI\Rest\Controller\CommandController;
 use App\UI\Rest\Response\ApiResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

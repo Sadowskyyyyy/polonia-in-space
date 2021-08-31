@@ -6,7 +6,7 @@ namespace App\UI\Rest\Controller\Expedition;
 use App\Command\FinishExpeditionCommand;
 use App\Command\PlanNewExpeditionCommand;
 use App\Command\StartExpeditionCommand;
-use App\UI\rest\Controller\CommandController;
+use App\UI\Rest\Controller\CommandController;
 use App\UI\Rest\Response\ApiResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
