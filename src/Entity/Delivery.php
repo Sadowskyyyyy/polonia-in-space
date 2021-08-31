@@ -23,16 +23,4 @@ class Delivery
     {
         return $this->id;
     }
-
-    public function getSender(): ?SpaceScientist
-    {
-        return $this->sender;
-    }
-
-    public function setSender(?SpaceScientist $sender): self
-    {
-        $this->sender = $sender;
-
-        return $this;
-    }
 }

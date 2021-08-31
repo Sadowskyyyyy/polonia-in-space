@@ -25,7 +25,7 @@ class MarsScientistTest extends TestCase
     }
 
     /** @test */
-    public function test_creating_new_scientist()
+    public function test_creating_new_scientist(): void
     {
         $newScientist = MarsScientist::createNewScientist('Adam', 'Jensen');
 
@@ -33,7 +33,7 @@ class MarsScientistTest extends TestCase
     }
 
     /** @test */
-    public function test_marking_as_missing()
+    public function test_marking_as_missing(): void
     {
         $this->scientist->markAsMissing();
 
@@ -41,7 +41,7 @@ class MarsScientistTest extends TestCase
     }
 
     /** @test */
-    public function test_marking_as_dead()
+    public function test_marking_as_dead(): void
     {
         $this->scientist->markAsDead();
 
@@ -49,7 +49,7 @@ class MarsScientistTest extends TestCase
     }
 
     /** @test */
-    public function test_try_to_give_eason_of_death_to_living_scientist()
+    public function test_try_to_give_eason_of_death_to_living_scientist(): void
     {
         $this->expectException(ScientistIsAliveException::class);
 
@@ -58,7 +58,7 @@ class MarsScientistTest extends TestCase
     }
 
     /** @test */
-    public function test_try_to_give_reason_of_death_to_dead_scientist()
+    public function test_try_to_give_reason_of_death_to_dead_scientist(): void
     {
         $this->scientist->markAsDead();
         $this->scientist->setReasonOfDeath('Heart attack');

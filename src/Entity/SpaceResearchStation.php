@@ -67,4 +67,49 @@ class SpaceResearchStation
     {
         return $this->events;
     }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getScientists(): array
+    {
+        return $this->scientists;
+    }
+
+    public function getNeedHelp(): ?bool
+    {
+        return $this->needHelp;
+    }
+
+    public function getOxygenPercentage(): ?float
+    {
+        return $this->oxygenPercentage;
+    }
+
+    public function getDaysAtOrbit(): ?int
+    {
+        return $this->daysAtOrbit;
+    }
+
+    public function getMass(): ?float
+    {
+        return $this->mass;
+    }
+
+    public function getEnergyWaste(): ?float
+    {
+        return $this->energyWaste;
+    }
+
+    public function getAccumulatorPercentage(): ?float
+    {
+        return $this->accumulatorPercentage;
+    }
+
+    public function getPosition(): ?float
+    {
+        return $this->position;
+    }
 }

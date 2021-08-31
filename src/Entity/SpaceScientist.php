@@ -38,4 +38,29 @@ class SpaceScientist
      * @ORM\JoinColumn(nullable=false)
      */
     private ?SpaceResearchStation $station;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function getSurname(): ?string
+    {
+        return $this->surname;
+    }
+
+    public function getSentDeliveries(): array
+    {
+        return $this->sentDeliveries;
+    }
+
+    public function getStation(): ?SpaceResearchStation
+    {
+        return $this->station;
+    }
 }

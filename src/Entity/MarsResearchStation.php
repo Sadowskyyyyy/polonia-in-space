@@ -40,4 +40,20 @@ class MarsResearchStation
     {
         return $this->events;
     }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function isNeedHelp(): bool
+    {
+        return $this->needHelp;
+    }
+
+    public function getScientists(): array
+    {
+        return $this->scientists;
+    }
+
 }
