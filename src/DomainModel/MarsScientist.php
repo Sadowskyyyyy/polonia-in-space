@@ -8,7 +8,6 @@ use App\Entity\MarsScientistEntity;
 use App\Exception\CannotAddStartedOrFinishedExpeditionException;
 use App\Exception\ExpeditionIsNotAlreadyFinishedException;
 use App\Exception\ScientistIsAliveException;
-use Doctrine\Common\Collections\ArrayCollection;
 
 class MarsScientist extends AbstractScientist
 {
@@ -21,14 +20,15 @@ class MarsScientist extends AbstractScientist
     private array $finishedExpeditions = [];
 
     public function __construct(
-        int $id,
+        int    $id,
         string $name,
         string $surname,
         string $apikey,
-        array $registeredUsers,
-        array $plannedExpeditions,
-        array $finishedExpeditions
-    ) {
+        array  $registeredUsers,
+        array  $plannedExpeditions,
+        array  $finishedExpeditions
+    )
+    {
         parent::__construct($id, $name, $surname, $apikey);
         $this->registeredUsers = $registeredUsers;
         $this->plannedExpeditions = $plannedExpeditions;
@@ -37,11 +37,17 @@ class MarsScientist extends AbstractScientist
 
     public static function createNewScientist(string $name, string $surname): self
     {
-        return new self((int) null, $name, $surname, '', [], [], []);
+        return new self((int)null, $name, $surname, '', [], [], []);
     }
 
     public static function toEntity(self $marsScientist, MarsResearchStation $marsResearchStationEntity): MarsScientistEntity
     {
+        $registredUsersEntities = [];
+
+        foreach ($marsScientist->registeredUsers as $registeredUser) {
+            $registredUsersEntities[] = self::toEntity($registeredUser, $marsResearchStationEntity);
+        }
+
         return new MarsScientistEntity(
             $marsScientist->getId(),
             $marsScientist->getName(),
@@ -50,8 +56,8 @@ class MarsScientist extends AbstractScientist
             $marsScientist->isMissing(),
             $marsScientist->isDead(),
             $marsScientist->getReason(),
-            self::toEntity($marsScientist->getAuthor()),
-            $marsScientist->registeredUsers,
+            self::toEntity($marsScientist->getAuthor(), $marsResearchStationEntity),
+            $registredUsersEntities,
             $marsResearchStationEntity
         );
     }
@@ -121,7 +127,7 @@ class MarsScientist extends AbstractScientist
         $this->isMissing = true;
     }
 
-    public function setReasonOfDeath(string $reason)
+    public function setReasonOfDeath(string $reason): void
     {
         if (false === $this->isDead) {
             throw new ScientistIsAliveException();

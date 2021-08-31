@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -17,67 +18,15 @@ class EarthResearchStation
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\OneToMany(targetEntity=EarthScientist::class, mappedBy="station")
      */
-    private $scientists;
+    private array $scientists;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $needHelp;
-
-    public function __construct()
-    {
-        $this->scientists = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return Collection|EarthScientist[]
-     */
-    public function getScientists(): Collection
-    {
-        return $this->scientists;
-    }
-
-    public function addScientist(EarthScientist $scientist): self
-    {
-        if (!$this->scientists->contains($scientist)) {
-            $this->scientists[] = $scientist;
-            $scientist->setStation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeScientist(EarthScientist $scientist): self
-    {
-        if ($this->scientists->removeElement($scientist)) {
-            // set the owning side to null (unless already changed)
-            if ($scientist->getStation() === $this) {
-                $scientist->setStation(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getNeedHelp(): ?bool
-    {
-        return $this->needHelp;
-    }
-
-    public function setNeedHelp(bool $needHelp): self
-    {
-        $this->needHelp = $needHelp;
-
-        return $this;
-    }
+    private bool $needHelp;
 }

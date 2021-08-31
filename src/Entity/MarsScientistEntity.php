@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Application\Scientist\Domain\MarsScientist\MarsScientist;
+use App\DomainModel\MarsScientist;
 use App\Repository\MarsScientistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -80,20 +81,17 @@ class MarsScientistEntity
         bool $isDead,
         ?string $reason,
         ?self $author,
-        array $registredUsers,
         $station
     ) {
         $this->id = $id;
         $this->name = $name;
         $this->surname = $surname;
-        $this->password = $password;
+        $this->apikey = $apikey;
         $this->isMissing = $isMissing;
         $this->isDead = $isDead;
         $this->reason = $reason;
         $this->author = $author;
-        $this->registredUsers = $registredUsers;
         $this->station = $station;
-        $this->expeditionEntities = new ArrayCollection();
     }
 
     public static function toDomain(self $entity): MarsScientist

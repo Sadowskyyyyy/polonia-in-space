@@ -23,7 +23,7 @@ class MarkMarsScientistAsMissingOrDeadCommand implements Command
         $this->validate();
     }
 
-    private function validate()
+    private function validate(): void
     {
         if (true === $this->isDead && true === $this->isMissing) {
             throw new RuntimeException('Data is not valid');

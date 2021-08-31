@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -15,13 +16,13 @@ class Delivery
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=SpaceScientist::class, inversedBy="sentDeliveries")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $sender;
+    private ?SpaceScientist $sender;
 
     public function getId(): ?int
     {
