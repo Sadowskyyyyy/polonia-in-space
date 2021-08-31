@@ -17,8 +17,7 @@ class EarthScientistDomain extends AbstractScientist
     public static function toEntity(
         self $earthScientist,
         EarthResearchStation $earthResearchStationEntity
-    ): EarthScientist
-    {
+    ): EarthScientist {
         return new EarthScientist(
             $earthScientist->id,
             $earthScientist->name,

@@ -19,8 +19,7 @@ class Delivery
         Product $product,
         string $destination,
         string $status
-    )
-    {
+    ) {
         $this->sender = $sender;
         $this->product = $product;
         $this->destination = $destination;
@@ -34,8 +33,7 @@ class Delivery
         Product $product,
         string $destination,
         string $status
-    ): self
-    {
+    ): self {
         return new self($sender, $product, $destination, $status);
     }
 
@@ -73,12 +71,12 @@ class Delivery
         return $this->status;
     }
 
-    public function getPostDate(): \DateTime
+    public function getPostDate(): \DateTimeInterface
     {
         return $this->postDate;
     }
 
-    public function getPickUpDate(): \DateTime
+    public function getPickUpDate(): \DateTimeInterface
     {
         return $this->pickUpDate;
     }
