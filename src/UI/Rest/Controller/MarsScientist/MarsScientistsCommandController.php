@@ -6,7 +6,7 @@ namespace App\UI\Rest\Controller\MarsScientist;
 
 use App\Command\MarkMarsScientistAsMissingOrDeadCommand;
 use App\Command\RegisterScientistCommand;
-use App\UI\rest\Controller\CommandController;
+use App\UI\Rest\Controller\CommandController;
 use App\UI\Rest\Response\ApiResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

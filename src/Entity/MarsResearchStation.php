@@ -30,4 +30,14 @@ class MarsResearchStation
      */
     private array $scientists = [];
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Event::class)
+     */
+    private array $events = [];
+
+
+    public function getEvents(): array
+    {
+        return $this->events;
+    }
 }
