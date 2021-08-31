@@ -3,7 +3,6 @@ php:
   - 8.0
 install:
   - composer install
-  - composer update
 script:
   - bin/phpunit
   - vendor/bin/ecs check --config vendor/landingi/php-coding-standards/ecs.php
