@@ -19,7 +19,8 @@ class DeliveryTest extends TestCase
             new EarthScientistDomain(1, 'Adam', 'Jensen', 'pass', []),
             new Product('food'),
             'spacestation',
-            '');
+            ''
+        );
     }
 
     /** @test */

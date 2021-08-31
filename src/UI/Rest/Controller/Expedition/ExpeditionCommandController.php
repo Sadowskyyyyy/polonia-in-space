@@ -32,6 +32,7 @@ class ExpeditionCommandController extends CommandController
         $this->handle(new StartExpeditionCommand($id));
 
         $response = new ApiResponse();
+
         return $response->setStatusCode(200);
     }
 
@@ -44,6 +45,7 @@ class ExpeditionCommandController extends CommandController
         $this->handle(new PlanNewExpeditionCommand($data['plannedStartDate']));
 
         $response = new ApiResponse();
+
         return $response->setStatusCode(200);
     }
 
@@ -56,6 +58,7 @@ class ExpeditionCommandController extends CommandController
         $this->handle(new FinishExpeditionCommand($id));
 
         $response = new ApiResponse();
+
         return $response->setStatusCode(200);
     }
 }

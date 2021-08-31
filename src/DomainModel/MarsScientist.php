@@ -20,15 +20,14 @@ class MarsScientist extends AbstractScientist
     private array $finishedExpeditions = [];
 
     public function __construct(
-        int    $id,
+        int $id,
         string $name,
         string $surname,
         string $apikey,
-        array  $registeredUsers,
-        array  $plannedExpeditions,
-        array  $finishedExpeditions
-    )
-    {
+        array $registeredUsers,
+        array $plannedExpeditions,
+        array $finishedExpeditions
+    ) {
         parent::__construct($id, $name, $surname, $apikey);
         $this->registeredUsers = $registeredUsers;
         $this->plannedExpeditions = $plannedExpeditions;
@@ -37,7 +36,7 @@ class MarsScientist extends AbstractScientist
 
     public static function createNewScientist(string $name, string $surname): self
     {
-        return new self((int)null, $name, $surname, '', [], [], []);
+        return new self((int) null, $name, $surname, '', [], [], []);
     }
 
     public static function toEntity(self $marsScientist, MarsResearchStation $marsResearchStationEntity): MarsScientistEntity
@@ -60,9 +59,9 @@ class MarsScientist extends AbstractScientist
             $marsResearchStationEntity
         );
 
-       $entity->setRegistredUsers($registredUsersEntities);
+        $entity->setRegistredUsers($registredUsersEntities);
 
-       return $entity;
+        return $entity;
     }
 
     public function isMissing(): bool
@@ -153,5 +152,4 @@ class MarsScientist extends AbstractScientist
     {
         $this->registeredUsers = $registeredUsers;
     }
-
 }

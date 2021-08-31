@@ -71,17 +71,16 @@ class MarsScientistEntity
     private array $expeditionEntities = [];
 
     public function __construct(
-        int                 $id,
-        string              $name,
-        string              $surname,
-        string              $apikey,
-        bool                $isMissing,
-        bool                $isDead,
-        ?string             $reason,
-        ?self               $author,
+        int $id,
+        string $name,
+        string $surname,
+        string $apikey,
+        bool $isMissing,
+        bool $isDead,
+        ?string $reason,
+        ?self $author,
         MarsResearchStation $station
-    )
-    {
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->surname = $surname;
@@ -103,7 +102,7 @@ class MarsScientistEntity
         }
 
         foreach ($plannedExpeditions as $expedition) {
-            if ($expedition->isFinished() === true) {
+            if (true === $expedition->isFinished()) {
                 $finishedExpeditions[] = $expedition;
             }
         }
@@ -234,7 +233,7 @@ class MarsScientistEntity
     /**
      * @return MarsScientistEntity|null
      */
-    public function getAuthor(): ?MarsScientistEntity
+    public function getAuthor(): ?self
     {
         return $this->author;
     }
@@ -242,7 +241,7 @@ class MarsScientistEntity
     /**
      * @param MarsScientistEntity|null $author
      */
-    public function setAuthor(?MarsScientistEntity $author): void
+    public function setAuthor(?self $author): void
     {
         $this->author = $author;
     }
@@ -294,5 +293,4 @@ class MarsScientistEntity
     {
         $this->expeditionEntities = $expeditionEntities;
     }
-
 }

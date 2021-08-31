@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\MarsScientist;
 
-
 use App\Command\MarkMarsScientistAsMissingOrDeadCommand;
 use App\Command\RegisterScientistCommand;
 use App\UI\Rest\Controller\CommandController;
@@ -32,6 +31,7 @@ class MarsScientistsCommandController extends CommandController
         $this->handle(new RegisterScientistCommand($data['name'], $data['surname']));
 
         $response = new ApiResponse();
+
         return $response->setStatusCode(200);
     }
 
@@ -42,15 +42,16 @@ class MarsScientistsCommandController extends CommandController
     {
         $data = json_decode($request->getContent(), true);
         $command = new MarkMarsScientistAsMissingOrDeadCommand(
-            (int)$data['id'],
+            (int) $data['id'],
             $data['reason'],
-            (bool)$data['isMissing'],
-            (bool)$data['isDead']
+            (bool) $data['isMissing'],
+            (bool) $data['isDead']
         );
 
         $this->handle($command);
 
         $response = new ApiResponse();
+
         return $response->setStatusCode(200);
     }
 }

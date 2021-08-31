@@ -34,7 +34,7 @@ class ExpeditionQueryController extends QueryController
             new DataDocument(
                 new ResourceObject(
                     'expedition',
-                    (string)$id,
+                    (string) $id,
                     new Attribute('conclusion', $response),
                     new SelfLink('expeditions/conclusion/'.$id)
                 )

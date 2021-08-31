@@ -31,6 +31,7 @@ class ResearchStationCommandController extends CommandController
         $this->handle(new ChangeAngleCommand($data['degrees']));
 
         $response = new ApiResponse();
+
         return $response->setStatusCode(200);
     }
 
@@ -43,6 +44,7 @@ class ResearchStationCommandController extends CommandController
         $this->handleWithDelay(new ReportARequestCommand($destination));
 
         $response = new ApiResponse();
+
         return $response->setStatusCode(200);
     }
 }

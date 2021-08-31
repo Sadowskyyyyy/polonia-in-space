@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\DomainModel;
 
-
 use App\Entity\EarthResearchStation;
 use App\Entity\EarthScientist;
 
@@ -16,8 +15,9 @@ class EarthScientistDomain extends AbstractScientist
     }
 
     public static function toEntity(
-        self                 $earthScientist,
-        EarthResearchStation $earthResearchStationEntity): EarthScientist
+        self $earthScientist,
+        EarthResearchStation $earthResearchStationEntity
+    ): EarthScientist
     {
         return new EarthScientist(
             $earthScientist->id,

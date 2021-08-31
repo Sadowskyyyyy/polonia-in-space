@@ -18,7 +18,6 @@ class Delivery
      */
     private ?int $id;
 
-
     public function getId(): ?int
     {
         return $this->id;
