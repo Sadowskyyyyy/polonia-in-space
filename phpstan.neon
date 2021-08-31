@@ -1,2 +1,7 @@
 includes:
 	- vendor/landingi/php-coding-standards/phpstan.neon
+
+parameters:
+    bootstrapFiles:
+            - vendor/bin/.phpunit/phpunit/vendor/autoload.php
+
