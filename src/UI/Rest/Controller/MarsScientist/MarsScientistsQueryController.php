@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\MarsScientist;
 
-use App\Application\Scientist\Application\Query\GetAllScientistsFromMarsResearchStation;
+use App\Query\GetAllScientistsFromMarsResearchStationQuery;
 use App\UI\Rest\Controller\QueryController;
 use JsonApiPhp\JsonApi\Attribute;
 use JsonApiPhp\JsonApi\DataDocument;
@@ -24,20 +24,17 @@ class MarsScientistsQueryController extends QueryController
         parent::__construct($queryBus);
     }
 
-    /**
-     * @Route("/marsscientists")
-     */
     public function getScientists(Request $request): Response
     {
-        $response = $this->ask(new GetAllScientistsFromMarsResearchStation());
+        $response = $this->ask(new GetAllScientistsFromMarsResearchStationQuery());
 
         return $this->json(
             new DataDocument(
                 new ResourceObject(
                     'user',
                     '1',
-                    new Attribute('apikey', $response),
-                    new SelfLink('/users/generate')
+                    new Attribute('scientists', $response),
+                    new SelfLink('/marsscientists')
                 )
             )
         );

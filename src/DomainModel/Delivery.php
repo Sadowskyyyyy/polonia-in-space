@@ -23,9 +23,9 @@ class Delivery
         $this->product = $product;
         $this->destination = $destination;
         $this->status = $status;
-        $this->postDate = new \DateTime(\DateTimeInterface::RFC822);
-        $this->pickUpDate = clone $this->postDate;
-        $this->pickUpDate->modify('+14 minutes');
+        $this->postDate =  new \DateTime();
+        $this->postDate->getTimestamp();
+        $this->pickUpDate = $this->postDate->modify('+14 minutes');
     }
 
     public static function createNewDelivery(

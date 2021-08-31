@@ -71,15 +71,15 @@ class MarsScientistEntity
     private array $expeditionEntities = [];
 
     public function __construct(
-        int     $id,
-        string  $name,
-        string  $surname,
-        string  $apikey,
-        bool    $isMissing,
-        bool    $isDead,
-        ?string $reason,
-        ?self   $author,
-                $station
+        int                 $id,
+        string              $name,
+        string              $surname,
+        string              $apikey,
+        bool                $isMissing,
+        bool                $isDead,
+        ?string             $reason,
+        ?self               $author,
+        MarsResearchStation $station
     )
     {
         $this->id = $id;

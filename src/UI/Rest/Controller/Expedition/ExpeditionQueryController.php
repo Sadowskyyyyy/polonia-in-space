@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\Expedition;
 
-use App\Application\Expedition\Application\Query\GenerateExpeditionConclusionQuery;
+use App\Query\GenerateExpeditionConclusionQuery;
 use App\UI\Rest\Controller\QueryController;
 use JsonApiPhp\JsonApi\Attribute;
 use JsonApiPhp\JsonApi\DataDocument;
@@ -33,10 +33,10 @@ class ExpeditionQueryController extends QueryController
         return $this->json(
             new DataDocument(
                 new ResourceObject(
-                    'user',
-                    '1',
-                    new Attribute('apikey', $response),
-                    new SelfLink('/users/generate')
+                    'expedition',
+                    (string)$id,
+                    new Attribute('conclusion', $response),
+                    new SelfLink('expeditions/conclusion/'.$id)
                 )
             )
         );

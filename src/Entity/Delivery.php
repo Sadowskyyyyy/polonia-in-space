@@ -18,11 +18,6 @@ class Delivery
      */
     private ?int $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=SpaceScientist::class, inversedBy="sentDeliveries")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private ?SpaceScientist $sender;
 
     public function getId(): ?int
     {
