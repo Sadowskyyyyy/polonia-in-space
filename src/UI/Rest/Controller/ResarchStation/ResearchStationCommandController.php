@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\ResarchStation;
 
-use App\Application\ResarchStation\Application\Command\ChangeAngleCommand;
-use App\Application\ResarchStation\Application\Command\ReportARequestCommand;
+use App\Command\ChangeAngleCommand;
+use App\Command\ReportARequestCommand;
 use App\UI\rest\Controller\CommandController;
+use App\UI\Rest\Response\ApiResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/researchstations")
  */
-class ResearchStationController extends CommandController
+class ResearchStationCommandController extends CommandController
 {
     public function __construct(MessageBusInterface $bus)
     {
@@ -27,9 +28,10 @@ class ResearchStationController extends CommandController
     public function changeAngle(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
-        $command = new ChangeAngleCommand($data['degrees']);
+        $this->handle(new ChangeAngleCommand($data['degrees']));
 
-        $this->handle($command);
+        $response = new ApiResponse();
+        return $response->setStatusCode(200);
     }
 
     /**
@@ -38,8 +40,9 @@ class ResearchStationController extends CommandController
     public function reportRequest(Request $request): Response
     {
         $destination = $request->query->get('destination');
-        $command = new ReportARequestCommand($destination);
+        $this->handleWithDelay(new ReportARequestCommand($destination));
 
-        $this->handleWithDelay($command);
+        $response = new ApiResponse();
+        return $response->setStatusCode(200);
     }
 }
