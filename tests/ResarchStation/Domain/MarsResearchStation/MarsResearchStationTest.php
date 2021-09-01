@@ -15,21 +15,22 @@ class MarsResearchStationTest extends TestCase
     private MarsResearchStation $marsResearchStation;
 
     /** @test */
-    public function test_try_to_add_other_instance_of_scientist_then_throw_error()
+    public function test_try_to_add_other_instance_of_scientist_then_throw_error(): void
     {
         $this->expectException(WrongScientistTypeException::class);
 
-        $this->marsResearchStation = new MarsResearchStation(1);
+        $this->marsResearchStation = new MarsResearchStation(1, [], [], [], false);
         $this->marsResearchStation->addScientist(
-            new EarthScientistDomain('Adam', 'Jensen', '123', []));
+            new EarthScientistDomain('Adam', 'Jensen', '123', [])
+        );
     }
 
     /**
      * @test
      */
-    public function test_try_to_add_scientist_then_run_successful()
+    public function test_try_to_add_scientist_then_run_successful(): void
     {
-        $this->marsResearchStation = new MarsResearchStation(1);
+        $this->marsResearchStation = new MarsResearchStation(1, [], [], [], false);
         $this->marsResearchStation
             ->addScientist(new MarsScientist('Adam', 'Jensen', '1234', [], [], []));
 

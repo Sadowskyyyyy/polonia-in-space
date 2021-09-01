@@ -15,16 +15,21 @@ class SpaceResearchStation extends AbstractResearchStation
     private float $accumulatorsPercentage;
     private float $position;
 
-    public function __construct(int   $id,
-                                float $oxygenPercentage,
-                                int   $daysAtOrbit,
-                                float $mass,
-                                float $energyWaste,
-                                float $waterWaste,
-                                float $accumulatorsPercentage,
-                                float $position)
-    {
-        parent::__construct($id);
+    public function __construct(
+        int $id,
+        float $oxygenPercentage,
+        int $daysAtOrbit,
+        float $mass,
+        float $energyWaste,
+        float $waterWaste,
+        float $accumulatorsPercentage,
+        float $position,
+        array $scientists,
+        array $products,
+        array $events,
+        bool $needHelp
+    ) {
+        parent::__construct($id, $scientists, $products, $events, $needHelp);
         $this->oxygenPercentage = $oxygenPercentage;
         $this->daysAtOrbit = $daysAtOrbit;
         $this->mass = $mass;
@@ -33,7 +38,6 @@ class SpaceResearchStation extends AbstractResearchStation
         $this->accumulatorsPercentage = $accumulatorsPercentage;
         $this->position = $position;
     }
-
 
     public function addScientist(AbstractScientist $scientist): void
     {
@@ -44,7 +48,7 @@ class SpaceResearchStation extends AbstractResearchStation
         $this->scientists[] = $scientist;
     }
 
-    public function changePosition(float $degrees)
+    public function changePosition(float $degrees): void
     {
         $this->position = $this->position += $degrees;
     }

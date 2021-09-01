@@ -29,7 +29,7 @@ abstract class AbstractResearchStation
         $this->products[] = $product;
     }
 
-    public function addEvent(Event $event)
+    public function addEvent(Event $event): void
     {
         $this->events[] = $event;
     }

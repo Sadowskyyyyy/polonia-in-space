@@ -33,6 +33,23 @@ class EarthResearchStation
      */
     private array $events = [];
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Product::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private array $products = [];
+
+    public static function toDomain(self $entity): \App\DomainModel\EarthResearchStation
+    {
+        return new \App\DomainModel\EarthResearchStation(
+            $entity->id,
+            $entity->scientists,
+            $entity->products,
+            $entity->events,
+            $entity->needHelp
+        );
+    }
+
     public function getEvents(): array
     {
         return $this->events;
@@ -51,5 +68,17 @@ class EarthResearchStation
     public function isNeedHelp(): bool
     {
         return $this->needHelp;
+    }
+
+    public function getProducts(): ?Product
+    {
+        return $this->products;
+    }
+
+    public function setProducts(?Product $products): self
+    {
+        $this->products = $products;
+
+        return $this;
     }
 }
