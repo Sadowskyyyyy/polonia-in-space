@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\SpaceScientistRepository;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -98,7 +97,7 @@ class SpaceScientist
         return $this;
     }
 
-    public function getSecurityUser(): UserInterface\
+    public function getSecurityUser(): UserInterface
     {
         return $this->securityUser;
     }

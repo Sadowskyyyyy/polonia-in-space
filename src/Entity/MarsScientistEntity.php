@@ -77,21 +77,21 @@ class MarsScientistEntity
      */
     private string $apikey;
 
-    public function __construct(
-        string $name,
-        string $surname,
-        ?self $author,
-        MarsResearchStation $station,
-        UserInterface $securityUser,
-        $apikey
-    ) {
+    public function __construct(string $name, string $surname, bool $isMissing, bool $isDead, ?string $reason, ?MarsScientistEntity $author, array $registredUsers, MarsResearchStation $station, array $expeditionEntities, UserInterface $securityUser, string $apikey)
+    {
         $this->name = $name;
         $this->surname = $surname;
+        $this->isMissing = $isMissing;
+        $this->isDead = $isDead;
+        $this->reason = $reason;
         $this->author = $author;
+        $this->registredUsers = $registredUsers;
         $this->station = $station;
+        $this->expeditionEntities = $expeditionEntities;
         $this->securityUser = $securityUser;
         $this->apikey = $apikey;
     }
+
 
     public static function toDomain(self $entity): MarsScientist
     {
@@ -235,18 +235,6 @@ class MarsScientistEntity
     public function setSecurityUser(UserInterface $securityUser): self
     {
         $this->securityUser = $securityUser;
-
-        return $this;
-    }
-
-    public function getApikey(): ?string
-    {
-        return $this->apikey;
-    }
-
-    public function setApikey(string $apikey): self
-    {
-        $this->apikey = $apikey;
 
         return $this;
     }

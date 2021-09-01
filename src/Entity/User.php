@@ -17,24 +17,29 @@ class User implements UserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $uuid;
+    private string $uuid;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $apikey;
+    private string $apikey;
 
-    public function __construct($name, array $roles, string $apikey)
+    /**
+     * @ORM\Column(type="string", length=34)
+     */
+    private string $name;
+
+    public function __construct(string $name, array $roles, string $apikey)
     {
         $this->name = $name;
         $this->roles = $roles;
@@ -85,7 +90,7 @@ class User implements UserInterface
         return null;
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;

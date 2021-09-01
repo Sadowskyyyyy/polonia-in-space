@@ -15,10 +15,8 @@ class ApiKeyGeneratorTest extends TestCase
         $generator = new ApiKeyGenerator();
     }
 
-    public function test_should_count_30()
+    public function test_should_count_30(): void
     {
-        $generator = new ApiKeyGenerator();
-
-        $this->assertEquals(30, strlen($generator->generateApiKey()));
+        $this->assertEquals(30, strlen($this->generator->generateApiKey()));
     }
 }

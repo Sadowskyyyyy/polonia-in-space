@@ -5,6 +5,7 @@ namespace App\DomainModel;
 
 use App\Entity\EarthResearchStation;
 use App\Entity\EarthScientist;
+use App\Entity\User;
 
 class EarthScientistDomain extends AbstractScientist
 {
@@ -19,11 +20,11 @@ class EarthScientistDomain extends AbstractScientist
         EarthResearchStation $earthResearchStationEntity
     ): EarthScientist {
         return new EarthScientist(
-            $earthScientist->id,
             $earthScientist->name,
             $earthScientist->surname,
-            $earthScientist->apikey,
-            $earthResearchStationEntity
+            $earthResearchStationEntity,
+            new User($earthScientist->name, ['ROLE_EARTH_SCIENTIST'], $earthScientist->apikey),
+            $earthScientist->apikey
         );
     }
 }

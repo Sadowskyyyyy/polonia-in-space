@@ -96,7 +96,7 @@ class EarthScientist
         return $this;
     }
 
-    public function getSecurityUser(): ?User
+    public function getSecurityUser(): UserInterface
     {
         return $this->securityUser;
     }

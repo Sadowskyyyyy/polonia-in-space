@@ -25,17 +25,6 @@ class MarsScientistsCommandController extends CommandController
     }
 
     /**
-     * @Route(methods={"POST"})
-     */
-    public function registerScientist(Request $request): Response
-    {
-        $data = json_decode($request->getContent(), true);
-        $this->handle(new RegisterScientistCommand($data['name'], $data['surname']));
-
-        return new Response([], 200);
-    }
-
-    /**
      * @Route(methods={"PATCH"})
      */
     public function markScientistAsMissingOrDead(Request $request): Response

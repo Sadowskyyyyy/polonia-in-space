@@ -20,7 +20,15 @@ class ScientistFactory
     private ApiKeyGenerator $apiKeyGenerator;
     private EntityManagerInterface $entityManager;
 
-    public function createFromCommand(RegisterScientistCommand $command,)
+    public function __construct(ResarchStationRepositoryInterface $researchStationRepository, ApiKeyGenerator $apiKeyGenerator, EntityManagerInterface $entityManager)
+    {
+        $this->researchStationRepository = $researchStationRepository;
+        $this->apiKeyGenerator = $apiKeyGenerator;
+        $this->entityManager = $entityManager;
+    }
+
+
+    public function createFromCommand(RegisterScientistCommand $command)
     {
         $scientist = null;
         $station = $this->researchStationRepository->getResarchStationEntityByName($command->station);
@@ -49,8 +57,13 @@ class ScientistFactory
                 $scientist = new MarsScientistEntity(
                     $command->name,
                     $command->surname,
+                    false,
+                    false,
                     null,
+                    null,
+                    [],
                     $station,
+                    [],
                     new User($command->name, ['ROLE_MARS_SCIENTIST'], $apikey),
                     $apikey
                 );

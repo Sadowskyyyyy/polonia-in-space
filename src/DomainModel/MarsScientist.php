@@ -5,6 +5,7 @@ namespace App\DomainModel;
 
 use App\Entity\MarsResearchStation;
 use App\Entity\MarsScientistEntity;
+use App\Entity\User;
 use App\Exception\CannotAddStartedOrFinishedExpeditionException;
 use App\Exception\ExpeditionIsNotAlreadyFinishedException;
 use App\Exception\ScientistIsAliveException;
@@ -23,10 +24,11 @@ class MarsScientist extends AbstractScientist
         string $name,
         string $surname,
         string $apikey,
-        array $registeredUsers,
-        array $plannedExpeditions,
-        array $finishedExpeditions
-    ) {
+        array  $registeredUsers,
+        array  $plannedExpeditions,
+        array  $finishedExpeditions
+    )
+    {
         parent::__construct($name, $surname, $apikey);
         $this->registeredUsers = $registeredUsers;
         $this->plannedExpeditions = $plannedExpeditions;
@@ -46,16 +48,32 @@ class MarsScientist extends AbstractScientist
             $registredUsersEntities[] = self::toEntity($registeredUser, $marsResearchStationEntity);
         }
 
+        $author = new MarsScientistEntity(
+            $marsScientist->author->name,
+            $marsScientist->author->surname,
+            $marsScientist->author->isMissing,
+            $marsScientist->author->isDead,
+            $marsScientist->author->reason,
+            null,
+            [],
+            $marsResearchStationEntity,
+            [],
+            new User($marsScientist->author->name, ['ROLE_MARS_SCIENTIST'], ''),
+            ''
+        );
+
         $entity = new MarsScientistEntity(
-            $marsScientist->getId(),
-            $marsScientist->getName(),
-            $marsScientist->getSurname(),
-            $marsScientist->getApikey(),
-            $marsScientist->isMissing(),
-            $marsScientist->isDead(),
-            $marsScientist->getReason(),
-            self::toEntity($marsScientist->getAuthor(), $marsResearchStationEntity),
-            $marsResearchStationEntity
+            $marsScientist->name,
+            $marsScientist->surname,
+            $marsScientist->isMissing,
+            $marsScientist->isDead,
+            $marsScientist->reason,
+            $author,
+            $marsScientist->registeredUsers,
+            $marsResearchStationEntity,
+            $marsScientist->finishedExpeditions + $marsScientist->plannedExpeditions,
+            new User($marsScientist->name, ['ROLE_MARS_SCIENTIST'], $marsScientist->apikey),
+            $marsScientist->apikey
         );
 
         $entity->setRegistredUsers($registredUsersEntities);
