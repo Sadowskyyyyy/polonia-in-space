@@ -1,10 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
 use App\Repository\EarthResarchStationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,7 +16,7 @@ class EarthResearchStation
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\OneToMany(targetEntity=EarthScientist::class, mappedBy="station")
@@ -27,11 +26,16 @@ class EarthResearchStation
     /**
      * @ORM\Column(type="boolean")
      */
-    private $needHelp;
+    private bool $needHelp;
 
-    public function __construct()
+    /**
+     * @ORM\ManyToOne(targetEntity=Event::class)
+     */
+    private array $events = [];
+
+    public function getEvents(): array
     {
-        $this->scientists = [];
+        return $this->events;
     }
 
     public function getId(): ?int
@@ -39,45 +43,13 @@ class EarthResearchStation
         return $this->id;
     }
 
-    /**
-     * @return Collection|EarthScientist[]
-     */
-    public function getScientists(): Collection
+    public function getScientists(): array
     {
         return $this->scientists;
     }
 
-    public function addScientist(EarthScientist $scientist): self
-    {
-        if (!$this->scientists->contains($scientist)) {
-            $this->scientists[] = $scientist;
-            $scientist->setStation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeScientist(EarthScientist $scientist): self
-    {
-        if ($this->scientists->removeElement($scientist)) {
-            // set the owning side to null (unless already changed)
-            if ($scientist->getStation() === $this) {
-                $scientist->setStation(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getNeedHelp(): ?bool
+    public function isNeedHelp(): bool
     {
         return $this->needHelp;
-    }
-
-    public function setNeedHelp(bool $needHelp): self
-    {
-        $this->needHelp = $needHelp;
-
-        return $this;
     }
 }

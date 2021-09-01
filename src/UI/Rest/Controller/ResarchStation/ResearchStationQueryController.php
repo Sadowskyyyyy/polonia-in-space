@@ -3,8 +3,12 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\ResarchStation;
 
-use App\Application\ResarchStation\Application\Query\CheckDemand;
+use App\Query\CheckDemandQuery;
 use App\UI\Rest\Controller\QueryController;
+use JsonApiPhp\JsonApi\Attribute;
+use JsonApiPhp\JsonApi\DataDocument;
+use JsonApiPhp\JsonApi\Link\SelfLink;
+use JsonApiPhp\JsonApi\ResourceObject;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -23,6 +27,17 @@ class ResearchStationQueryController extends QueryController
     public function checkDemand(Request $request): Response
     {
         $direction = $request->query->get('destination');
-        $this->askWithDelay(new CheckDemand($direction));
+        $response = $this->askWithDelay(new CheckDemandQuery($direction));
+
+        return $this->json(
+            new DataDocument(
+                new ResourceObject(
+                    'research_station',
+                    '1',
+                    new Attribute('demand', $response),
+                    new SelfLink('/researchstations/demand')
+                )
+            )
+        );
     }
 }

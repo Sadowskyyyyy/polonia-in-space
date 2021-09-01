@@ -19,13 +19,4 @@ class DeliveryRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Delivery::class);
     }
-
-    public function findOneBySomeField($value): ?Delivery
-    {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
 }

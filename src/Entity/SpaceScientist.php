@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -17,7 +18,7 @@ class SpaceScientist
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=32)
@@ -75,56 +76,17 @@ class SpaceScientist
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getSurname(): ?string
     {
         return $this->surname;
     }
 
-    public function setSurname(string $surname): self
-    {
-        $this->surname = $surname;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Delivery[]
-     */
-    public function getSentDeliveries(): Collection
+    public function getSentDeliveries(): array
     {
         return $this->sentDeliveries;
     }
 
-    public function addSentDelivery(Delivery $sentDelivery): self
-    {
-        if (!$this->sentDeliveries->contains($sentDelivery)) {
-            $this->sentDeliveries[] = $sentDelivery;
-            $sentDelivery->setSender($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSentDelivery(Delivery $sentDelivery): self
-    {
-        if ($this->sentDeliveries->removeElement($sentDelivery)) {
-            // set the owning side to null (unless already changed)
-            if ($sentDelivery->getSender() === $this) {
-                $sentDelivery->setSender(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getStation(): ?SpaceResearchStation
+    public function getStation(): SpaceResearchStation
     {
         return $this->station;
     }
@@ -136,12 +98,12 @@ class SpaceScientist
         return $this;
     }
 
-    public function getSecurityUser(): ?User
+    public function getSecurityUser(): UserInterface\
     {
         return $this->securityUser;
     }
 
-    public function setSecurityUser(User $securityUser): self
+    public function setSecurityUser(UserInterface $securityUser): self
     {
         $this->securityUser = $securityUser;
 

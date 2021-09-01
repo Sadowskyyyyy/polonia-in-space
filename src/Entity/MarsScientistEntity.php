@@ -1,10 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Application\Scientist\Domain\MarsScientist\MarsScientist;
+use App\DomainModel\MarsScientist;
 use App\Repository\MarsScientistRepository;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -53,38 +53,30 @@ class MarsScientistEntity
     /**
      * @ORM\OneToMany(targetEntity=MarsScientistEntity::class, mappedBy="author")
      */
-    private $registredUsers = [];
+    private array $registredUsers = [];
 
     /**
      * @ORM\ManyToOne(targetEntity=MarsResearchStation::class, inversedBy="scientists")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $station;
+    private MarsResearchStation $station;
 
     /**
      * @ORM\OneToMany(targetEntity=Expedition::class, mappedBy="creator")
      */
-    private $expeditionEntities = [];
+    private array $expeditionEntities = [];
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $securityUser;
+    private UserInterface $securityUser;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $apikey;
+    private string $apikey;
 
-    /**
-     * @param string $name
-     * @param string $surname
-     * @param MarsScientistEntity|null $author
-     * @param $station
-     * @param $securityUser
-     * @param $apikey
-     */
     public function __construct(
         string $name,
         string $surname,
@@ -103,80 +95,87 @@ class MarsScientistEntity
 
     public static function toDomain(self $entity): MarsScientist
     {
+        $plannedExpeditions = [];
+        $finishedExpeditions = [];
+
+        foreach ($entity->expeditionEntities as $expeditionEntity) {
+            $plannedExpeditions[] = Expedition::toDomain($expeditionEntity);
+        }
+
+        foreach ($plannedExpeditions as $expedition) {
+            if (true === $expedition->isFinished()) {
+                $finishedExpeditions[] = $expedition;
+            }
+        }
+
         return new MarsScientist(
-            $entity->getId(),
             $entity->getName(),
             $entity->getSurname(),
-            $entity->getPassword(),
+            $entity->getApikey(),
             $entity->getRegistredUsers(),
-            $entity->getPlannedExpedition(),
-            $entity->getFinishedExpeditions()
+            $plannedExpeditions,
+            $finishedExpeditions
         );
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
-    public function getSurname(): ?string
+    public function getSurname(): string
     {
         return $this->surname;
     }
 
-    public function setSurname(string $surname): self
+    public function setSurname(string $surname): void
     {
         $this->surname = $surname;
-
-        return $this;
     }
 
-    public function getPassword(): ?string
+    public function getApikey(): string
     {
-        return $this->password;
+        return $this->apikey;
     }
 
-    public function setPassword(string $password): self
+    public function setApikey(string $apikey): void
     {
-        $this->password = $password;
-
-        return $this;
+        $this->apikey = $apikey;
     }
 
-    public function getIsMissing(): ?bool
+    public function isMissing(): bool
     {
         return $this->isMissing;
     }
 
-    public function setIsMissing(bool $isMissing): self
+    public function setIsMissing(bool $isMissing): void
     {
         $this->isMissing = $isMissing;
-
-        return $this;
     }
 
-    public function getIsDead(): ?bool
+    public function isDead(): bool
     {
         return $this->isDead;
     }
 
-    public function setIsDead(bool $isDead): self
+    public function setIsDead(bool $isDead): void
     {
         $this->isDead = $isDead;
-
-        return $this;
     }
 
     public function getReason(): ?string
@@ -184,11 +183,9 @@ class MarsScientistEntity
         return $this->reason;
     }
 
-    public function setReason(?string $reason): self
+    public function setReason(?string $reason): void
     {
         $this->reason = $reason;
-
-        return $this;
     }
 
     public function getAuthor(): ?self
@@ -196,41 +193,19 @@ class MarsScientistEntity
         return $this->author;
     }
 
-    public function setAuthor(?self $author): self
+    public function setAuthor(self $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
 
-    /**
-     * @return Collection|self[]
-     */
-    public function getRegistredUsers(): Collection
+    public function getRegistredUsers(): array
     {
         return $this->registredUsers;
     }
 
-    public function addRegistredUser(self $registredUser): self
+    public function setRegistredUsers(array $registredUsers): void
     {
-        if (!$this->registredUsers->contains($registredUser)) {
-            $this->registredUsers[] = $registredUser;
-            $registredUser->setAuthor($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRegistredUser(self $registredUser): self
-    {
-        if ($this->registredUsers->removeElement($registredUser)) {
-            // set the owning side to null (unless already changed)
-            if ($registredUser->getAuthor() === $this) {
-                $registredUser->setAuthor(null);
-            }
-        }
-
-        return $this;
+        $this->registredUsers = $registredUsers;
     }
 
     public function getStation(): ?MarsResearchStation
@@ -238,49 +213,26 @@ class MarsScientistEntity
         return $this->station;
     }
 
-    public function setStation(?MarsResearchStation $station): self
+    public function setStation(MarsResearchStation $station): void
     {
         $this->station = $station;
-
-        return $this;
     }
 
-    /**
-     * @return Collection|Expedition[]
-     */
-    public function getExpeditionEntities(): Collection
+    public function getExpeditionEntities(): array
     {
         return $this->expeditionEntities;
     }
 
-    public function addExpeditionEntity(Expedition $expeditionEntity): self
+    public function setExpeditionEntities(array $expeditionEntities): void
     {
-        if (!$this->expeditionEntities->contains($expeditionEntity)) {
-            $this->expeditionEntities[] = $expeditionEntity;
-            $expeditionEntity->setCreator($this);
-        }
-
-        return $this;
+        $this->expeditionEntities = $expeditionEntities;
     }
-
-    public function removeExpeditionEntity(Expedition $expeditionEntity): self
-    {
-        if ($this->expeditionEntities->removeElement($expeditionEntity)) {
-            // set the owning side to null (unless already changed)
-            if ($expeditionEntity->getCreator() === $this) {
-                $expeditionEntity->setCreator(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getSecurityUser(): ?User
+    public function getSecurityUser(): UserInterface
     {
         return $this->securityUser;
     }
 
-    public function setSecurityUser(User $securityUser): self
+    public function setSecurityUser(UserInterface $securityUser): self
     {
         $this->securityUser = $securityUser;
 

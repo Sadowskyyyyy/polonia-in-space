@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\MarsScientist;
 
-use App\Application\Scientist\Application\Command\MarkMarsScientistAsMissingOrDeadCommand;
-use App\Application\Scientist\Application\Command\RegisterScientistCommand;
-use App\UI\rest\Controller\CommandController;
+use App\Command\MarkMarsScientistAsMissingOrDeadCommand;
+use App\Command\RegisterScientistCommand;
+use App\Service\MarkMarsScientistAsMissingOrDeadCommandValidator;
+use App\UI\Rest\Controller\CommandController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -16,8 +17,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class MarsScientistsCommandController extends CommandController
 {
-    public function __construct(MessageBusInterface $bus)
+    private MarkMarsScientistAsMissingOrDeadCommandValidator $validator;
+    public function __construct(MessageBusInterface $bus, MarkMarsScientistAsMissingOrDeadCommandValidator $validator)
     {
+        $this->validator = $validator;
         parent::__construct($bus);
     }
 
@@ -27,13 +30,9 @@ class MarsScientistsCommandController extends CommandController
     public function registerScientist(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
+        $this->handle(new RegisterScientistCommand($data['name'], $data['surname']));
 
-        $command = new RegisterScientistCommand(
-            $data['name'],
-            $data['surname']
-        );
-
-        $this->handle($command);
+        return new Response([], 200);
     }
 
     /**
@@ -42,7 +41,6 @@ class MarsScientistsCommandController extends CommandController
     public function markScientistAsMissingOrDead(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
-
         $command = new MarkMarsScientistAsMissingOrDeadCommand(
             (int) $data['id'],
             $data['reason'],
@@ -51,5 +49,7 @@ class MarsScientistsCommandController extends CommandController
         );
 
         $this->handle($command);
+
+        return new Response([], 200);
     }
 }

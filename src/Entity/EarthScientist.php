@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -16,7 +17,7 @@ class EarthScientist
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=32)
@@ -32,7 +33,7 @@ class EarthScientist
      * @ORM\ManyToOne(targetEntity=EarthResearchStation::class, inversedBy="scientists")
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?EarthResearchStation $station;
+    private EarthResearchStation $station;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
@@ -83,24 +84,12 @@ class EarthScientist
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getStation(): ?EarthResearchStation
+    public function getStation(): EarthResearchStation
     {
         return $this->station;
     }
 
-    public function setStation(?EarthResearchStation $station): self
+    public function setStation(EarthResearchStation $station): self
     {
         $this->station = $station;
 

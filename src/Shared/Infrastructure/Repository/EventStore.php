@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Repository;
 
+use App\Entity\EarthResearchStation;
 use App\Entity\MarsResearchStation;
 use App\Entity\SpaceResearchStation;
 use App\Shared\Domain\Event\Event;
@@ -29,8 +30,8 @@ class EventStore implements EventRepository
                 $events = $station->getEvents();
                 break;
             case 'earthstation':
-                /** @var EarthResarchStation $station */
-                $station = $this->entityManager->getRepository(EarthResarchStation::class)->findOneBy(['id' => 1]);
+                /** @var EarthResearchStation $station */
+                $station = $this->entityManager->getRepository(EarthResearchStation::class)->findOneBy(['id' => 1]);
                 $events = $station->getEvents();
                 break;
             case 'spacestation':
