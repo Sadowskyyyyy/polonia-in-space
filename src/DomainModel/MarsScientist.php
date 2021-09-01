@@ -24,10 +24,11 @@ class MarsScientist extends AbstractScientist
         string $name,
         string $surname,
         string $apikey,
-        array $registeredUsers,
-        array $plannedExpeditions,
-        array $finishedExpeditions
-    ) {
+        array  $registeredUsers,
+        array  $plannedExpeditions,
+        array  $finishedExpeditions
+    )
+    {
         parent::__construct($name, $surname, $apikey);
         $this->registeredUsers = $registeredUsers;
         $this->plannedExpeditions = $plannedExpeditions;
@@ -41,7 +42,7 @@ class MarsScientist extends AbstractScientist
 
     public static function toEntity(self $marsScientist, MarsResearchStation $marsResearchStationEntity): MarsScientistEntity
     {
-        $entity =  new MarsScientistEntity(
+        $entity = new MarsScientistEntity(
             $marsScientist->getId(),
             $marsScientist->getName(),
             $marsScientist->getSurname(),
@@ -53,7 +54,7 @@ class MarsScientist extends AbstractScientist
             $marsResearchStationEntity
         );
 
-        $entity->setRegistredUsers(array_map(array('MarsScientist', 'toEntity'), $marsScientist->registeredUsers));
+        $entity->setRegistredUsers(array_map(fn($user) => $user->toEntity(), $marsScientist->registeredUsers));
 
         return $entity;
     }
