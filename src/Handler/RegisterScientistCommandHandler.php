@@ -16,7 +16,7 @@ class RegisterScientistCommandHandler implements MessageHandlerInterface
         $this->factory = $factory;
     }
 
-    public function __invoke(RegisterScientistCommand $command)
+    public function __invoke(RegisterScientistCommand $command): void
     {
         $this->factory->createFromCommand($command);
     }

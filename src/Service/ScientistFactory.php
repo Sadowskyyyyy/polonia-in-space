@@ -12,18 +12,22 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ScientistFactory
 {
+    const EARTH_SCIENTIST = 'earthstation';
+    const SPACE_SCIENTIST = 'spacestation';
+    const MARS_SCIENTIST = 'marsstation';
+
     private ResarchStationRepositoryInterface $researchStationRepository;
     private ApiKeyGenerator $apiKeyGenerator;
     private EntityManagerInterface $entityManager;
 
-    public function createFromCommand(RegisterScientistCommand $command, )
+    public function createFromCommand(RegisterScientistCommand $command,)
     {
         $scientist = null;
         $station = $this->researchStationRepository->getResarchStationEntityByName($command->station);
         $apikey = $this->apiKeyGenerator->generateApiKey();
 
         switch ($command->station) {
-            case 'earthstation':
+            case self::EARTH_SCIENTIST:
                 $scientist = new EarthScientist(
                     $command->name,
                     $command->surname,
@@ -32,7 +36,7 @@ class ScientistFactory
                     $apikey
                 );
                 break;
-            case 'spacestation':
+            case self::SPACE_SCIENTIST:
                 $scientist = new SpaceScientist(
                     $command->name,
                     $command->surname,
@@ -41,7 +45,7 @@ class ScientistFactory
                     $apikey
                 );
                 break;
-            case 'marsstation':
+            case self::MARS_SCIENTIST:
                 $scientist = new MarsScientistEntity(
                     $command->name,
                     $command->surname,
