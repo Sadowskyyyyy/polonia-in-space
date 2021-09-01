@@ -8,7 +8,6 @@ use App\Entity\MarsScientistEntity;
 use App\Exception\CannotAddStartedOrFinishedExpeditionException;
 use App\Exception\ExpeditionIsNotAlreadyFinishedException;
 use App\Exception\ScientistIsAliveException;
-use function array_map;
 
 class MarsScientist extends AbstractScientist
 {
@@ -24,11 +23,10 @@ class MarsScientist extends AbstractScientist
         string $name,
         string $surname,
         string $apikey,
-        array  $registeredUsers,
-        array  $plannedExpeditions,
-        array  $finishedExpeditions
-    )
-    {
+        array $registeredUsers,
+        array $plannedExpeditions,
+        array $finishedExpeditions
+    ) {
         parent::__construct($name, $surname, $apikey);
         $this->registeredUsers = $registeredUsers;
         $this->plannedExpeditions = $plannedExpeditions;
@@ -42,6 +40,12 @@ class MarsScientist extends AbstractScientist
 
     public static function toEntity(self $marsScientist, MarsResearchStation $marsResearchStationEntity): MarsScientistEntity
     {
+        $registredUsersEntities = [];
+
+        foreach ($marsScientist->registeredUsers as $registeredUser) {
+            $registredUsersEntities[] = self::toEntity($registeredUser, $marsResearchStationEntity);
+        }
+
         $entity = new MarsScientistEntity(
             $marsScientist->getId(),
             $marsScientist->getName(),
@@ -54,7 +58,7 @@ class MarsScientist extends AbstractScientist
             $marsResearchStationEntity
         );
 
-        $entity->setRegistredUsers(array_map(fn($user) => $user->toEntity(), $marsScientist->registeredUsers));
+        $entity->setRegistredUsers($registredUsersEntities);
 
         return $entity;
     }
