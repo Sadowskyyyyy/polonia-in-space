@@ -176,12 +176,12 @@ class SpaceResearchStation
         return $this;
     }
 
-    public function getProducts(): ?Product
+    public function getProducts(): array
     {
         return $this->products;
     }
 
-    public function setProducts(?Product $products): self
+    public function setProducts(array $products): self
     {
         $this->products = $products;
 
