@@ -7,9 +7,9 @@ use App\Exception\WrongScientistTypeException;
 
 class MarsResearchStation extends AbstractResearchStation
 {
-    public function __construct(int $id)
+    public function __construct(int $id, array $scientists, array $products, array $events, bool $needHelp)
     {
-        parent::__construct($id);
+        parent::__construct($id, $scientists, $products, $events, $needHelp);
     }
 
     public function addScientist(AbstractScientist $scientist): void

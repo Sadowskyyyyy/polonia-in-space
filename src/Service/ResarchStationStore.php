@@ -3,16 +3,19 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-
 use App\DomainModel\AbstractResearchStation;
-use App\Entity\EarthScientistEntity;
-use App\Entity\MarsResearchStationEntity;
-use App\Entity\SpaceResearchStationEntity;
+use App\Entity\EarthResearchStation;
+use App\Entity\MarsResearchStation;
+use App\Entity\SpaceResearchStation;
 use App\Shared\Domain\Exception\NotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ResarchStationStore implements ResarchStationRepositoryInterface
 {
+    public const EARTH_SCIENTIST = 'earthstation';
+    public const SPACE_SCIENTIST = 'spacestation';
+    public const MARS_SCIENTIST = 'marsstation';
+
     private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -20,31 +23,30 @@ class ResarchStationStore implements ResarchStationRepositoryInterface
         $this->entityManager = $entityManager;
     }
 
-
     public function getResarchStationByName(string $name): AbstractResearchStation
     {
         $entity = null;
         $response = null;
 
         switch ($name) {
-            case 'marsstation':
-                /**@var MarsResearchStationEntity $entity */
-                $entity = $this->entityManager->getRepository(MarsResearchStationEntity::class)->find(1);
-                $response = MarsResearchStationEntity::toDomain($entity);
+            case self::MARS_SCIENTIST:
+                /** @var MarsResearchStation $entity */
+                $entity = $this->entityManager->getRepository(MarsResearchStation::class)->find(1);
+                $response = MarsResearchStation::toDomain($entity);
                 break;
-            case 'spacestation':
-                /**@var SpaceResearchStationEntity $entity */
-                $entity = $this->entityManager->getRepository(SpaceResearchStationEntity::class)->find(1);
-                $response = SpaceResearchStationEntity::toDomain($entity);
+            case self::SPACE_SCIENTIST:
+                /** @var SpaceResearchStation $entity */
+                $entity = $this->entityManager->getRepository(SpaceResearchStation::class)->find(1);
+                $response = SpaceResearchStation::toDomain($entity);
                 break;
-            case 'earthstation':
-                /**@var EarthScientistEntity $entity */
-                $entity = $this->entityManager->getRepository(EarthScientistEntity::class)->find(1);
-                $response = EarthScientistEntity::toDomain($entity);
+            case self::EARTH_SCIENTIST:
+                /** @var EarthResearchStation $entity */
+                $entity = $this->entityManager->getRepository(EarthResearchStation::class)->find(1);
+                $response = EarthResearchStation::toDomain($entity);
                 break;
         }
 
-        if (empty($entity) === true) {
+        if (true === empty($entity)) {
             throw new NotFoundException();
         }
 
@@ -55,5 +57,31 @@ class ResarchStationStore implements ResarchStationRepositoryInterface
     {
         $this->entityManager->persist($researchStation);
         $this->entityManager->flush();
+    }
+
+    public function getResarchStationEntityByName(string $name): mixed
+    {
+        $entity = null;
+
+        switch ($name) {
+            case self::MARS_SCIENTIST:
+                /** @var MarsResearchStation $entity */
+                $entity = $this->entityManager->getRepository(MarsResearchStation::class)->find(1);
+                break;
+            case self::SPACE_SCIENTIST:
+                /** @var SpaceResearchStation $entity */
+                $entity = $this->entityManager->getRepository(SpaceResearchStation::class)->find(1);
+                break;
+            case self::EARTH_SCIENTIST:
+                /** @var EarthResearchStation $entity */
+                $entity = $this->entityManager->getRepository(EarthResearchStation::class)->find(1);
+                break;
+        }
+
+        if (true === empty($entity)) {
+            throw new NotFoundException();
+        }
+
+        return $entity;
     }
 }

@@ -13,9 +13,13 @@ abstract class AbstractResearchStation
     protected array $events = [];
     protected bool $needHelp = false;
 
-    public function __construct(int $id)
+    public function __construct(int $id, array $scientists, array $products, array $events, bool $needHelp)
     {
         $this->id = $id;
+        $this->scientists = $scientists;
+        $this->products = $products;
+        $this->events = $events;
+        $this->needHelp = $needHelp;
     }
 
     abstract public function addScientist(AbstractScientist $scientist): void;
