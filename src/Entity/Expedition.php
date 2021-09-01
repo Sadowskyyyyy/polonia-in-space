@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -15,33 +16,43 @@ class Expedition
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=MarsScientistEntity::class, inversedBy="expeditionEntities")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $creator;
+    private ?MarsScientistEntity $creator;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $creationDate;
+    private ?\DateTimeInterface $creationDate;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $plannedStartDate;
+    private ?\DateTimeInterface $plannedStartDate;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isFinished;
+    private ?bool $isFinished;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isStarted;
+    private ?bool $isStarted;
+
+    public static function toDomain(self $expedition): \App\DomainModel\Expedition
+    {
+        return new \App\DomainModel\Expedition(
+            $expedition->id,
+            MarsScientistEntity::toDomain($expedition->creator),
+            $expedition->isFinished,
+            $expedition->isStarted
+        );
+    }
 
     public function getId(): ?int
     {

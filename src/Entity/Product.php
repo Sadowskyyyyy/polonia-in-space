@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -15,12 +16,12 @@ class Product
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private $category;
+    private ?string $category;
 
     public function getId(): ?int
     {
@@ -30,12 +31,5 @@ class Product
     public function getCategory(): ?string
     {
         return $this->category;
-    }
-
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
-
-        return $this;
     }
 }

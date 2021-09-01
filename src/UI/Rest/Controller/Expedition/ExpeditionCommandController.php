@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\Expedition;
 
-use App\Application\Expedition\Application\Command\FinishExpeditionCommand;
-use App\Application\Expedition\Application\Command\PlanNewExpeditionCommand;
-use App\Application\Expedition\Application\Command\StartExpeditionCommand;
-use App\UI\rest\Controller\CommandController;
+use App\Command\FinishExpeditionCommand;
+use App\Command\PlanNewExpeditionCommand;
+use App\Command\StartExpeditionCommand;
+use App\UI\Rest\Controller\CommandController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -27,10 +27,9 @@ class ExpeditionCommandController extends CommandController
      */
     public function startExpedition(Request $request, int $id): Response
     {
-        $data = json_decode($request->getContent(), true);
+        $this->handle(new StartExpeditionCommand($id));
 
-        $command = new StartExpeditionCommand($id);
-        $this->handle($command);
+        return new Response([], 200);
     }
 
     /**
@@ -39,12 +38,9 @@ class ExpeditionCommandController extends CommandController
     public function planNewExpedition(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
+        $this->handle(new PlanNewExpeditionCommand($data['plannedStartDate']));
 
-        $command = new PlanNewExpeditionCommand(
-            $data['plannedStartDate']
-        );
-
-        $this->handle($command);
+        return new Response([], 200);
     }
 
     /**
@@ -52,12 +48,8 @@ class ExpeditionCommandController extends CommandController
      */
     public function finishExpedition(Request $request, int $id): Response
     {
-        $data = json_decode($request->getContent(), true);
+        $this->handle(new FinishExpeditionCommand($id));
 
-        $command = new FinishExpeditionCommand(
-            $id
-        );
-
-        $this->handle($command);
+        return new Response([], 200);
     }
 }

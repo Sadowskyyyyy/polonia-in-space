@@ -1,10 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
 use App\Repository\MarsResearchStationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,62 +21,35 @@ class MarsResearchStation
     /**
      * @ORM\Column(type="boolean")
      */
-    private $needHelp;
+    private bool $needHelp;
 
     /**
      * @ORM\OneToMany(targetEntity=MarsScientistEntity::class, mappedBy="station")
      */
-    private $scientists = [];
+    private array $scientists = [];
 
-    public function __construct()
+    /**
+     * @ORM\ManyToOne(targetEntity=Event::class)
+     */
+    private array $events = [];
+
+    public function getEvents(): array
     {
-        $this->scientists = new ArrayCollection();
+        return $this->events;
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getNeedHelp(): ?bool
+    public function isNeedHelp(): bool
     {
         return $this->needHelp;
     }
 
-    public function setNeedHelp(bool $needHelp): self
-    {
-        $this->needHelp = $needHelp;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|MarsScientistEntity[]
-     */
-    public function getScientists(): Collection
+    public function getScientists(): array
     {
         return $this->scientists;
-    }
-
-    public function addScientist(MarsScientistEntity $scientist): self
-    {
-        if (!$this->scientists->contains($scientist)) {
-            $this->scientists[] = $scientist;
-            $scientist->setStation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeScientist(MarsScientistEntity $scientist): self
-    {
-        if ($this->scientists->removeElement($scientist)) {
-            // set the owning side to null (unless already changed)
-            if ($scientist->getStation() === $this) {
-                $scientist->setStation(null);
-            }
-        }
-
-        return $this;
     }
 }
