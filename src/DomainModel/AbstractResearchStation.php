@@ -37,15 +37,15 @@ abstract class AbstractResearchStation
     public function getProducts(): array
     {
         if (true === empty($this->products)) {
-            $this->askForHelp();
+            $this->setHelp(true);
         }
 
         return $this->products;
     }
 
-    public function askForHelp(): bool
+    public function setHelp(bool $needHelp): bool
     {
-        return $this->needHelp = true;
+        return $this->needHelp = $needHelp;
     }
 
     public function getEvents(): array

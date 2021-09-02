@@ -14,12 +14,22 @@ class MarsResearchStationTest extends TestCase
 {
     private MarsResearchStation $marsResearchStation;
 
+    protected function setUp(): void
+    {
+        $this->marsResearchStation = new MarsResearchStation(
+            id: 1,
+            scientists: [],
+            products: [],
+            events: [],
+            needHelp: false
+        );
+    }
+
     /** @test */
     public function test_try_to_add_other_instance_of_scientist_then_throw_error(): void
     {
         $this->expectException(WrongScientistTypeException::class);
 
-        $this->marsResearchStation = new MarsResearchStation(1, [], [], [], false);
         $this->marsResearchStation->addScientist(
             new EarthScientistDomain('Adam', 'Jensen', '123', [])
         );

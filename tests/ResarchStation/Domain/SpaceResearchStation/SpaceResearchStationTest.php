@@ -15,25 +15,28 @@ class SpaceResearchStationTest extends TestCase
 {
     private SpaceResearchStation $researchStation;
 
+    protected function setUp(): void
+    {
+        $this->researchStation = new SpaceResearchStation(
+            id: 1,
+            oxygenPercentage: 70,
+            daysAtOrbit: 100,
+            mass: 10000.05,
+            energyWaste: 12,
+            waterWaste: 12.5,
+            accumulatorsPercentage: 89,
+            position: 12,
+            scientists: [],
+            products: [],
+            events: [],
+            needHelp: false
+        );
+    }
+
     /** @test */
     public function try_to_add_wrong_scientist_type_should_throw_error(): void
     {
         $this->expectException(WrongScientistTypeException::class);
-
-        $this->researchStation = new SpaceResearchStation(
-            1,
-            70,
-            100,
-            10000.05,
-            12,
-            12.5,
-            89,
-            12,
-            [],
-            [],
-            [],
-            false
-        );
 
         $this->researchStation->addScientist(new EarthScientistDomain('Adam', 'jensen', '1234', []));
     }
@@ -42,23 +45,8 @@ class SpaceResearchStationTest extends TestCase
     public function try_to_add_scientist_should_run_successful(): void
     {
         $newScientist = new SpaceScientist('Adam', 'Jensen', '1234', []);
-
-        $this->researchStation = new SpaceResearchStation(
-            1,
-            70,
-            100,
-            10000.05,
-            12,
-            12.5,
-            89,
-            12,
-            [],
-            [],
-            [],
-            false
-        );
-
         $this->researchStation->addScientist($newScientist);
+
         $this->assertEquals(1, count($this->researchStation->getScientists()));
     }
 }
