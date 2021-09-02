@@ -37,7 +37,7 @@ class EarthScientist
      * @ORM\ManyToOne(targetEntity=EarthResearchStation::class, inversedBy="scientists")
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?EarthResearchStation $station;
+    private EarthResearchStation $station;
 
     public function __construct(int $id, string $name, string $surname, string $apikey, EarthResearchStation $station)
     {

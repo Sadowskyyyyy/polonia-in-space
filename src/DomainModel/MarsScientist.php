@@ -8,6 +8,7 @@ use App\Entity\MarsScientistEntity;
 use App\Exception\CannotAddStartedOrFinishedExpeditionException;
 use App\Exception\ExpeditionIsNotAlreadyFinishedException;
 use App\Exception\ScientistIsAliveException;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class MarsScientist extends AbstractScientist
 {
@@ -58,7 +59,7 @@ class MarsScientist extends AbstractScientist
             $marsResearchStationEntity
         );
 
-        $entity->setRegistredUsers($registredUsersEntities);
+        $entity->setRegistredUsers(new ArrayCollection($registredUsersEntities));
 
         return $entity;
     }

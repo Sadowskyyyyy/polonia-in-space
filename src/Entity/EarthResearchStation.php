@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\EarthResarchStationRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,12 +17,12 @@ class EarthResearchStation
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private int $id;
 
     /**
      * @ORM\OneToMany(targetEntity=EarthScientist::class, mappedBy="station")
      */
-    private array $scientists;
+    private Collection $scientists;
 
     /**
      * @ORM\Column(type="boolean")
@@ -29,38 +30,32 @@ class EarthResearchStation
     private bool $needHelp;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Event::class)
+     * @ORM\Column(type="array", nullable=true)
      */
-    private array $events = [];
+    private Collection $events;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Product::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="array")
      */
-    private array $products = [];
+    private Collection $products;
 
     public static function toDomain(self $entity): \App\DomainModel\EarthResearchStation
     {
         return new \App\DomainModel\EarthResearchStation(
             $entity->id,
-            $entity->scientists,
-            $entity->products,
-            $entity->events,
+            $entity->scientists->toArray(),
+            $entity->products->toArray(),
+            $entity->events->toArray(),
             $entity->needHelp
         );
     }
 
-    public function getEvents(): array
-    {
-        return $this->events;
-    }
-
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getScientists(): array
+    public function getScientists(): Collection
     {
         return $this->scientists;
     }
@@ -70,15 +65,13 @@ class EarthResearchStation
         return $this->needHelp;
     }
 
-    public function getProducts(): array
+    public function getEvents(): Collection
     {
-        return $this->products;
+        return $this->events;
     }
 
-    public function setProducts(array $products): self
+    public function getProducts(): Collection
     {
-        $this->products = $products;
-
-        return $this;
+        return $this->products;
     }
 }

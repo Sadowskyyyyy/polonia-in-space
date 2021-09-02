@@ -16,20 +16,38 @@ class Product
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private ?string $category;
+    private string $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Delivery::class, inversedBy="product")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private Delivery $delivery;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCategory(): ?string
+    public function getCategory(): string
     {
         return $this->category;
+    }
+
+    public function getDelivery(): Delivery
+    {
+        return $this->delivery;
+    }
+
+    public function setDelivery(Delivery $delivery): self
+    {
+        $this->delivery = $delivery;
+
+        return $this;
     }
 }

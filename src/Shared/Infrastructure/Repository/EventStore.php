@@ -27,17 +27,17 @@ class EventStore implements EventRepository
             case 'marsstation':
                 /** @var MarsResearchStation $station */
                 $station = $this->entityManager->getRepository(MarsResearchStation::class)->findOneBy(['id' => 1]);
-                $events = $station->getEvents();
+                $events = $station->getEvents()->toArray();
                 break;
             case 'earthstation':
                 /** @var EarthResearchStation $station */
                 $station = $this->entityManager->getRepository(EarthResearchStation::class)->findOneBy(['id' => 1]);
-                $events = $station->getEvents();
+                $events = $station->getEvents()->toArray();
                 break;
             case 'spacestation':
                 /** @var SpaceResearchStation $station */
                 $station = $this->entityManager->getRepository(SpaceResearchStation::class)->findOneBy(['id' => 1]);
-                $events = $station->getEvents();
+                $events = $station->getEvents()->toArray();
                 break;
         }
 
