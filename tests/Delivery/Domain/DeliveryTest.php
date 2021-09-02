@@ -16,12 +16,12 @@ class DeliveryTest extends TestCase
     protected function setUp(): void
     {
         $this->delivery = Delivery::createNewDelivery(
-            new EarthScientistDomain('Adam', 'Adam', 'Jensen', []),
-            new Product('food'),
-            'spacestation',
-            '',
-            new \DateTime(),
-            (new \DateTime())->modify('+14 minutes')
+            sender: new EarthScientistDomain('Adam', 'Adam', 'Jensen', []),
+            product: new Product('food'),
+            destination: 'spacestation',
+            status: '',
+            postDate: new \DateTime(),
+            pickUpDate: (new \DateTime())->modify('+14 minutes')
         );
     }
 

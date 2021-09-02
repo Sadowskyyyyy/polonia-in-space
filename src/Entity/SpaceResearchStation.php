@@ -63,6 +63,17 @@ class SpaceResearchStation
      */
     private array $events = [];
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private float $waterWaste;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Product::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private array $products = [];
+
     public function __construct(
         array $scientists,
         bool $needHelp,
@@ -83,6 +94,24 @@ class SpaceResearchStation
         $this->accumulatorPercentage = $accumulatorPercentage;
         $this->position = $position;
         $this->events = $events;
+    }
+
+    public static function toDomain(self $entity): \App\DomainModel\SpaceResearchStation
+    {
+        return new \App\DomainModel\SpaceResearchStation(
+            $entity->id,
+            $entity->oxygenPercentage,
+            $entity->daysAtOrbit,
+            $entity->mass,
+            $entity->energyWaste,
+            $entity->waterWaste,
+            $entity->accumulatorPercentage,
+            $entity->position,
+            $entity->scientists,
+            $entity->products,
+            $entity->events,
+            $entity->needHelp
+        );
     }
 
     public function getEvents(): array
@@ -133,5 +162,29 @@ class SpaceResearchStation
     public function getPosition(): ?float
     {
         return $this->position;
+    }
+
+    public function getWaterWaste(): ?float
+    {
+        return $this->waterWaste;
+    }
+
+    public function setWaterWaste(float $waterWaste): self
+    {
+        $this->waterWaste = $waterWaste;
+
+        return $this;
+    }
+
+    public function getProducts(): array
+    {
+        return $this->products;
+    }
+
+    public function setProducts(array $products): self
+    {
+        $this->products = $products;
+
+        return $this;
     }
 }

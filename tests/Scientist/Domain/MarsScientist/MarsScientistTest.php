@@ -14,12 +14,12 @@ class MarsScientistTest extends TestCase
     protected function setUp(): void
     {
         $this->scientist = new MarsScientist(
-            'Adam',
-            'Jensen',
-            'apikey',
-            ['test'],
-            ['test'],
-            ['test']
+            name: 'Adam',
+            surname: 'Jensen',
+            apikey: 'apikey',
+            registeredUsers: [],
+            plannedExpeditions: [],
+            finishedExpeditions: []
         );
     }
 
