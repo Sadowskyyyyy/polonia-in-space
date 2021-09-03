@@ -16,18 +16,18 @@ class Expedition
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=MarsScientistEntity::class, inversedBy="expeditionEntities")
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?MarsScientistEntity $creator;
+    private MarsScientistEntity $creator;
 
     /**
      * @ORM\Column(type="date")
      */
-    private ?\DateTimeInterface $creationDate;
+    private \DateTimeInterface $creationDate;
 
     /**
      * @ORM\Column(type="date")
@@ -37,12 +37,12 @@ class Expedition
     /**
      * @ORM\Column(type="boolean")
      */
-    private ?bool $isFinished;
+    private bool $isFinished;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private ?bool $isStarted;
+    private bool $isStarted;
 
     public static function toDomain(self $expedition): \App\DomainModel\Expedition
     {
@@ -54,24 +54,33 @@ class Expedition
         );
     }
 
-    public function getId(): ?int
+    public function __construct(MarsScientistEntity $creator, \DateTimeInterface $creationDate, ?\DateTimeInterface $plannedStartDate, bool $isFinished, bool $isStarted)
+    {
+        $this->creator = $creator;
+        $this->creationDate = $creationDate;
+        $this->plannedStartDate = $plannedStartDate;
+        $this->isFinished = $isFinished;
+        $this->isStarted = $isStarted;
+    }
+
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getCreator(): ?MarsScientistEntity
+    public function getCreator(): MarsScientistEntity
     {
         return $this->creator;
     }
 
-    public function setCreator(?MarsScientistEntity $creator): self
+    public function setCreator(MarsScientistEntity $creator): self
     {
         $this->creator = $creator;
 
         return $this;
     }
 
-    public function getCreationDate(): ?\DateTimeInterface
+    public function getCreationDate(): \DateTimeInterface
     {
         return $this->creationDate;
     }
@@ -83,7 +92,7 @@ class Expedition
         return $this;
     }
 
-    public function getPlannedStartDate(): ?\DateTimeInterface
+    public function getPlannedStartDate(): \DateTimeInterface
     {
         return $this->plannedStartDate;
     }
@@ -95,7 +104,7 @@ class Expedition
         return $this;
     }
 
-    public function getIsFinished(): ?bool
+    public function getIsFinished(): bool
     {
         return $this->isFinished;
     }
@@ -107,7 +116,7 @@ class Expedition
         return $this;
     }
 
-    public function getIsStarted(): ?bool
+    public function getIsStarted(): bool
     {
         return $this->isStarted;
     }

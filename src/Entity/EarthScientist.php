@@ -108,7 +108,7 @@ class EarthScientist
         return $this;
     }
 
-    public function getApikey(): ?string
+    public function getApikey(): string
     {
         return $this->apikey;
     }

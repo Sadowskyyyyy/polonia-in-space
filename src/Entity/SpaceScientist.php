@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\SpaceScientistRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -32,7 +33,7 @@ class SpaceScientist
     /**
      * @ORM\OneToMany(targetEntity=Delivery::class, mappedBy="sender")
      */
-    private array $sentDeliveries = [];
+    private Collection $sentDeliveries;
 
     /**
      * @ORM\ManyToOne(targetEntity=SpaceResearchStation::class, inversedBy="scientists")
@@ -80,7 +81,7 @@ class SpaceScientist
         return $this->surname;
     }
 
-    public function getSentDeliveries(): array
+    public function getSentDeliveries(): Collection
     {
         return $this->sentDeliveries;
     }
