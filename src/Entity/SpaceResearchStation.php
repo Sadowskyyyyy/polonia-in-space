@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\SpaceResearchStationRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,52 +17,47 @@ class SpaceResearchStation
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private int $id;
 
     /**
      * @ORM\OneToMany(targetEntity=SpaceScientist::class, mappedBy="station")
      */
-    private array $scientists = [];
+    private Collection $scientists;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private ?bool $needHelp;
+    private bool $needHelp;
 
     /**
      * @ORM\Column(type="float")
      */
-    private ?float $oxygenPercentage;
+    private float $oxygenPercentage;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private ?int $daysAtOrbit;
+    private int $daysAtOrbit;
 
     /**
      * @ORM\Column(type="float")
      */
-    private ?float $mass;
+    private float $mass;
 
     /**
      * @ORM\Column(type="float")
      */
-    private ?float $energyWaste;
+    private float $energyWaste;
 
     /**
      * @ORM\Column(type="float")
      */
-    private ?float $accumulatorPercentage;
+    private float $accumulatorPercentage;
 
     /**
      * @ORM\Column(type="float")
      */
-    private ?float $position;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Event::class)
-     */
-    private array $events = [];
+    private float $position;
 
     /**
      * @ORM\Column(type="float")
@@ -69,13 +65,17 @@ class SpaceResearchStation
     private float $waterWaste;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Product::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="array")
      */
-    private array $products = [];
+    private Collection $events;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private Collection $products;
 
     public function __construct(
-        array $scientists,
+        Collection $scientists,
         bool $needHelp,
         float $oxygenPercentage,
         int $daysAtOrbit,
@@ -83,7 +83,7 @@ class SpaceResearchStation
         float $energyWaste,
         float $accumulatorPercentage,
         float $position,
-        array $events
+        Collection $events
     ) {
         $this->scientists = $scientists;
         $this->needHelp = $needHelp;
@@ -107,14 +107,14 @@ class SpaceResearchStation
             $entity->waterWaste,
             $entity->accumulatorPercentage,
             $entity->position,
-            $entity->scientists,
-            $entity->products,
-            $entity->events,
+            $entity->scientists->toArray(),
+            $entity->products->toArray(),
+            $entity->events->toArray(),
             $entity->needHelp
         );
     }
 
-    public function getEvents(): array
+    public function getEvents(): Collection
     {
         return $this->events;
     }
@@ -124,7 +124,7 @@ class SpaceResearchStation
         return $this->id;
     }
 
-    public function getScientists(): array
+    public function getScientists(): Collection
     {
         return $this->scientists;
     }
@@ -176,15 +176,13 @@ class SpaceResearchStation
         return $this;
     }
 
-    public function getProducts(): array
+    public function getProducts(): Collection
     {
         return $this->products;
     }
 
-    public function setProducts(array $products): self
+    public function setProducts(Collection $products): void
     {
         $this->products = $products;
-
-        return $this;
     }
 }
