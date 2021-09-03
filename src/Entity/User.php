@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use function uniqid;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -20,9 +23,9 @@ class User implements UserInterface
     private int $id;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="array")
      */
-    private array $roles = [];
+    private Collection $roles;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -39,7 +42,7 @@ class User implements UserInterface
      */
     private string $name;
 
-    public function __construct(string $name, array $roles, string $apikey)
+    public function __construct(string $name, ArrayCollection $roles, string $apikey)
     {
         $this->name = $name;
         $this->roles = $roles;
@@ -78,7 +81,7 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles(ArrayCollection $roles): self
     {
         $this->roles = $roles;
 
