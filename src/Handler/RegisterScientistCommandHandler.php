@@ -5,11 +5,13 @@ namespace App\Handler;
 
 use App\Command\RegisterScientistCommand;
 use App\Service\ScientistFactory;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class RegisterScientistCommandHandler implements MessageHandlerInterface
 {
     private ScientistFactory $factory;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(ScientistFactory $factory)
     {
@@ -18,6 +20,9 @@ class RegisterScientistCommandHandler implements MessageHandlerInterface
 
     public function __invoke(RegisterScientistCommand $command): void
     {
-        $this->factory->createFromCommand($command);
+        $scientist = $this->factory->createFromCommand($command);
+
+        $this->entityManager->persist($scientist);
+        $this->entityManager->flush();
     }
 }

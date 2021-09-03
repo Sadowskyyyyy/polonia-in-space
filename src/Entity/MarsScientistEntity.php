@@ -103,18 +103,20 @@ class MarsScientistEntity
      */
     private string $apikey;
 
-    public function __construct(string $name, string $surname, bool $isMissing, bool $isDead, ?string $reason, ?MarsScientistEntity $author, array $registredUsers, MarsResearchStation $station, array $expeditionEntities, UserInterface $securityUser, string $apikey)
-    {
     public function __construct(
-        string $name,
-        string $surname,
-        string $apikey,
-        bool $isMissing,
-        bool $isDead,
-        ?string $reason,
-        ?self $author,
-        MarsResearchStation $station
-    ) {
+        string              $name,
+        string              $surname,
+        string              $apikey,
+        bool                $isMissing,
+        bool                $isDead,
+        ?string             $reason,
+        ?self               $author,
+        MarsResearchStation $station,
+        Collection          $registredUsers,
+        Collection          $expeditionEntities,
+        User                $user,
+    )
+    {
         $this->name = $name;
         $this->surname = $surname;
         $this->isMissing = $isMissing;
@@ -124,7 +126,7 @@ class MarsScientistEntity
         $this->registredUsers = $registredUsers;
         $this->station = $station;
         $this->expeditionEntities = $expeditionEntities;
-        $this->securityUser = $securityUser;
+        $this->securityUser = $user;
         $this->apikey = $apikey;
     }
 
@@ -189,7 +191,7 @@ class MarsScientistEntity
         $this->station = $station;
     }
 
-    public function getExpeditionEntities(): array
+    public function getExpeditionEntities(): Collection
     {
         return $this->expeditionEntities;
     }

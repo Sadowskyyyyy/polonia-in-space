@@ -8,6 +8,7 @@ use App\Entity\EarthScientist;
 use App\Entity\MarsScientistEntity;
 use App\Entity\SpaceScientist;
 use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ScientistFactory
@@ -28,49 +29,41 @@ class ScientistFactory
     }
 
 
-    public function createFromCommand(RegisterScientistCommand $command)
+    public function createFromCommand(RegisterScientistCommand $command): EarthScientist|SpaceScientist|MarsScientistEntity
     {
-        $scientist = null;
         $station = $this->researchStationRepository->getResarchStationEntityByName($command->station);
         $apikey = $this->apiKeyGenerator->generateApiKey();
 
-        switch ($command->station) {
-            case self::EARTH_SCIENTIST:
-                $scientist = new EarthScientist(
-                    $command->name,
-                    $command->surname,
-                    $station,
-                    new User($command->name, ['ROLE_EARTH_SCIENTIST'], $apikey),
-                    $apikey
-                );
-                break;
-            case self::SPACE_SCIENTIST:
-                $scientist = new SpaceScientist(
-                    $command->name,
-                    $command->surname,
-                    $station,
-                    new User($command->name, ['ROLE_SPACE_SCIENTIST'], $apikey),
-                    $apikey
-                );
-                break;
-            case self::MARS_SCIENTIST:
-                $scientist = new MarsScientistEntity(
-                    $command->name,
-                    $command->surname,
-                    false,
-                    false,
-                    null,
-                    null,
-                    [],
-                    $station,
-                    [],
-                    new User($command->name, ['ROLE_MARS_SCIENTIST'], $apikey),
-                    $apikey
-                );
-                break;
-        }
+        $scientist = match ($command->station) {
+            self::EARTH_SCIENTIST => new EarthScientist(
+                $command->name,
+                $command->surname,
+                $station,
+                new User($command->name, ['ROLE_EARTH_SCIENTIST'], $apikey),
+                $apikey
+            ),
+            self::SPACE_SCIENTIST => new SpaceScientist(
+                $command->name,
+                $command->surname,
+                $station,
+                new User($command->name, ['ROLE_SPACE_SCIENTIST'], $apikey),
+                $apikey
+            ),
+            self::MARS_SCIENTIST => new MarsScientistEntity(
+                $command->name,
+                $command->surname,
+                $apikey,
+                false,
+                null,
+                null,
+                null,
+                $station,
+                new ArrayCollection(),
+                new ArrayCollection(),
+                new User($command->name, ['ROLE_MARS_SCIENTIST'], $apikey),
+            ),
+        };
 
-        $this->entityManager->persist($scientist);
-        $this->entityManager->flush();
+        return $scientist;
     }
 }
