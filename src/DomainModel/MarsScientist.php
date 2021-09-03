@@ -48,7 +48,6 @@ class MarsScientist extends AbstractScientist
         }
 
         $entity = new MarsScientistEntity(
-            $marsScientist->getId(),
             $marsScientist->getName(),
             $marsScientist->getSurname(),
             $marsScientist->getApikey(),

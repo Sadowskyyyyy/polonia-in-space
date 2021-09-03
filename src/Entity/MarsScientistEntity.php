@@ -71,36 +71,6 @@ class MarsScientistEntity
      */
     private Collection $expeditionEntities;
 
-    public function __construct(
-        int $id,
-        string $name,
-        string $surname,
-        string $apikey,
-        bool $isMissing,
-        bool $isDead,
-        ?string $reason,
-        ?self $author,
-        MarsResearchStation $station
-    ) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->apikey = $apikey;
-        $this->isMissing = $isMissing;
-        $this->isDead = $isDead;
-        $this->reason = $reason;
-        $this->author = $author;
-        $this->station = $station;
-    }
-
-    /**
-     * @param Collection $registredUsers
-     */
-    public function setRegistredUsers(Collection $registredUsers): void
-    {
-        $this->registredUsers = $registredUsers;
-    }
-
     public static function toDomain(self $entity): MarsScientist
     {
         $plannedExpeditions = [];
@@ -124,6 +94,31 @@ class MarsScientistEntity
             $plannedExpeditions,
             $finishedExpeditions
         );
+    }
+
+    public function __construct(
+        string $name,
+        string $surname,
+        string $apikey,
+        bool $isMissing,
+        bool $isDead,
+        ?string $reason,
+        ?self $author,
+        MarsResearchStation $station
+    ) {
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->apikey = $apikey;
+        $this->isMissing = $isMissing;
+        $this->isDead = $isDead;
+        $this->reason = $reason;
+        $this->author = $author;
+        $this->station = $station;
+    }
+
+    public function setRegistredUsers(Collection $registredUsers): void
+    {
+        $this->registredUsers = $registredUsers;
     }
 
     public function getId(): int

@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\DeliveryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -45,9 +44,13 @@ class Delivery
      */
     private \DateTimeInterface $pickUpDate;
 
-    public function __construct()
+    public function __construct(Collection $products, string $destination, string $status, \DateTimeInterface $postDate, \DateTimeInterface $pickUpDate)
     {
-        $this->products = new ArrayCollection();
+        $this->products = $products;
+        $this->destination = $destination;
+        $this->status = $status;
+        $this->postDate = $postDate;
+        $this->pickUpDate = $pickUpDate;
     }
 
     public function getId(): ?int
@@ -55,9 +58,6 @@ class Delivery
         return $this->id;
     }
 
-    /**
-     * @return Collection|Product[]
-     */
     public function getProducts(): Collection
     {
         return $this->products;

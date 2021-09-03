@@ -29,7 +29,13 @@ class Product
      */
     private Delivery $delivery;
 
-    public function getId(): ?int
+    public function __construct(string $category, Delivery $delivery)
+    {
+        $this->category = $category;
+        $this->delivery = $delivery;
+    }
+
+    public function getId(): int
     {
         return $this->id;
     }

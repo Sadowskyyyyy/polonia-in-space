@@ -54,6 +54,15 @@ class Expedition
         );
     }
 
+    public function __construct(MarsScientistEntity $creator, \DateTimeInterface $creationDate, ?\DateTimeInterface $plannedStartDate, bool $isFinished, bool $isStarted)
+    {
+        $this->creator = $creator;
+        $this->creationDate = $creationDate;
+        $this->plannedStartDate = $plannedStartDate;
+        $this->isFinished = $isFinished;
+        $this->isStarted = $isStarted;
+    }
+
     public function getId(): int
     {
         return $this->id;

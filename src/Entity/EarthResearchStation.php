@@ -50,6 +50,14 @@ class EarthResearchStation
         );
     }
 
+    public function __construct(Collection $scientists, bool $needHelp, Collection $events, Collection $products)
+    {
+        $this->scientists = $scientists;
+        $this->needHelp = $needHelp;
+        $this->events = $events;
+        $this->products = $products;
+    }
+
     public function getId(): int
     {
         return $this->id;

@@ -50,6 +50,14 @@ class MarsResearchStation
         );
     }
 
+    public function __construct(bool $needHelp, Collection $scientists, Collection $events, Collection $products)
+    {
+        $this->needHelp = $needHelp;
+        $this->scientists = $scientists;
+        $this->events = $events;
+        $this->products = $products;
+    }
+
     public function getId(): int
     {
         return $this->id;
