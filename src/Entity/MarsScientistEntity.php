@@ -105,19 +105,18 @@ class MarsScientistEntity
     private string $apikey;
 
     public function __construct(
-        string              $name,
-        string              $surname,
-        string              $apikey,
-        bool                $isMissing,
-        bool                $isDead,
-        ?string             $reason,
-        ?self               $author,
+        string $name,
+        string $surname,
+        string $apikey,
+        bool $isMissing,
+        bool $isDead,
+        ?string $reason,
+        ?self $author,
         MarsResearchStation $station,
-        Collection          $registredUsers,
-        Collection          $expeditionEntities,
-        User                $user,
-    )
-    {
+        Collection $registredUsers,
+        Collection $expeditionEntities,
+        User $user,
+    ) {
         $this->name = $name;
         $this->surname = $surname;
         $this->isMissing = $isMissing;

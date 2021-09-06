@@ -46,7 +46,6 @@ class ResarchStationStore implements ResarchStationRepositoryInterface
 
     public function getResarchStationEntityByName(string $name): mixed
     {
-
         $entity = match ($name) {
             self::MARS_SCIENTIST => $this->entityManager->getRepository(MarsResearchStation::class)->find(1),
             self::SPACE_SCIENTIST => $this->entityManager->getRepository(SpaceResearchStation::class)->find(1),

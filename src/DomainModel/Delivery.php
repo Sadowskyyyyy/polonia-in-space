@@ -15,14 +15,13 @@ class Delivery
     private \DateTimeInterface $pickUpDate;
 
     public function __construct(
-        AbstractScientist  $sender,
-        Product            $product,
-        string             $destination,
-        string             $status,
+        AbstractScientist $sender,
+        Product $product,
+        string $destination,
+        string $status,
         \DateTimeInterface $postDate,
         \DateTimeInterface $pickUpDate
-    )
-    {
+    ) {
         $this->sender = $sender;
         $this->product = $product;
         $this->destination = $destination;
@@ -32,14 +31,13 @@ class Delivery
     }
 
     public static function createNewDelivery(
-        AbstractScientist  $sender,
-        Product            $product,
-        string             $destination,
-        string             $status,
+        AbstractScientist $sender,
+        Product $product,
+        string $destination,
+        string $status,
         \DateTimeInterface $postDate,
         \DateTimeInterface $pickUpDate
-    ): self
-    {
+    ): self {
         return new self($sender, $product, $destination, $status, $postDate, $pickUpDate);
     }
 

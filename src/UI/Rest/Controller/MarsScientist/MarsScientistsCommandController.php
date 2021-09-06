@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\UI\Rest\Controller\MarsScientist;
 
 use App\Command\MarkMarsScientistAsMissingOrDeadCommand;
-use App\Command\RegisterScientistCommand;
 use App\Service\MarkMarsScientistAsMissingOrDeadCommandValidator;
 use App\UI\Rest\Controller\CommandController;
 use Symfony\Component\HttpFoundation\Request;

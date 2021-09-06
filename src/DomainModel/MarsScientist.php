@@ -25,11 +25,10 @@ class MarsScientist extends AbstractScientist
         string $name,
         string $surname,
         string $apikey,
-        array  $registeredUsers,
-        array  $plannedExpeditions,
-        array  $finishedExpeditions
-    )
-    {
+        array $registeredUsers,
+        array $plannedExpeditions,
+        array $finishedExpeditions
+    ) {
         parent::__construct($name, $surname, $apikey);
         $this->registeredUsers = $registeredUsers;
         $this->plannedExpeditions = $plannedExpeditions;
@@ -74,7 +73,8 @@ class MarsScientist extends AbstractScientist
             $marsResearchStationEntity,
             new ArrayCollection($registredUsersEntities),
             (new ArrayCollection($marsScientist->plannedExpeditions + $marsScientist->finishedExpeditions)),
-            new User($marsScientist->author->name, ['ROLE_MARS_SCIENTIST'], $marsScientist->getApikey()));
+            new User($marsScientist->author->name, ['ROLE_MARS_SCIENTIST'], $marsScientist->getApikey())
+        );
 
         $entity->setRegistredUsers(new ArrayCollection($registredUsersEntities));
 

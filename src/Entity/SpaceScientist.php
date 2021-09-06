@@ -53,13 +53,12 @@ class SpaceScientist
     public string $apikey;
 
     public function __construct(
-        string               $name,
-        string               $surname,
+        string $name,
+        string $surname,
         SpaceResearchStation $station,
-        UserInterface        $securityUser,
-        string               $apikey
-    )
-    {
+        UserInterface $securityUser,
+        string $apikey
+    ) {
         $this->name = $name;
         $this->surname = $surname;
         $this->station = $station;

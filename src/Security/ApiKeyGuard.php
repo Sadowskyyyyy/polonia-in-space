@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Repository\UserRepository;
+use App\DomainModel\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,7 +43,7 @@ class ApiKeyGuard extends AbstractGuardAuthenticator
             return null;
         }
 
-        $user = $this->userRepository->findOneBy(['apikey' => $credentials]);
+        $user = $this->userRepository->findOneByApikey($credentials);
 
         if (true === empty($user)) {
             throw new BadCredentialsException();

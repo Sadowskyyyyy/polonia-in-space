@@ -76,16 +76,15 @@ class SpaceResearchStation
 
     public function __construct(
         Collection $scientists,
-        bool       $needHelp,
-        float      $oxygenPercentage,
-        int        $daysAtOrbit,
-        float      $mass,
-        float      $energyWaste,
-        float      $accumulatorPercentage,
-        float      $position,
+        bool $needHelp,
+        float $oxygenPercentage,
+        int $daysAtOrbit,
+        float $mass,
+        float $energyWaste,
+        float $accumulatorPercentage,
+        float $position,
         Collection $events
-    )
-    {
+    ) {
         $this->scientists = $scientists;
         $this->needHelp = $needHelp;
         $this->oxygenPercentage = $oxygenPercentage;

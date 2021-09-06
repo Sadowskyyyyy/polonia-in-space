@@ -21,12 +21,11 @@ class AuthFactory
     private EarthScientistRepository $earthScientistRepository;
 
     public function __construct(
-        UserRepository           $userRepository,
-        MarsScientistRepository  $marsScientistRepository,
+        UserRepository $userRepository,
+        MarsScientistRepository $marsScientistRepository,
         SpaceScientistRepository $spaceScientistRepository,
         EarthScientistRepository $earthScientistRepository
-    )
-    {
+    ) {
         $this->userRepository = $userRepository;
         $this->marsScientistRepository = $marsScientistRepository;
         $this->spaceScientistRepository = $spaceScientistRepository;

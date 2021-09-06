@@ -17,7 +17,7 @@ final class DoctrineMarsScientistRepository extends ServiceEntityRepository impl
 
     public function existsCheckByApikey(string $apikey): bool
     {
-        return !empty($this->findByApikey($apikey)) === true;
+        return true === !empty($this->findByApikey($apikey));
     }
 
     public function findByApikey(string $apikey): MarsScientistEntity

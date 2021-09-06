@@ -16,9 +16,9 @@ class SpaceResearchStation extends AbstractResearchStation
     private float $position;
 
     public function __construct(
-        int   $id,
+        int $id,
         float $oxygenPercentage,
-        int   $daysAtOrbit,
+        int $daysAtOrbit,
         float $mass,
         float $energyWaste,
         float $waterWaste,
@@ -27,9 +27,8 @@ class SpaceResearchStation extends AbstractResearchStation
         array $scientists,
         array $products,
         array $events,
-        bool  $needHelp
-    )
-    {
+        bool $needHelp
+    ) {
         parent::__construct($id, $scientists, $products, $events, $needHelp);
         $this->oxygenPercentage = $oxygenPercentage;
         $this->daysAtOrbit = $daysAtOrbit;
