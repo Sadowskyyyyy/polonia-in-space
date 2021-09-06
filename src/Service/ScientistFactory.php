@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Command\RegisterScientistCommand;
+use App\DomainModel\AbstractScientist;
 use App\Entity\EarthScientist;
 use App\Entity\MarsScientistEntity;
 use App\Entity\SpaceScientist;
@@ -34,6 +35,7 @@ class ScientistFactory
         $station = $this->researchStationRepository->getResarchStationEntityByName($command->station);
         $apikey = $this->apiKeyGenerator->generateApiKey();
 
+        /**@var AbstractScientist $scientist */
         $scientist = match ($command->station) {
             self::EARTH_SCIENTIST => new EarthScientist(
                 $command->name,
@@ -54,7 +56,7 @@ class ScientistFactory
                 $command->surname,
                 $apikey,
                 false,
-                null,
+                false,
                 null,
                 null,
                 $station,

@@ -82,9 +82,4 @@ class Expedition
     {
         return $this->isFinished;
     }
-
-    public function setStartDate(string $plannedStartDate): void
-    {
-        $this->plannedStartDate = $plannedStartDate;
-    }
 }

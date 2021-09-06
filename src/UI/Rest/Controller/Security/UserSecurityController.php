@@ -48,13 +48,16 @@ class UserSecurityController extends AbstractController
      */
     public function findCurrentApikey(Request $request): JsonResponse
     {
+        /**@var UserInterface $user */
+        $user = $this->getUser();
+
         return $this->json(
             new DataDocument(
                 new ResourceObject(
                     'apikey',
                     '1',
-                    new Attribute('apikey', $this->getUser()->getUsername()),
-                    new SelfLink('/users/apikey')
+                    new Attribute('apikey', $user->getUsername()
+                    )
                 )
             )
         );

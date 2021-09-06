@@ -12,7 +12,7 @@ class ApiKeyGeneratorTest extends TestCase
 
     protected function setUp(): void
     {
-        $generator = new ApiKeyGenerator();
+        $this->generator = new ApiKeyGenerator();
     }
 
     public function test_should_count_30(): void

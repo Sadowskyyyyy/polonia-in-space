@@ -16,9 +16,9 @@ class SpaceResearchStation extends AbstractResearchStation
     private float $position;
 
     public function __construct(
-        int $id,
+        int   $id,
         float $oxygenPercentage,
-        int $daysAtOrbit,
+        int   $daysAtOrbit,
         float $mass,
         float $energyWaste,
         float $waterWaste,
@@ -27,8 +27,9 @@ class SpaceResearchStation extends AbstractResearchStation
         array $scientists,
         array $products,
         array $events,
-        bool $needHelp
-    ) {
+        bool  $needHelp
+    )
+    {
         parent::__construct($id, $scientists, $products, $events, $needHelp);
         $this->oxygenPercentage = $oxygenPercentage;
         $this->daysAtOrbit = $daysAtOrbit;
@@ -46,75 +47,5 @@ class SpaceResearchStation extends AbstractResearchStation
         }
 
         $this->scientists[] = $scientist;
-    }
-
-    public function changePosition(float $degrees): void
-    {
-        $this->position = $this->position += $degrees;
-    }
-
-    public function getOxygenPercentage(): float
-    {
-        return $this->oxygenPercentage;
-    }
-
-    public function setOxygenPercentage(float $oxygenPercentage): void
-    {
-        $this->oxygenPercentage = $oxygenPercentage;
-    }
-
-    public function getDaysAtOrbit(): int
-    {
-        return $this->daysAtOrbit;
-    }
-
-    public function setDaysAtOrbit(int $daysAtOrbit): void
-    {
-        $this->daysAtOrbit = $daysAtOrbit;
-    }
-
-    public function getMass(): float
-    {
-        return $this->mass;
-    }
-
-    public function setMass(float $mass): void
-    {
-        $this->mass = $mass;
-    }
-
-    public function getEnergyWaste(): float
-    {
-        return $this->energyWaste;
-    }
-
-    public function setEnergyWaste(float $energyWaste): void
-    {
-        $this->energyWaste = $energyWaste;
-    }
-
-    public function getAccumulatorsPercentage(): float
-    {
-        return $this->accumulatorsPercentage;
-    }
-
-    public function setAccumulatorsPercentage(float $accumulatorsPercentage): void
-    {
-        $this->accumulatorsPercentage = $accumulatorsPercentage;
-    }
-
-    public function getPosition(): float
-    {
-        return $this->position;
-    }
-
-    public function getWaterWaste(): float
-    {
-        return $this->waterWaste;
-    }
-
-    public function setWaterWaste(float $waterWaste): void
-    {
-        $this->waterWaste = $waterWaste;
     }
 }

@@ -17,32 +17,32 @@ class Delivery
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    public ?int $id;
 
     /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="delivery")
      */
-    private Collection $products;
+    public Collection $products;
 
     /**
      * @ORM\Column(type="string", length=20)
      */
-    private string $destination;
+    public string $destination;
 
     /**
      * @ORM\Column(type="string", length=15)
      */
-    private string $status;
+    public string $status;
 
     /**
      * @ORM\Column(type="date")
      */
-    private \DateTimeInterface $postDate;
+    public \DateTimeInterface $postDate;
 
     /**
      * @ORM\Column(type="date")
      */
-    private \DateTimeInterface $pickUpDate;
+    public \DateTimeInterface $pickUpDate;
 
     public function __construct(Collection $products, string $destination, string $status, \DateTimeInterface $postDate, \DateTimeInterface $pickUpDate)
     {

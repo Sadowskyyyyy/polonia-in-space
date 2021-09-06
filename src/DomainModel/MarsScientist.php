@@ -52,15 +52,15 @@ class MarsScientist extends AbstractScientist
         $author = new MarsScientistEntity(
             $marsScientist->author->name,
             $marsScientist->author->surname,
+            $marsScientist->author->apikey,
             $marsScientist->author->isMissing,
             $marsScientist->author->isDead,
             $marsScientist->author->reason,
             null,
-            [],
             $marsResearchStationEntity,
-            [],
-            new User($marsScientist->author->name, ['ROLE_MARS_SCIENTIST'], ''),
-            ''
+            new ArrayCollection(),
+            new ArrayCollection(),
+            new User($marsScientist->author->name, ['ROLE_MARS_SCIENTIST'], '')
         );
 
         $entity = new MarsScientistEntity(
@@ -71,8 +71,10 @@ class MarsScientist extends AbstractScientist
             $marsScientist->isDead(),
             $marsScientist->getReason(),
             self::toEntity($marsScientist->getAuthor(), $marsResearchStationEntity),
-            $marsResearchStationEntity
-        );
+            $marsResearchStationEntity,
+            new ArrayCollection($registredUsersEntities),
+            (new ArrayCollection($marsScientist->plannedExpeditions + $marsScientist->finishedExpeditions)),
+            new User($marsScientist->author->name, ['ROLE_MARS_SCIENTIST'], $marsScientist->getApikey()));
 
         $entity->setRegistredUsers(new ArrayCollection($registredUsersEntities));
 
@@ -151,16 +153,6 @@ class MarsScientist extends AbstractScientist
         }
 
         $this->reason = $reason;
-    }
-
-    public function getPlannedExpeditions(): array
-    {
-        return $this->plannedExpeditions;
-    }
-
-    public function getFinishedExpeditions(): array
-    {
-        return $this->finishedExpeditions;
     }
 
     public function setRegisteredUsers(array $registeredUsers): void

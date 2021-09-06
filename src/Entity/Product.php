@@ -16,18 +16,18 @@ class Product
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    public int $id;
 
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private string $category;
+    public string $category;
 
     /**
      * @ORM\ManyToOne(targetEntity=Delivery::class, inversedBy="product")
      * @ORM\JoinColumn(nullable=false)
      */
-    private Delivery $delivery;
+    public Delivery $delivery;
 
     public function __construct(string $category, Delivery $delivery)
     {

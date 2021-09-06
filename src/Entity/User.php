@@ -25,7 +25,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="array")
      */
-    private Collection $roles;
+    private array $roles;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -42,7 +42,7 @@ class User implements UserInterface
      */
     private string $name;
 
-    public function __construct(string $name, ArrayCollection $roles, string $apikey)
+    public function __construct(string $name, array $roles, string $apikey)
     {
         $this->name = $name;
         $this->roles = $roles;
@@ -81,7 +81,7 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
-    public function setRoles(ArrayCollection $roles): self
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
