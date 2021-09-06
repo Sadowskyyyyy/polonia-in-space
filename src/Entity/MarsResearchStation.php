@@ -57,29 +57,4 @@ class MarsResearchStation
         $this->events = $events;
         $this->products = $products;
     }
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function isNeedHelp(): bool
-    {
-        return $this->needHelp;
-    }
-
-    public function getScientists(): Collection
-    {
-        return $this->scientists;
-    }
-
-    public function getEvents(): Collection
-    {
-        return $this->events;
-    }
-
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
 }

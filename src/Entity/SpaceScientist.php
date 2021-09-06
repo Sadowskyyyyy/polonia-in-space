@@ -53,72 +53,17 @@ class SpaceScientist
     private string $apikey;
 
     public function __construct(
-        string $name,
-        string $surname,
+        string               $name,
+        string               $surname,
         SpaceResearchStation $station,
-        UserInterface $securityUser,
-        string $apikey
-    ) {
+        UserInterface        $securityUser,
+        string               $apikey
+    )
+    {
         $this->name = $name;
         $this->surname = $surname;
         $this->station = $station;
         $this->securityUser = $securityUser;
         $this->apikey = $apikey;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function getSurname(): ?string
-    {
-        return $this->surname;
-    }
-
-    public function getSentDeliveries(): Collection
-    {
-        return $this->sentDeliveries;
-    }
-
-    public function getStation(): SpaceResearchStation
-    {
-        return $this->station;
-    }
-
-    public function setStation(?SpaceResearchStation $station): self
-    {
-        $this->station = $station;
-
-        return $this;
-    }
-
-    public function getSecurityUser(): UserInterface
-    {
-        return $this->securityUser;
-    }
-
-    public function setSecurityUser(UserInterface $securityUser): self
-    {
-        $this->securityUser = $securityUser;
-
-        return $this;
-    }
-
-    public function getApikey(): ?string
-    {
-        return $this->apikey;
-    }
-
-    public function setApikey(string $apikey): self
-    {
-        $this->apikey = $apikey;
-
-        return $this;
     }
 }

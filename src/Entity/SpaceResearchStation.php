@@ -76,15 +76,16 @@ class SpaceResearchStation
 
     public function __construct(
         Collection $scientists,
-        bool $needHelp,
-        float $oxygenPercentage,
-        int $daysAtOrbit,
-        float $mass,
-        float $energyWaste,
-        float $accumulatorPercentage,
-        float $position,
+        bool       $needHelp,
+        float      $oxygenPercentage,
+        int        $daysAtOrbit,
+        float      $mass,
+        float      $energyWaste,
+        float      $accumulatorPercentage,
+        float      $position,
         Collection $events
-    ) {
+    )
+    {
         $this->scientists = $scientists;
         $this->needHelp = $needHelp;
         $this->oxygenPercentage = $oxygenPercentage;
@@ -117,72 +118,5 @@ class SpaceResearchStation
     public function getEvents(): Collection
     {
         return $this->events;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getScientists(): Collection
-    {
-        return $this->scientists;
-    }
-
-    public function getNeedHelp(): ?bool
-    {
-        return $this->needHelp;
-    }
-
-    public function getOxygenPercentage(): ?float
-    {
-        return $this->oxygenPercentage;
-    }
-
-    public function getDaysAtOrbit(): ?int
-    {
-        return $this->daysAtOrbit;
-    }
-
-    public function getMass(): ?float
-    {
-        return $this->mass;
-    }
-
-    public function getEnergyWaste(): ?float
-    {
-        return $this->energyWaste;
-    }
-
-    public function getAccumulatorPercentage(): ?float
-    {
-        return $this->accumulatorPercentage;
-    }
-
-    public function getPosition(): ?float
-    {
-        return $this->position;
-    }
-
-    public function getWaterWaste(): ?float
-    {
-        return $this->waterWaste;
-    }
-
-    public function setWaterWaste(float $waterWaste): self
-    {
-        $this->waterWaste = $waterWaste;
-
-        return $this;
-    }
-
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function setProducts(Collection $products): void
-    {
-        $this->products = $products;
     }
 }

@@ -34,26 +34,4 @@ class Product
         $this->category = $category;
         $this->delivery = $delivery;
     }
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function getCategory(): string
-    {
-        return $this->category;
-    }
-
-    public function getDelivery(): Delivery
-    {
-        return $this->delivery;
-    }
-
-    public function setDelivery(Delivery $delivery): self
-    {
-        $this->delivery = $delivery;
-
-        return $this;
-    }
 }

@@ -27,19 +27,4 @@ class Event
      * @ORM\Column(type="string", length=16)
      */
     private string $storageLocation;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function getCreationDate(): \DateTimeImmutable
-    {
-        return $this->creationDate;
-    }
-
-    public function getStorageLocation(): string
-    {
-        return $this->storageLocation;
-    }
 }
