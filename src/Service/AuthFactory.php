@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
-namespace App\Service;
 
+namespace App\Service;
 
 use App\DomainModel\Repository\EarthScientistRepository;
 use App\DomainModel\Repository\MarsScientistRepository;
