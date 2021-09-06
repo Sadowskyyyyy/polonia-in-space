@@ -25,26 +25,12 @@ class ResarchStationStore implements ResarchStationRepositoryInterface
 
     public function getResarchStationByName(string $name): AbstractResearchStation
     {
-        $entity = null;
-        $response = null;
-
-        switch ($name) {
-            case self::MARS_SCIENTIST:
-                /** @var MarsResearchStation $entity */
-                $entity = $this->entityManager->getRepository(MarsResearchStation::class)->find(1);
-                $response = MarsResearchStation::toDomain($entity);
-                break;
-            case self::SPACE_SCIENTIST:
-                /** @var SpaceResearchStation $entity */
-                $entity = $this->entityManager->getRepository(SpaceResearchStation::class)->find(1);
-                $response = SpaceResearchStation::toDomain($entity);
-                break;
-            case self::EARTH_SCIENTIST:
-                /** @var EarthResearchStation $entity */
-                $entity = $this->entityManager->getRepository(EarthResearchStation::class)->find(1);
-                $response = EarthResearchStation::toDomain($entity);
-                break;
-        }
+        $response = match ($name) {
+            self::EARTH_SCIENTIST => $this->getEarthResearchStationDomainModel(),
+            self::SPACE_SCIENTIST => $this->getSpaceResearchStationDomainModel(),
+            self::MARS_SCIENTIST => $this->getMarsResearchStationDomainModel(),
+            default => throw new \Exception('Cannot find research station named: '.$name)
+        };
 
         if (true === empty($entity)) {
             throw new NotFoundException();
@@ -61,27 +47,41 @@ class ResarchStationStore implements ResarchStationRepositoryInterface
 
     public function getResarchStationEntityByName(string $name): mixed
     {
-        $entity = null;
-
-        switch ($name) {
-            case self::MARS_SCIENTIST:
-                /** @var MarsResearchStation $entity */
-                $entity = $this->entityManager->getRepository(MarsResearchStation::class)->find(1);
-                break;
-            case self::SPACE_SCIENTIST:
-                /** @var SpaceResearchStation $entity */
-                $entity = $this->entityManager->getRepository(SpaceResearchStation::class)->find(1);
-                break;
-            case self::EARTH_SCIENTIST:
-                /** @var EarthResearchStation $entity */
-                $entity = $this->entityManager->getRepository(EarthResearchStation::class)->find(1);
-                break;
-        }
+        $entity = match ($name) {
+            self::MARS_SCIENTIST => $this->entityManager->getRepository(MarsResearchStation::class)->find(1),
+            self::SPACE_SCIENTIST => $this->entityManager->getRepository(SpaceResearchStation::class)->find(1),
+            self::EARTH_SCIENTIST => $this->entityManager->getRepository(EarthResearchStation::class)->find(1),
+            default => null,
+        };
 
         if (true === empty($entity)) {
             throw new NotFoundException();
         }
 
         return $entity;
+    }
+
+    private function getMarsResearchStationDomainModel(): \App\DomainModel\MarsResearchStation
+    {
+        /** @var MarsResearchStation $entity */
+        $entity = $this->entityManager->getRepository(MarsResearchStation::class)->find(1);
+
+        return MarsResearchStation::toDomain($entity);
+    }
+
+    private function getEarthResearchStationDomainModel(): \App\DomainModel\EarthResearchStation
+    {
+        /** @var EarthResearchStation $entity */
+        $entity = $this->entityManager->getRepository(EarthResearchStation::class)->find(1);
+
+        return EarthResearchStation::toDomain($entity);
+    }
+
+    private function getSpaceResearchStationDomainModel(): \App\DomainModel\SpaceResearchStation
+    {
+        /** @var SpaceResearchStation $entity */
+        $entity = $this->entityManager->getRepository(SpaceResearchStation::class)->find(1);
+
+        return SpaceResearchStation::toDomain($entity);
     }
 }

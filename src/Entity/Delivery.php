@@ -17,32 +17,32 @@ class Delivery
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    public ?int $id;
 
     /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="delivery")
      */
-    private Collection $products;
+    public Collection $products;
 
     /**
      * @ORM\Column(type="string", length=20)
      */
-    private string $destination;
+    public string $destination;
 
     /**
      * @ORM\Column(type="string", length=15)
      */
-    private string $status;
+    public string $status;
 
     /**
      * @ORM\Column(type="date")
      */
-    private \DateTimeInterface $postDate;
+    public \DateTimeInterface $postDate;
 
     /**
      * @ORM\Column(type="date")
      */
-    private \DateTimeInterface $pickUpDate;
+    public \DateTimeInterface $pickUpDate;
 
     public function __construct(Collection $products, string $destination, string $status, \DateTimeInterface $postDate, \DateTimeInterface $pickUpDate)
     {
@@ -51,73 +51,5 @@ class Delivery
         $this->status = $status;
         $this->postDate = $postDate;
         $this->pickUpDate = $pickUpDate;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): self
-    {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->setDelivery($this);
-        }
-
-        return $this;
-    }
-
-    public function getDestination(): ?string
-    {
-        return $this->destination;
-    }
-
-    public function setDestination(string $destination): self
-    {
-        $this->destination = $destination;
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    public function getPostDate(): ?\DateTimeInterface
-    {
-        return $this->postDate;
-    }
-
-    public function setPostDate(\DateTimeInterface $postDate): self
-    {
-        $this->postDate = $postDate;
-
-        return $this;
-    }
-
-    public function getPickUpDate(): ?\DateTimeInterface
-    {
-        return $this->pickUpDate;
-    }
-
-    public function setPickUpDate(\DateTimeInterface $pickUpDate): self
-    {
-        $this->pickUpDate = $pickUpDate;
-
-        return $this;
     }
 }

@@ -11,14 +11,4 @@ class Product
     {
         $this->category = $category;
     }
-
-    public function getCategory(): string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(string $category): void
-    {
-        $this->category = $category;
-    }
 }

@@ -16,30 +16,15 @@ class Event
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    public int $id;
 
     /**
      * @ORM\Column(type="date")
      */
-    private \DateTimeImmutable $creationDate;
+    public \DateTimeImmutable $creationDate;
 
     /**
      * @ORM\Column(type="string", length=16)
      */
-    private string $storageLocation;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function getCreationDate(): \DateTimeImmutable
-    {
-        return $this->creationDate;
-    }
-
-    public function getStorageLocation(): string
-    {
-        return $this->storageLocation;
-    }
+    public string $storageLocation;
 }

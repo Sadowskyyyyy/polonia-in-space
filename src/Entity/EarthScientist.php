@@ -5,6 +5,7 @@ namespace App\Entity;
 
 use App\Repository\EarthScientistRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=EarthScientistRepository::class)
@@ -16,76 +17,41 @@ class EarthScientist
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    public int $id;
 
     /**
      * @ORM\Column(type="string", length=32)
      */
-    private string $name;
+    public string $name;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private string $surname;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $apikey;
+    public string $surname;
 
     /**
      * @ORM\ManyToOne(targetEntity=EarthResearchStation::class, inversedBy="scientists")
      * @ORM\JoinColumn(nullable=false)
      */
-    private EarthResearchStation $station;
+    public EarthResearchStation $station;
 
-    public function __construct(int $id, string $name, string $surname, string $apikey, EarthResearchStation $station)
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    public UserInterface $securityUser;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    public string $apikey;
+
+    public function __construct(string $name, string $surname, EarthResearchStation $station, UserInterface $securityUser, string $apikey)
     {
-        $this->id = $id;
         $this->name = $name;
         $this->surname = $surname;
+        $this->station = $station;
+        $this->securityUser = $securityUser;
         $this->apikey = $apikey;
-        $this->station = $station;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getSurname(): ?string
-    {
-        return $this->surname;
-    }
-
-    public function setSurname(string $surname): self
-    {
-        $this->surname = $surname;
-
-        return $this;
-    }
-
-    public function getStation(): ?EarthResearchStation
-    {
-        return $this->station;
-    }
-
-    public function setStation(?EarthResearchStation $station): self
-    {
-        $this->station = $station;
-
-        return $this;
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\UI\Rest\Controller\MarsScientist;
 
 use App\Command\MarkMarsScientistAsMissingOrDeadCommand;
-use App\Command\RegisterScientistCommand;
 use App\Service\MarkMarsScientistAsMissingOrDeadCommandValidator;
 use App\UI\Rest\Controller\CommandController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,17 +21,6 @@ class MarsScientistsCommandController extends CommandController
     {
         $this->validator = $validator;
         parent::__construct($bus);
-    }
-
-    /**
-     * @Route(methods={"POST"})
-     */
-    public function registerScientist(Request $request): Response
-    {
-        $data = json_decode($request->getContent(), true);
-        $this->handle(new RegisterScientistCommand($data['name'], $data['surname']));
-
-        return new Response([], 200);
     }
 
     /**

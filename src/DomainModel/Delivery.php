@@ -60,28 +60,8 @@ class Delivery
         return $this->sender;
     }
 
-    public function getProduct(): Product
-    {
-        return $this->product;
-    }
-
-    public function getDestination(): string
-    {
-        return $this->destination;
-    }
-
     public function getStatus(): string
     {
         return $this->status;
-    }
-
-    public function getPostDate(): \DateTimeInterface
-    {
-        return $this->postDate;
-    }
-
-    public function getPickUpDate(): \DateTimeInterface
-    {
-        return $this->pickUpDate;
     }
 }
