@@ -29,7 +29,7 @@ class ScientistFactory
         $this->entityManager = $entityManager;
     }
 
-    public function createFromCommand(RegisterScientistCommand $command): EarthScientist|SpaceScientist|MarsScientistEntity
+    public function createFromCommand(RegisterScientistCommand $command): AbstractScientist
     {
         $station = $this->researchStationRepository->getResarchStationEntityByName($command->station);
         $apikey = $this->apiKeyGenerator->generateApiKey();
@@ -63,6 +63,7 @@ class ScientistFactory
                 new ArrayCollection(),
                 new User($command->name, ['ROLE_MARS_SCIENTIST'], $apikey),
             ),
+            default => throw new \Exception('Cannot find station' . $command->station)
         };
 
         return $scientist;

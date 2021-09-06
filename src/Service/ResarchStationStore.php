@@ -29,6 +29,7 @@ class ResarchStationStore implements ResarchStationRepositoryInterface
             self::EARTH_SCIENTIST => $this->getEarthResearchStationDomainModel(),
             self::SPACE_SCIENTIST => $this->getSpaceResearchStationDomainModel(),
             self::MARS_SCIENTIST => $this->getMarsResearchStationDomainModel(),
+            default => throw new \Exception('Cannot find research station named: '.$name)
         };
 
         if (true === empty($entity)) {
