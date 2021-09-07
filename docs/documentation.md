@@ -1,6 +1,6 @@
 # Authorization
 
-Application use API token to authorize requests. No other authorization protocols are supported.
+Application use API token to authorize requests. No other authorization methods are supported.
 
 # Authorizing requests with API token
 
