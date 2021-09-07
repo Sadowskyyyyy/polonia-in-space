@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ExpeditionQueryController extends QueryController
 {
-
     public function __construct(MessageBusInterface $queryBus)
     {
         parent::__construct($queryBus);

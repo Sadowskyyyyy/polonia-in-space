@@ -22,7 +22,7 @@ final class DoctrineExpeditionRepository extends ServiceEntityRepository impleme
 
     public function findById(int $id): Expedition
     {
-        $expedition = $this->find($id);
+        $expedition = $this->entityManager->createQuery('SELECT * FROM expedition where id=' . $id)->getResult();
 
         if (true === empty($expedition)) {
             throw new NotFoundException();
@@ -40,5 +40,10 @@ final class DoctrineExpeditionRepository extends ServiceEntityRepository impleme
     {
         $this->entityManager->persist($expedition);
         $this->entityManager->flush();
+    }
+
+    public function findAll(): array
+    {
+        return $this->entityManager->createQuery('SELECT * FROM expedition')->getResult();
     }
 }
