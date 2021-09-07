@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Exception\CannotAddStartedOrFinishedExpeditionException;
 use App\Exception\ExpeditionIsNotAlreadyFinishedException;
 use App\Exception\ScientistIsAliveException;
+use App\Expeditions\Domain\Expedition;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class MarsScientist extends AbstractScientist

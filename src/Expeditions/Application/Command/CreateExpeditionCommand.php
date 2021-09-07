@@ -7,5 +7,4 @@ use App\Shared\Application\Command;
 
 class CreateExpeditionCommand implements Command
 {
-
 }

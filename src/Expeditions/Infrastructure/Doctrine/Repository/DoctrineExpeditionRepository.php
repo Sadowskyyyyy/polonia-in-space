@@ -24,19 +24,19 @@ final class DoctrineExpeditionRepository extends ServiceEntityRepository impleme
     {
         $expedition = $this->find($id);
 
-        if (empty($expedition) === true) {
+        if (true === empty($expedition)) {
             throw new NotFoundException();
         }
 
         return $expedition;
     }
 
-    public function delete($expedition): void
+    public function delete(Expedition $expedition): void
     {
         $this->entityManager->remove($expedition);
     }
 
-    public function save(Expedition $expedition)
+    public function save(Expedition $expedition): void
     {
         $this->entityManager->persist($expedition);
         $this->entityManager->flush();

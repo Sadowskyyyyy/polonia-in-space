@@ -7,7 +7,7 @@ use App\Repository\ExpeditionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ExpeditionRepository::class)
+ * @ORM\Entity()
  */
 class Expedition
 {
@@ -44,9 +44,9 @@ class Expedition
      */
     private bool $isStarted;
 
-    public static function toDomain(self $expedition): \App\DomainModel\Expedition
+    public static function toDomain(self $expedition): \App\Expeditions\Domain\Expedition
     {
-        return new \App\DomainModel\Expedition(
+        return new \App\Expeditions\Domain\Expedition(
             $expedition->id,
             MarsScientistEntity::toDomain($expedition->creator),
             $expedition->isFinished,

@@ -21,7 +21,7 @@ class ExpeditionCommandController extends CommandController
     /**
      * @Route("/expeditions", name="CREATE_EXPEDITION", methods={"POST"})
      */
-    public function createExpedition(Request $request)
+    public function createExpedition(Request $request): Response
     {
         $this->handle(new CreateExpeditionCommand());
 
@@ -31,7 +31,7 @@ class ExpeditionCommandController extends CommandController
     /**
      * @Route("/expeditions/{id}", name="DELETE_EXPEDITION", methods={"DELETE"})
      */
-    public function kads(Request $request, int $id)
+    public function kads(Request $request, int $id): Response
     {
         $this->handle(new DeleteExpeditionCommand($id));
 

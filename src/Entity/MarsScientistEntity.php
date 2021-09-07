@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass=MarsScientistRepository::class)
+ * @ORM\Entity()
  */
 class MarsScientistEntity
 {
