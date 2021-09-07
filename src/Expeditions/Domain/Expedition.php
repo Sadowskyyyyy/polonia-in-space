@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\DomainModel;
+namespace App\Expeditions\Domain;
 
+use App\DomainModel\MarsScientist;
 use App\Exception\CannotFinishExpeditionWhichHasNotStartedYetException;
 use App\Exception\CannotGenerateConclusionForNotFinishedExpeditionException;
 use App\Exception\CannotStartFinishedExpeditionException;

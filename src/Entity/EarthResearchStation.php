@@ -3,12 +3,11 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\EarthResarchStationRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EarthResarchStationRepository::class)
+ * @ORM\Entity()
  */
 class EarthResearchStation
 {
