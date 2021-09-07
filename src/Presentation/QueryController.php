@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\UI\Rest\Controller;
+namespace App\Presentation;
 
 use App\Shared\Application\Query;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

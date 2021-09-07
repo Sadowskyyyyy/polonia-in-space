@@ -1,10 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Expeditions\Presentation;
+namespace App\Presentation\Expedition;
 
-use App\UI\Rest\Controller\CommandController;
+use App\Expeditions\Application\Command\DeleteExpeditionCommand;
+use App\Presentation\CommandController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,13 +23,19 @@ class ExpeditionCommandController extends CommandController
     public function createExpedition(Request $request)
     {
         $data = json_decode($request->getContent(), true);
+
+        $this->handle(new CreateExpeditionCommand());
+
+        return new Response([], 200);
     }
 
     /**
-     * @Route("/expeditions", name="CREATE_EXPEDITION", methods={"DELETE"})
+     * @Route("/expeditions/{id}", name="DELETE_EXPEDITION", methods={"DELETE"})
      */
-    public function createExpedition(Request $request)
+    public function deleteExpedition(Request $request, int $id)
     {
-        $data = json_decode($request->getContent(), true);
+        $this->handle(new DeleteExpeditionCommand($id));
+
+        return new Response([], 204);
     }
 }
