@@ -16,8 +16,8 @@ services:
     App\:
         resource: '../src/'
 
-    App\UI\Rest\Controller\:
-        resource: '../src/UI/Rest/Controller/'
+    App\Presentation\:
+        resource: '../src/Presentation/'
         tags: ['controller.service_arguments']
 
     # controllers are imported separately to make sure services can be injected

@@ -9,4 +9,5 @@ interface ExpeditionRepository
 {
     public function findById(int $id): Expedition;
     public function delete(Expedition $expedition): void;
+    public function save(Expedition $expedition);
 }
