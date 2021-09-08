@@ -16,12 +16,12 @@ services:
     App\:
         resource: '../src/'
 
-    App\Presentation\:
-        resource: '../src/Presentation/'
+    App\Expeditions\Presentation\:
+        resource: '../src/Expeditions/Presentation/'
         tags: ['controller.service_arguments']
 
-    App\DomainModel\Repository\MarsScientistRepository:
-        class: App\Infrastructure\Memory\Repository\MemoryMarsScientistRepository
+    App\Expeditions\Domain\MarsScientistRepository:
+        class: App\Expeditions\Infrastructure\Memory\Repository\MemoryMarsScientistRepository
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
