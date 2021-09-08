@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Infrastructure\Doctrine\Repository;
+namespace App\Expeditions\Infrastructure\Doctrine\Repository;
 
-use App\DomainModel\Repository\MarsScientistRepository;
 use App\Entity\MarsScientistEntity;
+use App\Expeditions\Domain\MarsScientistRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,7 +17,7 @@ final class DoctrineMarsScientistRepository extends ServiceEntityRepository impl
 
     public function existsCheckByApikey(string $apikey): bool
     {
-        return true === !empty($this->findByApikey($apikey));
+        return $this->findByApikey($apikey) !== null;
     }
 
     public function findByApikey(string $apikey): MarsScientistEntity

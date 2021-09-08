@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Expeditions\Application\Handler;
 
-use App\DomainModel\Repository\ExpeditionRepository;
 use App\Expeditions\Application\Query\FindExpeditionsQuery;
+use App\Expeditions\Domain\ExpeditionRepository;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 

@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Presentation\Expedition;
+namespace App\Expeditions\Presentation;
 
-use App\DomainModel\Repository\ExpeditionRepository;
 use App\Expeditions\Application\Command\CreateExpeditionCommand;
 use App\Expeditions\Application\Command\DeleteExpeditionCommand;
-use App\Presentation\CommandController;
+use App\Expeditions\Domain\ExpeditionRepository;
+use App\Presentation\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ExpeditionQueryController extends CommandController
+class ExpeditionQueryController extends AbstractController
 {
     /**
      * @Route("/expeditions/{id}", name="FIND_EXPEDITION", methods={"GET"})
@@ -44,7 +44,7 @@ class ExpeditionQueryController extends CommandController
     /**
      * @Route("/expeditions/{id}", name="DELETE_EXPEDITION", methods={"DELETE"})
      */
-    public function deleteExpedition(Request $request, int $id): Response
+    public function deleteExpedition(int $id): Response
     {
         $this->handle(new DeleteExpeditionCommand($id));
 

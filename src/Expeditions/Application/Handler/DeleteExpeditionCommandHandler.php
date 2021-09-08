@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Expeditions\Application\Handler;
 
-use App\DomainModel\Repository\ExpeditionRepository;
 use App\Expeditions\Application\Command\DeleteExpeditionCommand;
+use App\Expeditions\Domain\ExpeditionRepository;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class DeleteExpeditionCommandHandler implements MessageHandlerInterface

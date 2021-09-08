@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Infrastructure\Doctrine\Repository;
+namespace App\Expeditions\Infrastructure\Doctrine\Repository;
 
-use App\DomainModel\Repository\UserRepository;
 use App\Entity\User;
+use App\Expeditions\Domain\UserRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

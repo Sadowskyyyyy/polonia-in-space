@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace App\Expeditions\Application\Handler;
 
-use App\DomainModel\Repository\ExpeditionRepository;
-use App\DomainModel\Repository\MarsScientistRepository;
 use App\Entity\Expedition;
 use App\Expeditions\Application\Command\CreateExpeditionCommand;
+use App\Expeditions\Domain\ExpeditionRepository;
+use App\Expeditions\Domain\MarsScientistRepository;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Security\Core\Security;
 
