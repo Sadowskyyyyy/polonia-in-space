@@ -23,6 +23,16 @@ class UserCommandController
 
         $repository->save(new User($data['name'], [], 'xd'));
 
-        return JsonResponse::create(utf8_encode($apikey), 200, array('Content-Type' => 'Accept: application/json;charset=utf-8'));
+        return new JsonResponse(utf8_encode($apikey));
+    }
+
+    /**
+     * @Route("/users/{id}", name="GET_USER")
+     */
+    public function findUserById(int $id, UserRepository $repository): Response
+    {
+        $user = $repository->findById($id);
+
+        return new JsonResponse($user);
     }
 }

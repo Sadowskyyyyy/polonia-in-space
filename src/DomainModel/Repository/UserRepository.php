@@ -9,4 +9,5 @@ interface UserRepository
 {
     public function findOneByApikey(string $apikey): User;
     public function save(User $user): void;
+    public function findById(int $id);
 }

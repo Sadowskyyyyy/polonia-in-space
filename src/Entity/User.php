@@ -10,7 +10,7 @@ use function uniqid;
  * @ORM\Entity()
  * @ORM\Table(name="`user`")
  */
-class User implements UserInterface
+class User implements UserInterface, \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -66,7 +66,7 @@ class User implements UserInterface
 
     public function getUsername(): string
     {
-        return (string) $this->apikey;
+        return (string)$this->apikey;
     }
 
     public function getRoles(): array
@@ -123,5 +123,14 @@ class User implements UserInterface
     public function getPassword(): string
     {
         return $this->apikey;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'roles' => $this->roles,
+            'apikey' => $this->apikey
+        ];
     }
 }

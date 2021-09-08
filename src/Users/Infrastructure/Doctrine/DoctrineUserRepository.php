@@ -5,6 +5,7 @@ namespace App\Users\Infrastructure\Doctrine;
 
 use App\DomainModel\Repository\UserRepository;
 use App\Entity\User;
+use App\Shared\Domain\Exception\NotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
@@ -26,5 +27,16 @@ final class DoctrineUserRepository implements UserRepository
     {
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+    }
+
+    public function findById(int $id)
+    {
+        $user = $this->repository->find($id);
+
+        if (empty($user) === true) {
+            throw new NotFoundException();
+        }
+
+        return $user;
     }
 }
