@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\DomainModel\Repository\UserRepository;
+use App\Users\Domain\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

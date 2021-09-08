@@ -3,15 +3,16 @@ declare(strict_types=1);
 
 namespace App\UI\Rest\Controller\User;
 
-use App\DomainModel\Repository\UserRepository;
 use App\Entity\User;
 use App\Service\ApiKeyGenerator;
+use App\Users\Domain\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class UserCommandController
+class UserCommandController extends AbstractController
 {
     /**
      * @Route("/users", name="CREATE_USER")

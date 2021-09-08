@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\DomainModel\Repository;
+namespace App\Users\Domain\Repository;
 
 use App\Entity\User;
 
 interface UserRepository
 {
+    public function findById(int $id): User;
     public function findOneByApikey(string $apikey): User;
     public function save(User $user): void;
-    public function findById(int $id);
 }
