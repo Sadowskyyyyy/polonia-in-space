@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity()
  */
-class Expedition
+class Expedition implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -20,9 +20,14 @@ class Expedition
 
     /**
      * @ORM\ManyToOne(targetEntity=MarsScientistEntity::class, inversedBy="expeditionEntities")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
-    private MarsScientistEntity $creator;
+    private ?MarsScientistEntity $creator;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private string $name;
 
     /**
      * @ORM\Column(type="date")
@@ -32,35 +37,23 @@ class Expedition
     /**
      * @ORM\Column(type="date")
      */
-    private ?\DateTimeInterface $plannedStartDate;
+    private \DateTimeInterface $plannedStartDate;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private bool $isFinished;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private bool $isStarted;
-
-    public static function toDomain(self $expedition): \App\Expeditions\Domain\Expedition
+    public function __construct(?MarsScientistEntity $creator, string $name, \DateTimeInterface $creationDate, \DateTimeInterface $plannedStartDate)
     {
-        return new \App\Expeditions\Domain\Expedition(
-            $expedition->id,
-            MarsScientistEntity::toDomain($expedition->creator),
-            $expedition->isFinished,
-            $expedition->isStarted
-        );
-    }
-
-    public function __construct(MarsScientistEntity $creator, \DateTimeInterface $creationDate, ?\DateTimeInterface $plannedStartDate, bool $isFinished, bool $isStarted)
-    {
-        $this->id = 1;
         $this->creator = $creator;
+        $this->name = $name;
         $this->creationDate = $creationDate;
         $this->plannedStartDate = $plannedStartDate;
-        $this->isFinished = $isFinished;
-        $this->isStarted = $isStarted;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'plannedStartDate' => $this->plannedStartDate->format('Y-m-d'),
+            'creationDate'=>$this->creationDate->format('Y-m-d')
+        ];
     }
 }

@@ -25,15 +25,14 @@ class CreateExpeditionCommandHandler implements MessageHandlerInterface
 
     public function __invoke(CreateExpeditionCommand $command): void
     {
-        $user = $this->security->getUser();
-        $scientist = $this->marsScientistRepository->findByApikey($user->getUsername());
+//        $user = $this->security->getUser();
+        $scientist = $this->marsScientistRepository->findByApikey('asdsa');
 
         $expedition = new Expedition(
-            creator: $scientist,
+            creator: null,
+            name: $command->name,
             creationDate: new \DateTime(),
-            plannedStartDate: new \DateTime(),
-            isFinished: false,
-            isStarted: false
+            plannedStartDate: \DateTime::createFromFormat('Y-m-d', $command->plannedStartDate)
         );
 
         $this->expeditionRepository->save($expedition);

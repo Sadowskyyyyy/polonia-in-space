@@ -1,9 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Expeditions\Application\Handler;
 
 use App\DomainModel\Repository\ExpeditionRepository;
 use App\Expeditions\Application\Query\FindExpeditionsQuery;
+use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 class FindExpeditionsQueryHandler implements MessageHandlerInterface
@@ -15,9 +17,8 @@ class FindExpeditionsQueryHandler implements MessageHandlerInterface
         $this->expeditionRepository = $expeditionRepository;
     }
 
-    public function __invoke(FindExpeditionsQuery $query): array
+    public function __invoke(FindExpeditionsQuery $query): Envelope
     {
-        return $this->expeditionRepository->findAll();
+        return new Envelope($this->expeditionRepository->findAll());
     }
-
 }

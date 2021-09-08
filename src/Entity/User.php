@@ -2,13 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use function uniqid;
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Entity()
  * @ORM\Table(name="`user`")
  */
 class User implements UserInterface
@@ -28,23 +26,11 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $uuid;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private string $apikey;
 
-    /**
-     * @ORM\Column(type="string", length=34)
-     */
-    private string $name;
-
-    public function __construct(string $name, array $roles, string $apikey)
+    public function __construct(array $roles, string $apikey)
     {
-        $this->name = $name;
         $this->roles = $roles;
-        $this->uuid = uniqid();
         $this->apikey = $apikey;
     }
 
@@ -53,21 +39,9 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getUsername(): string
     {
-        return (string) $this->apikey;
+        return $this->apikey;
     }
 
     public function getRoles(): array
@@ -95,18 +69,6 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getUuid(): ?string
-    {
-        return $this->uuid;
-    }
-
-    public function setUuid(string $uuid): self
-    {
-        $this->uuid = $uuid;
-
-        return $this;
     }
 
     public function getApikey(): ?string

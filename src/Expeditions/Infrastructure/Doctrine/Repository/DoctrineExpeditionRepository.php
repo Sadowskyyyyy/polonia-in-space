@@ -6,23 +6,21 @@ namespace App\Expeditions\Infrastructure\Doctrine\Repository;
 use App\DomainModel\Repository\ExpeditionRepository;
 use App\Entity\Expedition;
 use App\Shared\Domain\Exception\NotFoundException;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityRepository;
 
-final class DoctrineExpeditionRepository extends ServiceEntityRepository implements ExpeditionRepository
+final class DoctrineExpeditionRepository implements ExpeditionRepository
 {
-    private EntityManagerInterface $entityManager;
+    private EntityRepository $repository;
 
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
+    public function __construct(private EntityManagerInterface $entityManager)
     {
-        parent::__construct($registry, Expedition::class);
-        $this->entityManager = $entityManager;
+        $this->repository = $this->entityManager->getRepository(Expedition::class);
     }
 
     public function findById(int $id): Expedition
     {
-        $expedition = $this->entityManager->createQuery('SELECT * FROM expedition where id=' . $id)->getResult();
+        $expedition = $this->repository->find($id);
 
         if (true === empty($expedition)) {
             throw new NotFoundException();
@@ -34,6 +32,7 @@ final class DoctrineExpeditionRepository extends ServiceEntityRepository impleme
     public function delete(Expedition $expedition): void
     {
         $this->entityManager->remove($expedition);
+        $this->entityManager->flush();
     }
 
     public function save(Expedition $expedition): void
@@ -44,6 +43,6 @@ final class DoctrineExpeditionRepository extends ServiceEntityRepository impleme
 
     public function findAll(): array
     {
-        return $this->entityManager->createQuery('SELECT * FROM expedition')->getResult();
+        return $this->repository->findAll();
     }
 }

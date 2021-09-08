@@ -3,38 +3,51 @@ declare(strict_types=1);
 
 namespace App\Presentation\Expedition;
 
-use App\Expeditions\Application\Query\FindExpeditionByIdQuery;
-use App\Expeditions\Application\Query\FindExpeditionsQuery;
-use App\Presentation\QueryController;
+use App\DomainModel\Repository\ExpeditionRepository;
+use App\Expeditions\Application\Command\CreateExpeditionCommand;
+use App\Expeditions\Application\Command\DeleteExpeditionCommand;
+use App\Presentation\CommandController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ExpeditionQueryController extends QueryController
+class ExpeditionQueryController extends CommandController
 {
-    public function __construct(MessageBusInterface $queryBus)
-    {
-        parent::__construct($queryBus);
-    }
-
     /**
      * @Route("/expeditions/{id}", name="FIND_EXPEDITION", methods={"GET"})
      */
-    public function findExpeditionById(int $id): Response
+    public function findExpeditionById(int $id, ExpeditionRepository $repository): Response
     {
-        $response = $this->ask(new FindExpeditionByIdQuery($id));
-
-        return new JsonResponse($response);
+        return new JsonResponse($repository->findById($id));
     }
 
     /**
      * @Route("/expeditions", name="FIND_EXPEDITIONS", methods={"GET"})
      */
-    public function findExpeditions(): Response
+    public function findExpeditions(ExpeditionRepository $repository): Response
     {
-        $response = $this->ask(new FindExpeditionsQuery());
+        return new JsonResponse($repository->findAll());
+    }
+    /**
+     * @Route("/expeditions", name="CREATE_EXPEDITION", methods={"POST"})
+     */
+    public function createExpedition(Request $request): Response
+    {
+        $data = json_decode($request->getContent(), true);
 
-        return new JsonResponse($response);
+        $this->handle(new CreateExpeditionCommand($data['name'], $data['plannedDate']));
+
+        return new JsonResponse([], 200);
+    }
+
+    /**
+     * @Route("/expeditions/{id}", name="DELETE_EXPEDITION", methods={"DELETE"})
+     */
+    public function deleteExpedition(Request $request, int $id): Response
+    {
+        $this->handle(new DeleteExpeditionCommand($id));
+
+        return new JsonResponse([], 204);
     }
 }
