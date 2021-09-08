@@ -17,6 +17,7 @@ class ExpeditionControllerTest extends WebTestCase
 
     public function test(): void
     {
+        //CREATE EXPEDITION X
         $this->client->request(
             method: 'POST',
             uri: '/expeditions',
@@ -26,11 +27,19 @@ class ExpeditionControllerTest extends WebTestCase
             ], JSON_THROW_ON_ERROR),
         );
         $response = json_decode($this->client->getResponse()->getContent(), true);
+
+        //GET EXPEDITION X
         $this->client->request(
             method: 'GET',
             uri: '/expeditions/' . $response[0]['id'],
         );
         self::assertResponseIsSuccessful();
+
+        //GET ALL EXPEDITIONS
+
+        //DELETE EXPEDITION X
+
+        //CHECK THAT EXPEDITION X NOT EXISTS
     }
 
     public function testDeletingExpedition(): void
@@ -46,5 +55,4 @@ class ExpeditionControllerTest extends WebTestCase
 
         self::assertResponseIsSuccessful();
     }
-
 }
