@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Expeditions\Infrastructure\Doctrine\Repository;
 
-use App\Entity\Expedition;
+use App\Expeditions\Domain\Entity\Expedition;
 use App\Expeditions\Domain\ExpeditionRepository;
 use App\Shared\Domain\Exception\NotFoundException;
 use Doctrine\ORM\EntityManagerInterface;

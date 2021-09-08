@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Expeditions\Domain;
 
-use App\Entity\Expedition;
+use App\Expeditions\Domain\Entity\Expedition;
 
 interface ExpeditionRepository
 {

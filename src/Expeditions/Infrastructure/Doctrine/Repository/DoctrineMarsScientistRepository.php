@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Expeditions\Infrastructure\Doctrine\Repository;
 
-use App\Entity\MarsScientistEntity;
+use App\Expeditions\Domain\Entity\MarsScientist;
 use App\Expeditions\Domain\MarsScientistRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -12,15 +12,15 @@ final class DoctrineMarsScientistRepository extends ServiceEntityRepository impl
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, MarsScientistEntity::class);
+        parent::__construct($registry, MarsScientist::class);
     }
 
     public function existsCheckByApikey(string $apikey): bool
     {
-        return $this->findByApikey($apikey) !== null;
+        return null !== $this->findByApikey($apikey);
     }
 
-    public function findByApikey(string $apikey): MarsScientistEntity
+    public function findByApikey(string $apikey): MarsScientist
     {
         return $this->findOneBy(['apikey' => $apikey]);
     }

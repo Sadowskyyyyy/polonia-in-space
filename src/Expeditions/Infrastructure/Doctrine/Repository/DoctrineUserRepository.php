@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Expeditions\Infrastructure\Doctrine\Repository;
 
-use App\Entity\User;
+use App\Expeditions\Domain\Entity\User;
 use App\Expeditions\Domain\UserRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,6 +17,12 @@ final class DoctrineUserRepository extends ServiceEntityRepository implements Us
 
     public function findOneByApikey(string $apikey): User
     {
-        return $this->findOneBy(['apikey' => $apikey]);
+        $user = $this->findOneBy(['apikey' => $apikey]);
+
+        if (null === $user) {
+            throw new \Exception();
+        }
+
+        return $user;
     }
 }

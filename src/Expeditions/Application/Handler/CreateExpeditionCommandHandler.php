@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Expeditions\Application\Handler;
 
-use App\Entity\Expedition;
 use App\Expeditions\Application\Command\CreateExpeditionCommand;
+use App\Expeditions\Domain\Entity\Expedition;
 use App\Expeditions\Domain\ExpeditionRepository;
 use App\Expeditions\Domain\MarsScientistRepository;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -28,13 +28,19 @@ class CreateExpeditionCommandHandler implements MessageHandlerInterface
 //        $user = $this->security->getUser();
         $scientist = $this->marsScientistRepository->findByApikey('asdsa');
 
-        $expedition = new Expedition(
-            creator: null,
-            name: $command->name,
-            creationDate: new \DateTime(),
-            plannedStartDate: \DateTime::createFromFormat('Y-m-d', $command->plannedStartDate)
-        );
+        $date = \DateTime::createFromFormat('Y-m-d', $command->plannedStartDate);
 
-        $this->expeditionRepository->save($expedition);
+        if (false === $date) {
+            throw new \Exception();
+        }
+
+        $this->expeditionRepository->save(
+            new Expedition(
+                creator: null,
+                name: $command->name,
+                creationDate: new \DateTime(),
+                plannedStartDate: $date,
+            )
+        );
     }
 }

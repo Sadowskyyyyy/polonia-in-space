@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Expeditions\Domain;
 
-use App\Entity\User;
+use App\Expeditions\Domain\Entity\User;
 
 interface UserRepository
 {

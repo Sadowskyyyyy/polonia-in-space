@@ -6,13 +6,13 @@ namespace App\Expeditions\Presentation;
 use App\Expeditions\Application\Command\CreateExpeditionCommand;
 use App\Expeditions\Application\Command\DeleteExpeditionCommand;
 use App\Expeditions\Domain\ExpeditionRepository;
-use App\Presentation\AbstractController;
+use App\Expeditions\Framework\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ExpeditionQueryController extends AbstractController
+class ExpeditionQueryController extends Controller
 {
     /**
      * @Route("/expeditions/{id}", name="FIND_EXPEDITION", methods={"GET"})

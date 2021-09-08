@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Expeditions\Domain\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -18,10 +18,10 @@ class Expedition implements \JsonSerializable
     private int $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=MarsScientistEntity::class, inversedBy="expeditionEntities")
+     * @ORM\ManyToOne(targetEntity=MarsScientist::class, inversedBy="expeditionEntities")
      * @ORM\JoinColumn(nullable=true)
      */
-    private ?MarsScientistEntity $creator;
+    private ?MarsScientist $creator;
 
     /**
      * @ORM\Column(type="string")
@@ -38,7 +38,7 @@ class Expedition implements \JsonSerializable
      */
     private \DateTimeInterface $plannedStartDate;
 
-    public function __construct(?MarsScientistEntity $creator, string $name, \DateTimeInterface $creationDate, \DateTimeInterface $plannedStartDate)
+    public function __construct(?MarsScientist $creator, string $name, \DateTimeInterface $creationDate, \DateTimeInterface $plannedStartDate)
     {
         $this->creator = $creator;
         $this->name = $name;

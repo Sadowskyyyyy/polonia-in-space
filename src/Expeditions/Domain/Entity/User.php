@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Expeditions\Domain\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
