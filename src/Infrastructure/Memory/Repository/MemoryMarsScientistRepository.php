@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Memory\Repository;
 
-use App\DomainModel\Repository\MarsScientistRepository;
 use App\Entity\MarsScientistEntity;
 use App\Entity\User;
+use App\Expeditions\Domain\MarsScientistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class MemoryMarsScientistRepository implements MarsScientistRepository

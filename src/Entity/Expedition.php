@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\ExpeditionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,7 +52,7 @@ class Expedition implements \JsonSerializable
             'id' => $this->id,
             'name' => $this->name,
             'plannedStartDate' => $this->plannedStartDate->format('Y-m-d'),
-            'creationDate'=>$this->creationDate->format('Y-m-d')
+            'creationDate'=>$this->creationDate->format('Y-m-d'),
         ];
     }
 }
