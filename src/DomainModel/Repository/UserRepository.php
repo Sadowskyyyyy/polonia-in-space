@@ -8,4 +8,5 @@ use App\Entity\User;
 interface UserRepository
 {
     public function findOneByApikey(string $apikey): User;
+    public function save(User $user): void;
 }
