@@ -1,9 +1,13 @@
 language: php
 php:
   - 8.0
+services:
+  - postgresql
 install:
   - composer install
 script:
+  - bin/console doctrine:database:create
+  - bin/console doctrine:schema:update --force
   - bin/phpunit
   - vendor/bin/ecs check --config vendor/landingi/php-coding-standards/ecs.php
   - vendor/bin/phpstan analyze -c phpstan.neon
