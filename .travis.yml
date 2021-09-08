@@ -6,7 +6,7 @@ services:
 install:
   - composer install
 before_script:
-  - psql -c 'create database symfony_db;' -U symfony
+  - psql -c 'create database symfony_db;' -U postgres
 script:
   - bin/console doctrine:database:create
   - bin/console doctrine:schema:update --force
