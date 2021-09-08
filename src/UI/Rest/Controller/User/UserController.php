@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class UserCommandController extends AbstractController
+class UserController extends AbstractController
 {
     /**
      * @Route("/users", name="CREATE_USER")
@@ -28,11 +28,33 @@ class UserCommandController extends AbstractController
     }
 
     /**
-     * @Route("/users/{id}", name="GET_USER")
+     * @Route("/users/{id}", name="GET_USER", methods={"GET"})
      */
     public function findUserById(int $id, UserRepository $repository): Response
     {
         $user = $repository->findById($id);
+
+        return new JsonResponse($user);
+    }
+
+    /**
+     * @Route("/users/token", name="GET_USER", methods={"GET"})
+     */
+    public function findUserByActualToken(Request $request, UserRepository $repository): Response
+    {
+        $apiToken = $request->headers->get('X-AUTH-TOKEN');
+        $user = $repository->findOneByApikey($apiToken);
+
+        return new JsonResponse($user);
+    }
+
+    /**
+     * @Route("/users/user", name="GET_USER", methods={"GET"})
+     */
+    public function findUserBySymfonySecurity(Request $request, UserRepository $repository): Response
+    {
+        $user = $this->getUser();
+        $user = $repository->findById((int)$user->getUsername());
 
         return new JsonResponse($user);
     }
