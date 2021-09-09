@@ -6,7 +6,7 @@ services:
 install:
   - composer install
 before_script:
-  - psql -c "CREATE USER symfony WITH PASSWORD 'symfony'" -U postgres -p 5400
+  - psql -c "CREATE USER symfony WITH PASSWORD 'symfony'" -U postgres
   - psql -c "CREATE DATABASE space_db;" -U postgres
 script:
   - bin/console doctrine:schema:update --force
@@ -15,6 +15,3 @@ script:
   - vendor/bin/phpstan analyze -c phpstan.neon
 addons:
   postgresql: "11"
-env:
-  global:
-    - PGPORT=5400
