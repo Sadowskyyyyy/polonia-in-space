@@ -3,11 +3,8 @@ doctrine:
     connections:
       postgres:
           driver: pdo_pgsql
-          port: 5400
-          dbname: space_db
-          user: symfony
-          password: symfony
           charset: UTF8
+          url: '%env(resolve:DATABASE_URL)%'
 
     # IMPORTANT: You MUST configure your server version,
     # either here or in the DATABASE_URL env var (see .env file)
