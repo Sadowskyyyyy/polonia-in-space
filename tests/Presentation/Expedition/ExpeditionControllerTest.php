@@ -51,7 +51,14 @@ class ExpeditionControllerTest extends WebTestCase
 
     public function testCreatingExpedition(): void
     {
-        $this->client->request('POST', '/expeditions');
+        $this->client->request(
+            method: 'POST',
+            uri: '/expeditions',
+            content: json_encode([
+                'name' => 'test-name',
+                'plannedDate' => '2021-10-23',
+            ], JSON_THROW_ON_ERROR),
+        );
 
         self::assertResponseIsSuccessful();
     }
