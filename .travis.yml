@@ -6,8 +6,6 @@ services:
 install:
   - composer install
 script:
-  - cd docker
-  - docker compose up
   - bin/console doctrine:schema:update --force
   - bin/phpunit
   - vendor/bin/ecs check --config vendor/landingi/php-coding-standards/ecs.php
