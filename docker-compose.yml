@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  posgresql:
+    image: postgres:11
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=symfony
+      - POSTGRES_PASSWORD=symfony
+      - POSTGRES_DB=space_db
+    restart: always
+    networks:
+      - polonia
+
+  php:
+    build:
+      context: ./.docker/php
+    ports:
+      - '9000:9000'
+    volumes:
+      - ./:/var/www/symfony:delegated
+    depends_on:
+      - posgresql
+    networks:
+      - polonia
+
+  nginx:
+    build:
+      context: ./.docker/nginx
+    ports:
+      - '8080:80'
+    depends_on:
+      - php
+      - posgres_db
+    networks:
+      - polonia
+
+networks:
+  polonia:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.10.0/24
