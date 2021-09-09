@@ -15,3 +15,6 @@ script:
   - vendor/bin/phpstan analyze -c phpstan.neon
 addons:
   postgresql: "11"
+env:
+  global:
+    - PGPORT=5400
