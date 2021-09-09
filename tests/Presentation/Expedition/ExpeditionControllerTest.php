@@ -26,7 +26,7 @@ class ExpeditionControllerTest extends WebTestCase
                 'plannedDate' => '2021-10-23',
             ], JSON_THROW_ON_ERROR),
         );
-        $response = json_decode($this->client->getResponse()->getContent(), true);
+//        $response = json_decode((string) $this->client->getResponse()->getContent(), true);
 
         //GET EXPEDITION X
 //        $this->client->request(
