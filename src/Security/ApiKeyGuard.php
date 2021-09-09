@@ -2,12 +2,13 @@
 
 namespace App\Security;
 
-use App\Expeditions\Domain\UserRepository;
+use App\Users\Domain\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
@@ -42,7 +43,13 @@ class ApiKeyGuard extends AbstractGuardAuthenticator
             return null;
         }
 
-        return $this->userRepository->findOneByApikey($credentials);
+        $user = $this->userRepository->findOneByApikey($credentials);
+
+        if (true === empty($user)) {
+            throw new BadCredentialsException();
+        }
+
+        return $user;
     }
 
     public function checkCredentials($credentials, UserInterface $user): bool
