@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Entity\User;
+use App\Expeditions\Domain\Entity\User;
 use App\Users\Domain\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 

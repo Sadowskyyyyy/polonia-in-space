@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Users\Infrastructure\Doctrine;
 
-use App\Entity\User;
+use App\Expeditions\Domain\Entity\User;
 use App\Shared\Domain\Exception\NotFoundException;
 use App\Users\Domain\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\UI\Rest\Controller\User;
+namespace App\Expeditions\Framework\User;
 
-use App\Entity\User;
+use App\Expeditions\Domain\Entity\User;
 use App\Service\ApiKeyGenerator;
 use App\Users\Domain\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserController extends AbstractController
 {
@@ -19,10 +20,9 @@ class UserController extends AbstractController
      */
     public function createNewUser(Request $request, UserRepository $repository, ApiKeyGenerator $apiKeyGenerator): Response
     {
-        $data = json_decode($request->getContent(), true);
         $apikey = $apiKeyGenerator->generateApiKey();
 
-        $repository->save(new User($data['name'], [], 'xd'));
+        $repository->save(new User([], $apikey));
 
         return new JsonResponse(utf8_encode($apikey));
     }
@@ -51,10 +51,9 @@ class UserController extends AbstractController
     /**
      * @Route("/users/user", name="GET_USER", methods={"GET"})
      */
-    public function findUserBySymfonySecurity(Request $request, UserRepository $repository): Response
+    public function findUserBySymfonySecurity(Request $request, UserRepository $repository, UserInterface $user): Response
     {
-        $user = $this->getUser();
-        $user = $repository->findById((int) $user->getUsername());
+        $user = $repository->findById((int)$user->getUsername());
 
         return new JsonResponse($user);
     }
