@@ -1,10 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Expeditions\Domain\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use function uniqid;
 
 /**
  * @ORM\Entity()
@@ -27,41 +27,17 @@ class User implements UserInterface, \JsonSerializable
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $uuid;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private string $apikey;
 
-    /**
-     * @ORM\Column(type="string", length=34)
-     */
-    private string $name;
-
-    public function __construct(string $name, array $roles, string $apikey)
+    public function __construct(array $roles, string $apikey)
     {
-        $this->name = $name;
         $this->roles = $roles;
-        $this->uuid = uniqid();
         $this->apikey = $apikey;
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getUsername(): string
@@ -94,18 +70,6 @@ class User implements UserInterface, \JsonSerializable
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getUuid(): ?string
-    {
-        return $this->uuid;
-    }
-
-    public function setUuid(string $uuid): self
-    {
-        $this->uuid = $uuid;
-
-        return $this;
     }
 
     public function getApikey(): ?string
