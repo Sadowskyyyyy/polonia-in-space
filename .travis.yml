@@ -5,6 +5,9 @@ services:
   - postgresql
 install:
   - composer install
+before_script:
+  - psql -c "CREATE USER symfony WITH PASSWORD 'symfony'" -U postgres
+  - psql -c "CREATE DATABASE space_db;" -U postgres
 script:
   - bin/console doctrine:schema:update --force
   - bin/phpunit
