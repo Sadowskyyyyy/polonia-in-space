@@ -13,3 +13,6 @@ script:
   - bin/phpunit
   - vendor/bin/ecs check --config vendor/landingi/php-coding-standards/ecs.php
   - vendor/bin/phpstan analyze -c phpstan.neon
+env:
+  global:
+    - APP_ENV=test
