@@ -27,7 +27,6 @@ class UserControllerTest extends WebTestCase
         $json = $this->client->getResponse()->getContent();
         if (is_string($json)) {
             $response = json_decode($json, true);
-            var_dump($response['id']);
         }
 
         $this->client->request(
