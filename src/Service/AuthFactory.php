@@ -18,6 +18,6 @@ class AuthFactory
 
     public function createFromUser(UserInterface $user): User
     {
-        return $this->userRepository->findById((int) $user->getUsername());
+        return $this->userRepository->findById((int) $user->getUserIdentifier());
     }
 }

@@ -40,7 +40,7 @@ class User implements UserInterface, \JsonSerializable
         return $this->id;
     }
 
-    public function getUsername(): string
+    public function getUserIdentifier(): string
     {
         return (string) $this->id;
     }

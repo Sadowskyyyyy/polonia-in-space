@@ -53,7 +53,7 @@ class UserController extends AbstractController
      */
     public function findUserBySymfonySecurity(Request $request, UserRepository $repository, UserInterface $user): Response
     {
-        $user = $repository->findById((int) $user->getUsername());
+        $user = $repository->findById((int) $user->getUserIdentifier());
 
         return new JsonResponse($user);
     }
