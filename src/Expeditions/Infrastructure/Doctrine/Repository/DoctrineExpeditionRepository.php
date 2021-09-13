@@ -45,4 +45,9 @@ final class DoctrineExpeditionRepository implements ExpeditionRepository
     {
         return $this->repository->findAll();
     }
+
+    public function findByName(string $name): Expedition
+    {
+        return $this->repository->findOneBy(['name' => $name]);
+    }
 }
