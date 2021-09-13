@@ -9,6 +9,7 @@
 /.idea
 /docker/app
 /docker/logs
+/bin/.phpunit
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###

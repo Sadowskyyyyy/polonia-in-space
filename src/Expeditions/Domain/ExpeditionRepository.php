@@ -11,4 +11,6 @@ interface ExpeditionRepository
     public function delete(Expedition $expedition): void;
     public function save(Expedition $expedition): void;
     public function findAll(): array;
+    public function findByName(string $name): Expedition;
+
 }

@@ -26,40 +26,37 @@ class ExpeditionControllerTest extends WebTestCase
                 'plannedDate' => '2021-10-23',
             ], JSON_THROW_ON_ERROR),
         );
-//        $response = json_decode((string) $this->client->getResponse()->getContent(), true);
 
-        //GET EXPEDITION X
-//        $this->client->request(
-//            method: 'GET',
-//            uri: '/expeditions/' . $response[0]['id'],
-//        );
-//        self::assertResponseIsSuccessful();
+        $response = json_decode($this->client->getResponse()->getContent(), true);
 
-        //GET ALL EXPEDITIONS
-
-        //DELETE EXPEDITION X
-
-        //CHECK THAT EXPEDITION X NOT EXISTS
-    }
-
-    public function testDeletingExpedition(): void
-    {
-        $this->client->request('DELETE', '/expeditions/1');
-
-        self::assertResponseIsSuccessful();
-    }
-
-    public function testCreatingExpedition(): void
-    {
         $this->client->request(
-            method: 'POST',
-            uri: '/expeditions',
-            content: json_encode([
-                'name' => 'test-name',
-                'plannedDate' => '2021-10-23',
-            ], JSON_THROW_ON_ERROR),
+            method: 'GET',
+            uri: '/expeditions/' . $response['id'],
         );
 
         self::assertResponseIsSuccessful();
+
+        //GET ALL EXPEDITIONS
+        $this->client->request(
+            method: 'GET',
+            uri: '/expeditions',
+        );
+
+        self::assertResponseIsSuccessful();
+        //DELETE EXPEDITION X
+        $this->client->request(
+            method: 'DELETE',
+            uri: '/expeditions/' . $response['id'],
+        );
+
+        self::assertResponseIsSuccessful();
+
+        //CHECK THAT EXPEDITION X NOT EXISTS
+        $this->client->request(
+            method: 'GET',
+            uri: '/expeditions/' . $response['id'],
+        );
+
+        self::assertResponseStatusCodeSame(404);
     }
 }
