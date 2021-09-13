@@ -12,5 +12,4 @@ interface ExpeditionRepository
     public function save(Expedition $expedition): void;
     public function findAll(): array;
     public function findByName(string $name): Expedition;
-
 }

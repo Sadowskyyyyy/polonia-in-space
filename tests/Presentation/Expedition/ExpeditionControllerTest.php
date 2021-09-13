@@ -27,8 +27,11 @@ class ExpeditionControllerTest extends WebTestCase
             ], JSON_THROW_ON_ERROR),
         );
 
-        $response = json_decode($this->client->getResponse()->getContent(), true);
-
+        $response = null;
+        $json = $this->client->getResponse()->getContent();
+        if (is_string($json)) {
+            $response = json_decode($json, true);
+        }
         $this->client->request(
             method: 'GET',
             uri: '/expeditions/' . $response['id'],
