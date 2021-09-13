@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  posgresql:
+  postgresql:
     image: postgres:11
     ports:
       - '5432:5432'
@@ -42,4 +42,4 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 192.168.10.0/24
+        - subnet: 192.168.20.0/24
