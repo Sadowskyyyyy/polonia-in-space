@@ -72,3 +72,4 @@ class ApiKeyGuard extends AbstractAuthenticator
     {
         return null;
     }
+}
