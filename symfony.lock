@@ -85,9 +85,6 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
-    "json-api-php/json-api": {
-        "version": "2.2.0"
-    },
     "laminas/laminas-code": {
         "version": "4.4.2"
     },
@@ -105,15 +102,6 @@
     },
     "phar-io/version": {
         "version": "3.1.0"
-    },
-    "phpdocumentor/reflection-common": {
-        "version": "2.2.0"
-    },
-    "phpdocumentor/reflection-docblock": {
-        "version": "5.2.2"
-    },
-    "phpdocumentor/type-resolver": {
-        "version": "1.4.0"
     },
     "phpspec/prophecy": {
         "version": "1.13.0"
@@ -212,18 +200,6 @@
     },
     "sebastian/version": {
         "version": "3.0.2"
-    },
-    "sensio/framework-extra-bundle": {
-        "version": "5.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "5.2",
-            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
-        },
-        "files": [
-            "config/packages/sensio_framework_extra.yaml"
-        ]
     },
     "symfony/browser-kit": {
         "version": "v4.4.27"
@@ -395,13 +371,7 @@
         "version": "v1.23.0"
     },
     "symfony/property-access": {
-        "version": "v4.4.27"
-    },
-    "symfony/property-info": {
         "version": "v4.4.30"
-    },
-    "symfony/proxy-manager-bridge": {
-        "version": "v4.4.27"
     },
     "symfony/routing": {
         "version": "4.2",
@@ -430,7 +400,7 @@
         ]
     },
     "symfony/security-core": {
-        "version": "v4.4.29"
+        "version": "v4.4.30"
     },
     "symfony/security-csrf": {
         "version": "v4.4.27"
@@ -439,10 +409,7 @@
         "version": "v4.4.27"
     },
     "symfony/security-http": {
-        "version": "v4.4.27"
-    },
-    "symfony/serializer": {
-        "version": "v4.4.27"
+        "version": "v4.4.30"
     },
     "symfony/service-contracts": {
         "version": "v1.1.9"
@@ -464,8 +431,5 @@
     },
     "theseer/tokenizer": {
         "version": "1.2.1"
-    },
-    "webmozart/assert": {
-        "version": "1.10.0"
     }
 }
