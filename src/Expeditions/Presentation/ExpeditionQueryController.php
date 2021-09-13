@@ -19,7 +19,11 @@ class ExpeditionQueryController extends Controller
      */
     public function findExpeditionById(int $id, ExpeditionRepository $repository): Response
     {
-        return new JsonResponse($repository->findById($id));
+        try {
+            return new JsonResponse($repository->findById($id));
+        } catch (\Exception $e) {
+            return new JsonResponse($e, 404);
+        }
     }
 
     /**
@@ -29,16 +33,18 @@ class ExpeditionQueryController extends Controller
     {
         return new JsonResponse($repository->findAll());
     }
+
     /**
      * @Route("/expeditions", name="CREATE_EXPEDITION", methods={"POST"})
      */
-    public function createExpedition(Request $request): Response
+    public function createExpedition(Request $request, ExpeditionRepository $repository): Response
     {
         $data = json_decode($request->getContent(), true);
 
         $this->handle(new CreateExpeditionCommand($data['name'], $data['plannedDate']));
+        $expedition = $repository->findByName($data['name']);
 
-        return new JsonResponse([], 200);
+        return new JsonResponse($expedition, 200);
     }
 
     /**

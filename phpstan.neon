@@ -5,4 +5,4 @@ parameters:
     excludes_analyse:
         - 'src/Kernel.php'
     bootstrapFiles:
-        - vendor/bin/.phpunit/phpunit/vendor/autoload.php
+        - bin/.phpunit/phpunit/vendor/autoload.php
