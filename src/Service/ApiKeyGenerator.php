@@ -10,11 +10,12 @@ use function substr;
 
 class ApiKeyGenerator
 {
-    const LENGTH = 30;
+    public const LENGTH = 30;
 
     public function generateApiKey(): string
     {
         $bytes = random_bytes(self::LENGTH);
+
         return substr(strtr(base64_encode($bytes), '+/', '-_'), 0, self::LENGTH);
     }
 }
