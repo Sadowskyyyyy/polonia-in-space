@@ -38,7 +38,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/users/token", name="GET_USER", methods={"GET"})
+     * @Route("/users/token", name="GET_USER_BY_TOKEN", methods={"GET"})
      */
     public function findUserByActualToken(Request $request, UserRepository $repository): Response
     {
