@@ -8,13 +8,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
-use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
-use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
+use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 
 class ApiKeyGuard extends AbstractAuthenticator
 {
@@ -27,7 +25,7 @@ class ApiKeyGuard extends AbstractAuthenticator
 
     public function start(Request $request, AuthenticationException $authException = null): JsonResponse
     {
-        return new JsonResponse(['message' => 'Authentication Required'], Response::HTTP_UNAUTHORIZED);
+        return new JsonResponse(['message' => 'Authentication Required'], Response::HTTP_OK);
     }
 
     public function supports(Request $request): bool
@@ -35,41 +33,25 @@ class ApiKeyGuard extends AbstractAuthenticator
         return $request->headers->has('X-AUTH-TOKEN');
     }
 
-    public function getCredentials(Request $request): mixed
-    {
-        return $request->headers->get('X-AUTH-TOKEN');
-    }
-
-    public function checkCredentials($credentials, UserInterface $user): bool
-    {
-        return true;
-    }
-
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): JsonResponse
-    {
-        return new JsonResponse(Response::HTTP_UNAUTHORIZED);
-    }
-
-    public function supportsRememberMe(): bool
-    {
-        return false;
-    }
-
     public function authenticate(Request $request): PassportInterface
     {
         $apiToken = $request->headers->get('X-AUTH-TOKEN');
-        if (null === $apiToken) {
-            throw new CustomUserMessageAuthenticationException('No API token provided');
-        }
 
-        return new Passport(
-            new UserBadge($apiToken),
-            new  PasswordCredentials($apiToken)
-        );
+        return new SelfValidatingPassport(new UserBadge($apiToken));
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         return null;
+    }
+
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): JsonResponse
+    {
+        return new JsonResponse('ehhhh');
+    }
+
+    public function getUser($credentials, UserProviderInterface $userProvider)
+    {
+        return $this->userRepository->findOneByApikey($credentials);
     }
 }

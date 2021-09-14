@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Expeditions\Framework\User;
+namespace App\Expeditions\Presentation;
 
 use App\Expeditions\Domain\Entity\User;
 use App\Service\ApiKeyGenerator;
@@ -51,10 +51,10 @@ class UserController extends AbstractController
     /**
      * @Route("/users/user", name="GET_USER", methods={"GET"})
      */
-    public function findUserBySymfonySecurity(Request $request, UserRepository $repository, UserInterface $user): Response
+    public function findUserBySymfonySecurity(Request $request, UserRepository $repository): Response
     {
-        $user = $repository->findById((int) $user->getUserIdentifier());
+//        $user = $repository->findById((int) $user);
 
-        return new JsonResponse($user);
+        return new JsonResponse([]);
     }
 }

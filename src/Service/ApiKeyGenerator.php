@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use function random_bytes;
+use function uniqid;
 
 class ApiKeyGenerator
 {
+    const LENGTH = 30;
+
     public function generateApiKey(): string
     {
-        return random_bytes(30);
+        return substr(uniqid(), 0, self::LENGTH);
     }
 }
