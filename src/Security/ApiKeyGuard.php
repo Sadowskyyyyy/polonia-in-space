@@ -15,7 +15,7 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 
-class ApiKeyGuard extends AbstractGuardAuthenticator implements AuthenticatorInterface
+class ApiKeyGuard extends AbstractGuardAuthenticator
 {
     private UserRepository $userRepository;
 
