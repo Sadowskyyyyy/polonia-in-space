@@ -20,10 +20,10 @@ class UserController extends AbstractController
      */
     public function createNewUser(Request $request, UserRepository $repository, ApiKeyGenerator $apiKeyGenerator): Response
     {
-//        $apikey = $apiKeyGenerator->generateApiKey();
-//        dd(utf8_decode($apikey));
-        $repository->save(new User([], '12312312321'));
-        $user = $repository->findOneByApikey('12312312321');
+        $apikey = $apiKeyGenerator->generateApiKey();
+
+        $repository->save(new User([], $apikey));
+        $user = $repository->findOneByApikey($apikey);
 
         return new JsonResponse($user);
     }
@@ -39,7 +39,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/users/token", name="GET_USER", methods={"GET"})
+     * @Route("/users/token", name="GET_USER_BY_ACTUAL_TOKEN", methods={"GET"})
      */
     public function findUserByActualToken(Request $request, UserRepository $repository): Response
     {
@@ -50,7 +50,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/users/user", name="GET_USER", methods={"GET"})
+     * @Route("/users/user", name="GET_USER_BY_SYMFONY", methods={"GET"})
      */
     public function findUserBySymfonySecurity(Request $request, UserRepository $repository, UserInterface $user): Response
     {
