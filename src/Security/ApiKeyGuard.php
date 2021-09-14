@@ -47,7 +47,7 @@ class ApiKeyGuard extends AbstractAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): JsonResponse
     {
-        return new JsonResponse('ehhhh');
+        return new JsonResponse(Response::HTTP_UNAUTHORIZED);
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)
