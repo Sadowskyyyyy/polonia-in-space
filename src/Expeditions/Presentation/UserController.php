@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserController extends AbstractController
 {
-    /**
+  /**
      * @Route("/users", name="CREATE_USER")
      */
     public function createNewUser(Request $request, UserRepository $repository, ApiKeyGenerator $apiKeyGenerator): Response
@@ -28,7 +28,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/users/{id}", name="GET_USER", methods={"GET"})
+     * @Route("/users/{id}", name="GET_USER_BYID", methods={"GET"})
      */
     public function findUserById(int $id, UserRepository $repository): Response
     {
@@ -53,8 +53,6 @@ class UserController extends AbstractController
      */
     public function findUserBySymfonySecurity(Request $request, UserRepository $repository): Response
     {
-//        $user = $repository->findById((int) $user);
-
-        return new JsonResponse([]);
+        return new JsonResponse($this->getUser());
     }
 }
