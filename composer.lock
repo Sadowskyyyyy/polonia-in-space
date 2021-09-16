@@ -1899,8 +1899,7 @@
                 "symfony/config": "^4.4|^5.0",
                 "symfony/dependency-injection": "^4.4|^5.0",
                 "symfony/filesystem": "^4.4|^5.0",
-                "symfony/http-kernel": "^4.4|^5.0",
-                "symfony/messenger": "^4.4|^5.0",
+                "symfony/http-kernel": "^4.4",
                 "symfony/var-dumper": "^4.4|^5.0"
             },
             "type": "library",
