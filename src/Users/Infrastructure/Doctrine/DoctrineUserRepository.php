@@ -47,9 +47,9 @@ final class DoctrineUserRepository implements UserRepository, UserProviderInterf
         $this->findOneByApikey($username);
     }
 
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $user): User|UserInterface
     {
-        return $this->loadUserByUsername($user->getPassword());
+        return $this->findOneByApikey($user->getPassword());
     }
 
     public function supportsClass($class): bool
