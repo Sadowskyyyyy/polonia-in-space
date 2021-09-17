@@ -150,6 +150,9 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/event-dispatcher": {
+        "version": "1.0.0"
+    },
     "psr/log": {
         "version": "1.1.4"
     },
@@ -201,6 +204,9 @@
     "sebastian/version": {
         "version": "3.0.2"
     },
+    "symfony/amqp-messenger": {
+        "version": "v5.3.7"
+    },
     "symfony/browser-kit": {
         "version": "v4.4.27"
     },
@@ -229,9 +235,6 @@
     "symfony/css-selector": {
         "version": "v4.4.27"
     },
-    "symfony/debug": {
-        "version": "v4.4.27"
-    },
     "symfony/dependency-injection": {
         "version": "v4.4.27"
     },
@@ -240,6 +243,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v4.4.27"
+    },
+    "symfony/doctrine-messenger": {
+        "version": "v5.3.7"
     },
     "symfony/dom-crawler": {
         "version": "v4.4.27"
@@ -304,9 +310,6 @@
     "symfony/http-kernel": {
         "version": "v4.4.29"
     },
-    "symfony/inflector": {
-        "version": "v4.4.27"
-    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -328,11 +331,11 @@
             "config/packages/messenger.yaml"
         ]
     },
-    "symfony/mime": {
-        "version": "v4.4.27"
-    },
     "symfony/orm-pack": {
         "version": "v2.1.0"
+    },
+    "symfony/password-hasher": {
+        "version": "v5.3.7"
     },
     "symfony/phpunit-bridge": {
         "version": "5.3",
@@ -349,17 +352,14 @@
             "tests/bootstrap.php"
         ]
     },
-    "symfony/polyfill-intl-idn": {
-        "version": "v1.23.0"
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.23.1"
     },
     "symfony/polyfill-intl-normalizer": {
         "version": "v1.23.0"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.23.1"
-    },
-    "symfony/polyfill-php72": {
-        "version": "v1.23.0"
     },
     "symfony/polyfill-php73": {
         "version": "v1.23.0"
@@ -372,6 +372,12 @@
     },
     "symfony/property-access": {
         "version": "v4.4.30"
+    },
+    "symfony/property-info": {
+        "version": "v5.3.7"
+    },
+    "symfony/redis-messenger": {
+        "version": "v5.3.7"
     },
     "symfony/routing": {
         "version": "4.2",
@@ -416,6 +422,9 @@
     },
     "symfony/stopwatch": {
         "version": "v4.4.27"
+    },
+    "symfony/string": {
+        "version": "v5.3.7"
     },
     "symfony/var-dumper": {
         "version": "v4.4.27"
