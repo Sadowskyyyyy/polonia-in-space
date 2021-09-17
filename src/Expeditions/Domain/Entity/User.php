@@ -42,7 +42,7 @@ class User implements UserInterface, \JsonSerializable
 
     public function getUsername(): string
     {
-        return (string) $this->id;
+        return (string)$this->id;
     }
 
     public function getRoles(): array
@@ -85,6 +85,11 @@ class User implements UserInterface, \JsonSerializable
     }
 
     public function getPassword(): string
+    {
+        return $this->apikey;
+    }
+
+    public function getUserIdentifier(): string
     {
         return $this->apikey;
     }
