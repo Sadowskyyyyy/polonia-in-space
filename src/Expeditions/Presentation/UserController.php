@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserController extends AbstractController
 {
@@ -44,7 +43,6 @@ class UserController extends AbstractController
      */
     public function findUserBySymfonySecurity(Request $request, UserRepository $repository): Response
     {
-
         return new JsonResponse($this->getUser());
     }
 }

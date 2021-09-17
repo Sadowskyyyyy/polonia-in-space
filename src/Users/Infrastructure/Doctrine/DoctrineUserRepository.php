@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Users\Infrastructure\Doctrine;
 
 use App\Expeditions\Domain\Entity\User;
-use App\Security\UnauthorizedUser;
 use App\Shared\Domain\Exception\NotFoundException;
 use App\Users\Domain\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -43,9 +42,9 @@ final class DoctrineUserRepository implements UserRepository, UserProviderInterf
         return $user;
     }
 
-    public function loadUserByUsername($username)
+    public function loadUserByUsername($username): UserInterface
     {
-        $this->findOneByApikey($username);
+        return $this->findOneByApikey($username);
     }
 
     public function refreshUser(UserInterface $user): User|UserInterface|null
@@ -56,6 +55,7 @@ final class DoctrineUserRepository implements UserRepository, UserProviderInterf
     public function supportsClass($class): bool
     {
         var_dump($class);
-        return $class === User::class || $class === UnauthorizedUser::class;
+
+        return User::class === $class;
     }
 }
