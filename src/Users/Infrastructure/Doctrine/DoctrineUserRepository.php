@@ -42,7 +42,7 @@ final class DoctrineUserRepository implements UserRepository, UserProviderInterf
         return $user;
     }
 
-    public function loadUserByUsername($username): UserInterface
+    public function loadUserByUsername(string $username): UserInterface
     {
         return $this->findOneByApikey($username);
     }
@@ -52,7 +52,7 @@ final class DoctrineUserRepository implements UserRepository, UserProviderInterf
         return $this->findOneByApikey($user->getPassword());
     }
 
-    public function supportsClass($class): bool
+    public function supportsClass(string $class): bool
     {
         return User::class === $class;
     }

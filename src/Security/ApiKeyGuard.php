@@ -12,7 +12,6 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
-use Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
@@ -41,7 +40,7 @@ class ApiKeyGuard extends AbstractAuthenticator
         return $request->headers->get('X-AUTH-TOKEN');
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider): UserInterface
+    public function getUser(string $credentials, UserProviderInterface $userProvider): UserInterface
     {
         $user = $this->userRepository->findOneByApikey($credentials);
 
@@ -52,7 +51,7 @@ class ApiKeyGuard extends AbstractAuthenticator
         return $user;
     }
 
-    public function checkCredentials($credentials, UserInterface $user): bool
+    public function checkCredentials(string $credentials, UserInterface $user): bool
     {
         return true;
     }
@@ -62,7 +61,7 @@ class ApiKeyGuard extends AbstractAuthenticator
         return new JsonResponse(Response::HTTP_UNAUTHORIZED);
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): ?Response
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey): ?Response
     {
         return null;
     }
