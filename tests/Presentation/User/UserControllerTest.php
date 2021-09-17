@@ -31,7 +31,7 @@ class UserControllerTest extends WebTestCase
 
         $this->client->request(
             method: 'GET',
-            uri: '/users/' . $response['id'],
+            uri: '/users/token/' . $response['apikey'],
         );
 
         self::assertResponseIsSuccessful();

@@ -28,12 +28,11 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/users/token", name="GET_USER_BY_ACTUAL_TOKEN", methods={"GET"})
+     * @Route("/users/token/{token}", name="GET_USER_BY_ACTUAL_TOKEN", methods={"GET"})
      */
-    public function findUserByActualToken(Request $request, UserRepository $repository): Response
+    public function findUserByActualToken(Request $request, UserRepository $repository, string $token): Response
     {
-        $apiToken = $request->headers->get('X-AUTH-TOKEN');
-        $user = $repository->findOneByApikey($apiToken);
+        $user = $repository->findOneByApikey($token);
 
         return new JsonResponse($user);
     }
