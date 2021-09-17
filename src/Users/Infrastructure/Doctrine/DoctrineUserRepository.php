@@ -8,8 +8,10 @@ use App\Shared\Domain\Exception\NotFoundException;
 use App\Users\Domain\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-final class DoctrineUserRepository implements UserRepository
+final class DoctrineUserRepository implements UserRepository, UserProviderInterface
 {
     private EntityRepository $repository;
 
@@ -38,5 +40,20 @@ final class DoctrineUserRepository implements UserRepository
         }
 
         return $user;
+    }
+
+    public function loadUserByUsername($username)
+    {
+        $this->findOneByApikey($username);
+    }
+
+    public function refreshUser(UserInterface $user)
+    {
+        return $this->loadUserByUsername($user->getPassword());
+    }
+
+    public function supportsClass($class): bool
+    {
+        return $class === User::class;
     }
 }
