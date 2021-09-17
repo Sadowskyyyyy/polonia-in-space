@@ -8,6 +8,6 @@ use App\Expeditions\Domain\Entity\User;
 interface UserRepository
 {
     public function findById(int $id): User;
-    public function findOneByApikey(string $apikey): User;
+    public function findOneByApikey(string $apikey): ?User;
     public function save(User $user): void;
 }
