@@ -54,8 +54,6 @@ final class DoctrineUserRepository implements UserRepository, UserProviderInterf
 
     public function supportsClass($class): bool
     {
-        var_dump($class);
-
         return User::class === $class;
     }
 }
