@@ -10,13 +10,10 @@ class UserControllerTest extends WebTestCase
 {
     private KernelBrowser $client;
 
-    protected function setUp(): void
-    {
-        $this->client = static::createClient();
-    }
-
     public function test(): void
     {
+        $this->client = static::createClient();
+
         //CREATE USER X
         $this->client->request(
             method: 'POST',
