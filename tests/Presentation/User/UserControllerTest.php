@@ -10,13 +10,10 @@ class UserControllerTest extends WebTestCase
 {
     private KernelBrowser $client;
 
-    protected function setUp(): void
-    {
-        $this->client = static::createClient();
-    }
-
     public function test(): void
     {
+        $this->client = static::createClient();
+
         //CREATE USER X
         $this->client->request(
             method: 'POST',
@@ -31,7 +28,7 @@ class UserControllerTest extends WebTestCase
 
         $this->client->request(
             method: 'GET',
-            uri: '/users/' . $response['id'],
+            uri: '/users/token/' . $response['apikey'],
         );
 
         self::assertResponseIsSuccessful();

@@ -89,6 +89,11 @@ class User implements UserInterface, \JsonSerializable
         return $this->apikey;
     }
 
+    public function getUserIdentifier(): string
+    {
+        return $this->apikey;
+    }
+
     public function jsonSerialize(): array
     {
         return [

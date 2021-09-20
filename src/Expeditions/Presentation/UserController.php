@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserController extends AbstractController
 {
@@ -29,22 +28,11 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/users/{id}", name="GET_USER_BY_ID", methods={"GET"})
+     * @Route("/users/token/{token}", name="GET_USER_BY_ACTUAL_TOKEN", methods={"GET"})
      */
-    public function findUserById(int $id, UserRepository $repository): Response
+    public function findUserByActualToken(Request $request, UserRepository $repository, string $token): Response
     {
-        $user = $repository->findById($id);
-
-        return new JsonResponse($user);
-    }
-
-    /**
-     * @Route("/users/token", name="GET_USER_BY_ACTUAL_TOKEN", methods={"GET"})
-     */
-    public function findUserByActualToken(Request $request, UserRepository $repository): Response
-    {
-        $apiToken = $request->headers->get('X-AUTH-TOKEN');
-        $user = $repository->findOneByApikey($apiToken);
+        $user = $repository->findOneByApikey($token);
 
         return new JsonResponse($user);
     }
@@ -52,10 +40,8 @@ class UserController extends AbstractController
     /**
      * @Route("/users/user", name="GET_USER_BY_SYMFONY", methods={"GET"})
      */
-    public function findUserBySymfonySecurity(Request $request, UserRepository $repository, UserInterface $user): Response
+    public function findUserBySymfonySecurity(Request $request, UserRepository $repository): Response
     {
-        $user = $repository->findById((int) $user->getUsername());
-
-        return new JsonResponse($user);
+        return new JsonResponse($this->getUser());
     }
 }

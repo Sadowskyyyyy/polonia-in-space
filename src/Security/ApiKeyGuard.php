@@ -2,18 +2,21 @@
 
 namespace App\Security;
 
+use App\Expeditions\Domain\Entity\User;
 use App\Users\Domain\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
+use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 
-class ApiKeyGuard extends AbstractGuardAuthenticator
+class ApiKeyGuard extends AbstractAuthenticator
 {
     private UserRepository $userRepository;
 
@@ -37,22 +40,18 @@ class ApiKeyGuard extends AbstractGuardAuthenticator
         return $request->headers->get('X-AUTH-TOKEN');
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider): ?UserInterface
+    public function getUser(string $credentials, UserProviderInterface $userProvider): UserInterface
     {
-        if (true === empty($credentials)) {
-            return null;
-        }
-
         $user = $this->userRepository->findOneByApikey($credentials);
 
         if (true === empty($user)) {
-            throw new BadCredentialsException();
+            $user = new User([], 'unauth');
         }
 
         return $user;
     }
 
-    public function checkCredentials($credentials, UserInterface $user): bool
+    public function checkCredentials(string $credentials, UserInterface $user): bool
     {
         return true;
     }
@@ -62,7 +61,7 @@ class ApiKeyGuard extends AbstractGuardAuthenticator
         return new JsonResponse(Response::HTTP_UNAUTHORIZED);
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey): ?Response
     {
         return null;
     }
@@ -70,5 +69,12 @@ class ApiKeyGuard extends AbstractGuardAuthenticator
     public function supportsRememberMe(): bool
     {
         return false;
+    }
+
+    public function authenticate(Request $request): PassportInterface
+    {
+        $apitoken = $request->headers->get('X-AUTH-TOKEN');
+
+        return new SelfValidatingPassport(new UserBadge($apitoken));
     }
 }
