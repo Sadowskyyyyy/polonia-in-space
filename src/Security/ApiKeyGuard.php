@@ -13,7 +13,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
-use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 
 class ApiKeyGuard extends AbstractAuthenticator
@@ -71,7 +70,7 @@ class ApiKeyGuard extends AbstractAuthenticator
         return false;
     }
 
-    public function authenticate(Request $request): PassportInterface
+    public function authenticate(Request $request): SelfValidatingPassport
     {
         $apitoken = $request->headers->get('X-AUTH-TOKEN');
 
